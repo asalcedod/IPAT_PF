@@ -1,0 +1,82 @@
+package com.uninorte.transdigital;
+
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
+/**
+ * Created by antonio on 20/04/17.
+ */
+@Table(database = AppDatabase.class)
+public class Act1 extends BaseModel{
+    @PrimaryKey(autoincrement = true)
+    int id;
+    @Column
+    String ot,gravedad,ubicacion,a_fecha,a_hora,r_fecha,r_hora;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getOt() {
+        return ot;
+    }
+
+    public void setOt(String ot) {
+        this.ot = ot;
+    }
+
+    public String getGravedad() {
+        return gravedad;
+    }
+
+    public void setGravedad(String gravedad) {
+        this.gravedad = gravedad;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public String getA_fecha() {
+        return a_fecha;
+    }
+
+    public void setA_fecha(String a_fecha) {
+        this.a_fecha = a_fecha;
+    }
+
+    public String getA_hora() {
+        return a_hora;
+    }
+
+    public void setA_hora(String a_hora) {
+        this.a_hora = a_hora;
+    }
+
+    public String getR_fecha() {
+        return r_fecha;
+    }
+
+    public void setR_fecha(String r_fecha) {
+        this.r_fecha = r_fecha;
+    }
+
+    public String getR_hora() {
+        return r_hora;
+    }
+
+    public void setR_hora(String r_hora) {
+        this.r_hora = r_hora;
+    }
+
+}

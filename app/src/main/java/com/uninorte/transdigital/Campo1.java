@@ -23,6 +23,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.raizlabs.android.dbflow.sql.language.Select;
+
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,9 +36,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-
 
 public class Campo1 extends Activity implements View.OnClickListener , ActivityCompat.OnRequestPermissionsResultCallback {
     private RadioGroup rdgGrupo;
@@ -58,6 +57,7 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
     String ubicacion = "";
     String latitud = "";
     String longitud = "";
+    String gravedad = "";
     TextView mensaje1;
     private Button mRegister;
     Intent it;
@@ -88,10 +88,13 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
                 // TODO Auto-generated method stub
                 if (checkedId == R.id.radioButton4) {
                     Log.d(TAG, "La gravedad del accidente es con muertos");
+                    gravedad = "Muertos";
                 } else if (checkedId == R.id.radioButton5) {
                     Log.d(TAG, "La gravedad del accidente es con heridos");
+                    gravedad = "Heridos";
                 } else if (checkedId == R.id.radioButton6) {
                     Log.d(TAG, "La gravedad del accidente es con solo daños");
+                    gravedad = "Solo Daños";
                 }
 
 
@@ -240,12 +243,26 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
     }
 
     public void onClick(View view) {
+        Act1 act1=new Act1();
         String mname = name.getText().toString();
         String mdate = date.getText().toString();
         String mhour = hour.getText().toString();
-        new Campo1.Addform().execute(mname,mdate,mhour);
+        act1.setOt(mname);
+        act1.setGravedad(gravedad);
+        act1.setA_fecha(salida1);
+        act1.setA_hora(salida2);
+        act1.setR_fecha(mdate);
+        act1.setR_hora(mhour);
+        act1.save();
+        /*List<ClaseAccidente> c = new Select().from(ClaseAccidente.class).queryList();
+        for (ClaseAccidente ca : c) {
+            Toast.makeText(this, ca.a, Toast.LENGTH_LONG).show();
+        }*/
+
+        startActivity(it);
+        //new Campo1.Addform().execute(mname,mdate,mhour);
     }
-    class Addform extends AsyncTask<String, String, String> {
+    /*class Addform extends AsyncTask<String, String, String> {
 
         @Override
         protected void onPreExecute() {
@@ -309,7 +326,7 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
                 Toast.makeText(Campo1.this, file_url, Toast.LENGTH_LONG).show();
             }
         }
-    }
+    }*/
     //------------------------------------------------------------------------------------------------------------
 
     public void onClick_Informe2(View view) {

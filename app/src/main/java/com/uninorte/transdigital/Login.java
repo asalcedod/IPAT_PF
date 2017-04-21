@@ -27,19 +27,12 @@ import java.util.List;
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private EditText ced, pass;
-    private Button mSubmit, mRegister;
+    private Button mSubmit;
 
     private ProgressDialog pDialog;
 
     // Clase JSONParser
     JSONParser jsonParser = new JSONParser();
-
-
-    // si trabajan de manera local "localhost" :
-    // En windows tienen que ir, run CMD > ipconfig
-    // buscar su IP
-    // y poner de la siguiente manera
-    // "http://xxx.xxx.x.x:1234/cas/login.php";
 
     private static final String LOGIN_URL = "https://transitodigital-asalcedod.c9users.io/login.php";
 
@@ -81,9 +74,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     else
                     if (TextUtils.isEmpty(password)) {
                         pass.setError("No Puede Estar Vacio");
-                    }
-                    else
-                    {
+                    } else {
                         new AttemptLogin().execute(cedula,password);
                         break;
                     }

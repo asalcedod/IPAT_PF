@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +26,7 @@ import java.util.List;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText user, pass;
+    private EditText ced, pass;
     private Button mSubmit, mRegister;
 
     private ProgressDialog pDialog;
@@ -51,14 +52,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         // setup input fields
-        user = (EditText) findViewById(R.id.username);
+        ced = (EditText) findViewById(R.id.cedula);
         pass = (EditText) findViewById(R.id.password);
-
         // setup buttons
         mSubmit = (Button) findViewById(R.id.login);
-
         // register listeners
         mSubmit.setOnClickListener(this);
 
@@ -70,10 +68,26 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.login:
                 //Toast.makeText(this, "WTF??", Toast.LENGTH_LONG).show();
-                String username = user.getText().toString();
+                String cedula = ced.getText().toString();
                 String password = pass.getText().toString();
-                new AttemptLogin().execute(username,password);
-                break;
+                if (TextUtils.isEmpty(cedula)&& TextUtils.isEmpty(password)){
+                    ced.setError("No Puede Estar Vacio");
+                    pass.setError("No Puede Estar Vacio");
+                }
+                else{
+                    if (TextUtils.isEmpty(cedula)) {
+                        ced.setError("No Puede Estar Vacio");
+                    }
+                    else
+                    if (TextUtils.isEmpty(password)) {
+                        pass.setError("No Puede Estar Vacio");
+                    }
+                    else
+                    {
+                        new AttemptLogin().execute(cedula,password);
+                        break;
+                    }
+                }
             default:
                 break;
         }
@@ -94,13 +108,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         @Override
         protected String doInBackground(String... args) {
             int success;
-            String username = args[0];
+            String cedula = args[0];
             String password = args[1];
 
             try {
                 // Building Parameters
                 List params = new ArrayList();
-                params.add(new BasicNameValuePair("username", username));
+                params.add(new BasicNameValuePair("cedula", cedula));
                 params.add(new BasicNameValuePair("password", password));
 
                 Log.d("request!", "starting");
@@ -119,10 +133,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     SharedPreferences sp = PreferenceManager
                             .getDefaultSharedPreferences(Login.this);
                     SharedPreferences.Editor edit = sp.edit();
-                    edit.putString("username", username);
+                    edit.putString("cedula", cedula);
                     edit.commit();
                     // Intent i = new Intent(Login.this, ReadComments.class);
-                     Intent i = new Intent(Login.this, MainActivity.class);
+                    Intent i = new Intent(Login.this, MainActivity.class);
                     // Intent i = new Intent(Login.this, Cond_Vehi_Prop.class);
 
 

@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1 ;
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_LOCATION_EXTRA_COMMANDS = 2;
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 3;
+    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,21 @@ public class MainActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS},
                         MY_PERMISSIONS_REQUEST_ACCESS_LOCATION_EXTRA_COMMANDS);
+
+            }
+        }
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.CAMERA)) {
+
+            } else {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CAMERA},
+                        MY_PERMISSIONS_REQUEST_CAMERA);
 
             }
         }

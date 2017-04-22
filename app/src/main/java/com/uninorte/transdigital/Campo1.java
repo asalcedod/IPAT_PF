@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -177,7 +178,7 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
     //-----------------------------------------
 
 
-    boolean validar(String a){
+    boolean validar(EditText name, String a){
         boolean sw = false;
         if(!a.equals("")){
             sw=true;
@@ -242,25 +243,53 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
 
     }
 
+    public boolean valid(EditText cam, String campo){
+        if (TextUtils.isEmpty(campo)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     public void onClick(View view) {
+        ArrayList<Boolean> data = new ArrayList<>();
         Act1 act1=new Act1();
         String mname = name.getText().toString();
         String mdate = date.getText().toString();
         String mhour = hour.getText().toString();
-        act1.setOt(mname);
-        act1.setGravedad(gravedad);
-        act1.setA_fecha(salida1);
-        act1.setA_hora(salida2);
-        act1.setR_fecha(mdate);
-        act1.setR_hora(mhour);
-        act1.save();
-        /*List<ClaseAccidente> c = new Select().from(ClaseAccidente.class).queryList();
-        for (ClaseAccidente ca : c) {
-            Toast.makeText(this, ca.a, Toast.LENGTH_LONG).show();
-        }*/
+        data.add(validar(name,mname));
+        data.add(validar(date,mdate));
+        data.add(validar(hour,mhour));
+        int cont=0;
+        boolean sw=true;
+        while(cont<data.size()){
+            if(data.get(cont)==false){
+                sw=false;
+                break;
+            }
+            cont++;
+        }if(sw == true && !TextUtils.isEmpty(latitud) && !TextUtils.isEmpty(longitud) && !TextUtils.isEmpty(gravedad) && !TextUtils.isEmpty(salida1) && !TextUtils.isEmpty(salida2)){
+            act1.setOt(mname);
+            act1.setLatitud(latitud);
+            act1.setLongitud(longitud);
+            act1.setUbicacion(ubicacion);
+            act1.setGravedad(gravedad);
+            act1.setA_fecha(salida1);
+            act1.setA_hora(salida2);
+            act1.setR_fecha(mdate);
+            act1.setR_hora(mhour);
+            act1.save();
+            Log.d("guardando","Saving...");
+            /*List<ClaseAccidente> c = new Select().from(ClaseAccidente.class).queryList();
+            for (ClaseAccidente ca : c) {
+                Toast.makeText(this, ca.a, Toast.LENGTH_LONG).show();
+            }*/
 
-        startActivity(it);
-        //new Campo1.Addform().execute(mname,mdate,mhour);
+            startActivity(it);
+            //new Campo1.Addform().execute(mname,mdate,mhour);
+        }else{
+            Toast.makeText(this,"Existen campos sin completar.",Toast.LENGTH_SHORT).show();
+        }
     }
     /*class Addform extends AsyncTask<String, String, String> {
 

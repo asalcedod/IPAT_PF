@@ -13,7 +13,23 @@ public class Act1 extends BaseModel{
     @PrimaryKey(autoincrement = true)
     int id;
     @Column
-    String ot,gravedad,ubicacion,a_fecha,a_hora,r_fecha,r_hora;
+    String ot,gravedad,latitud,longitud,ubicacion,a_fecha,a_hora,r_fecha,r_hora;
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
 
     public int getId() {
         return id;

@@ -12,39 +12,12 @@ import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-
 public class Anexos extends Activity implements OnClickListener{
-    Button btnBuscar;
     Button btnCam;
     ImageView img;
     Bitmap bmp;
     Intent i;
     final static int cons = 0;
-    TextView txtUbicacion;
-    String ubicacion = "";
-
-
-    private void abrirArchivo(){
-        try {
-            txtUbicacion.setText(ubicacion);
-            File f = new File(ubicacion);
-            FileReader fr = new FileReader(f);
-            BufferedReader br = new BufferedReader(fr);
-            String texto = br.readLine();
-            String aux = "";
-            while(texto != null){
-                aux=aux+texto;
-                texto = br.readLine();
-            }
-            br.close();
-        } catch (Exception e) {
-
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

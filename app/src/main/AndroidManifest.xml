@@ -11,9 +11,12 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.IMAGE_CAPTURE"/>
+    <uses-permission android:name="android.permission.IMAGE_CAPTURE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyC8sBB_CR_Ax4vi1ZRMpITdo3fv9LsslFg"/>
 
     <application
         android:allowBackup="true"
@@ -60,7 +63,8 @@
             android:name=".Cond_Vehi_Prop"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Anexos"></activity>
+        <activity android:name=".Anexos" />
+        <activity android:name=".Mapa"></activity>
     </application>
 
 </manifest>

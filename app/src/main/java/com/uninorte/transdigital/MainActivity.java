@@ -117,10 +117,20 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return;
             }
+            case MY_PERMISSIONS_REQUEST_CAMERA: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+
+                }
+                return;
+            }
         }
     }
     public void onClick_Informe(View view) {
-        Intent i = new Intent(this, Campo1.class);
+        Intent i = new Intent(this, Mapa.class);
         startActivity(i);
     }
 }

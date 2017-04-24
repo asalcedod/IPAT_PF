@@ -4,12 +4,15 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -30,6 +33,7 @@ public class Mapa extends AppCompatActivity implements OnMapReadyCallback {
         lngi = Double.parseDouble(getIntent().getStringExtra("longitud"));
         ubicacion = getIntent().getStringExtra("ubicacion");
         ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapa)).getMapAsync(this);
+
     }
 
     @Override
@@ -48,6 +52,9 @@ public class Mapa extends AppCompatActivity implements OnMapReadyCallback {
 
             }
         }
+        LatLng latLng = new LatLng(lat, lngi);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
+        googleMap.animateCamera(cameraUpdate);
         googleMap.setMyLocationEnabled(true);
         googleMap.addMarker(new MarkerOptions().position(new LatLng(lat,lngi)).title("Aqui Estoy"));
     }

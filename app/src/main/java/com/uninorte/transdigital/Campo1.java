@@ -19,6 +19,8 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -47,6 +49,7 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
     Date fecha = new Date(ahora);
     DateFormat df = new SimpleDateFormat("dd/MM/yy");
     String salida1 = df.format(fecha);
+    String cla = "";
     Date hora = new Date(ahora);
     DateFormat dh = new SimpleDateFormat("HH:mm:ss");
     String salida2 = dh.format(hora);
@@ -95,12 +98,32 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
                     gravedad = "Solo Daños";
                 }
 
-                accidente=(Spinner)findViewById(R.id.acc);
-
-
-
             }
 
+        });
+
+        accidente=(Spinner)findViewById(R.id.acc);
+        List<String> values = new ArrayList<String>();
+        values.add("Seleccione...");
+        values.add("Caida");
+        values.add("Choque");
+        values.add("Incendio");
+        values.add("Volcaminto");
+        values.add("Ocupante");
+        values.add("Otro");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, values);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        accidente.setAdapter(dataAdapter);
+        accidente.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                cla=parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                cla="";
+            }
         });
 
         //NUEVO..................................................................................
@@ -277,6 +300,7 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
             accidente.setA_hora(salida2);
             accidente.setR_fecha(mdate);
             accidente.setR_hora(mhour);
+            accidente.setAccidente(cla);
             accidente.save();
             /*List<ClaseAccidente> c = new Select().from(ClaseAccidente.class).queryList();
             for (ClaseAccidente ca : c) {

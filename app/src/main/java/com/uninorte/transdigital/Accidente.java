@@ -9,7 +9,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  * Created by antonio on 20/04/17.
  */
 @Table(database = AppDatabase.class)
-public class Act1 extends BaseModel{
+public class Accidente extends BaseModel{
     @PrimaryKey(autoincrement = true)
     int id;
     @Column

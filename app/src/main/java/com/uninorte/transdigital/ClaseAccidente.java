@@ -14,7 +14,7 @@ public class ClaseAccidente extends BaseModel {
     @PrimaryKey
     int id;
     @Column
-    String a;
+    String choque,volcameinto,caida,ocupante,incendio,otro;
 
     public int getId() {
         return id;
@@ -24,12 +24,51 @@ public class ClaseAccidente extends BaseModel {
         this.id = id;
     }
 
-    public String getA() {
-        return a;
+    public String getChoque() {
+        return choque;
     }
 
-    public void setA(String a) {
-        this.a = a;
+    public void setChoque(String choque) {
+        this.choque = choque;
     }
 
+    public String getVolcameinto() {
+        return volcameinto;
+    }
+
+    public void setVolcameinto(String volcameinto) {
+        this.volcameinto = volcameinto;
+    }
+
+    public String getCaida() {
+        return caida;
+    }
+
+    public void setCaida(String caida) {
+        this.caida = caida;
+    }
+
+    public String getOcupante() {
+        return ocupante;
+    }
+
+    public void setOcupante(String ocupante) {
+        this.ocupante = ocupante;
+    }
+
+    public String getIncendio() {
+        return incendio;
+    }
+
+    public void setIncendio(String incendio) {
+        this.incendio = incendio;
+    }
+
+    public String getOtro() {
+        return otro;
+    }
+
+    public void setOtro(String otro) {
+        this.otro = otro;
+    }
 }

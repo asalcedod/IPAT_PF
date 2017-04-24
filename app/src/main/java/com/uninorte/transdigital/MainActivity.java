@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.raizlabs.android.dbflow.config.FlowConfig;
+import com.raizlabs.android.dbflow.config.FlowManager;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1 ;
@@ -20,9 +23,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FlowManager.init(new FlowConfig.Builder(this).build());
         ClaseAccidente v=new ClaseAccidente();
         v.setId(0);
-        v.setA("a");
+        v.setChoque("Choque");
+        v.setCaida("Caida");
+        v.setIncendio("Incendio");
+        v.setOcupante("Ocupante");
+        v.setVolcameinto("Volcamiento");
+        v.setOtro("Otro");
         v.save();
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -130,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void onClick_Informe(View view) {
-        Intent i = new Intent(this,Cond_Vehi_Prop.class);
+        Intent i = new Intent(this,Campo1.class);
         startActivityForResult(i,0);
     }
 }

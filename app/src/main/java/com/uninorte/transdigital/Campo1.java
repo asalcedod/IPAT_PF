@@ -13,7 +13,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -23,14 +22,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.raizlabs.android.dbflow.sql.language.Select;
-
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -62,6 +56,7 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
     String longitud = "";
     String gravedad = "";
     TextView mensaje1;
+    Spinner accidente;
     private Button mRegister;
     Intent it;
 
@@ -99,6 +94,8 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
                     Log.d(TAG, "La gravedad del accidente es con solo daños");
                     gravedad = "Solo Daños";
                 }
+
+                accidente=(Spinner)findViewById(R.id.acc);
 
 
 
@@ -255,7 +252,7 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
 
     public void onClick(View view) {
         ArrayList<Boolean> data = new ArrayList<>();
-        Act1 act1=new Act1();
+        Accidente accidente =new Accidente();
         String mname = name.getText().toString();
         String mdate = date.getText().toString();
         String mhour = hour.getText().toString();
@@ -271,17 +268,16 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
             }
             cont++;
         }if(sw == true && !TextUtils.isEmpty(latitud) && !TextUtils.isEmpty(longitud) && !TextUtils.isEmpty(gravedad) && !TextUtils.isEmpty(salida1) && !TextUtils.isEmpty(salida2)){
-            act1.setOt(mname);
-            act1.setLatitud(latitud);
-            act1.setLongitud(longitud);
-            act1.setUbicacion(ubicacion);
-            act1.setGravedad(gravedad);
-            act1.setA_fecha(salida1);
-            act1.setA_hora(salida2);
-            act1.setR_fecha(mdate);
-            act1.setR_hora(mhour);
-            act1.save();
-            Log.d("guardando","Saving...");
+            accidente.setOt(mname);
+            accidente.setLatitud(latitud);
+            accidente.setLongitud(longitud);
+            accidente.setUbicacion(ubicacion);
+            accidente.setGravedad(gravedad);
+            accidente.setA_fecha(salida1);
+            accidente.setA_hora(salida2);
+            accidente.setR_fecha(mdate);
+            accidente.setR_hora(mhour);
+            accidente.save();
             /*List<ClaseAccidente> c = new Select().from(ClaseAccidente.class).queryList();
             for (ClaseAccidente ca : c) {
                 Toast.makeText(this, ca.a, Toast.LENGTH_LONG).show();
@@ -391,14 +387,11 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
                             });
             AlertDialog alert = builder.create();
             alert.show();
-
-
         }
         //MANEJO DE las imagenes
         //Intent i = new Intent(this, ReadComments.class);
         // startActivity(i);
     }
-
 
     public void onClick_lugar(View view) {
         //se va a la pestaña para las caracteristicas del lugar

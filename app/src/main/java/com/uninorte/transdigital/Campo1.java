@@ -2,8 +2,10 @@ package com.uninorte.transdigital;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -55,7 +57,7 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
     DateFormat dh = new SimpleDateFormat("HH:mm:ss");
     String salida2 = dh.format(hora);
     //Localizacion------------------------------------------------------------------------------
-    String ubicacion = "";
+    String ubicacion = "Ubicacion";
     String latitud = "";
     String longitud = "";
     String gravedad = "";
@@ -171,7 +173,7 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
         }
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,
                 (LocationListener) Local);
-        mensaje1.setText("Ubicacion");
+        mensaje1.setText(ubicacion);
     }
     //-----------------------------------------
 
@@ -365,9 +367,33 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
     }
 
     public void onClick_Ubicacion(View view) {
-        //MODIFICAR PENDIENTE AGREGAR LO DEL MAPA
         mensaje1.setText(ubicacion);
+        if(!latitud.equals("") && !longitud.equals("")) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("¿Desea confirmar la ubicacion desde el Mapa?")
+                    .setTitle("Advertencia")
+                    .setCancelable(false)
+                    .setNegativeButton("Cancelar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            })
+                    .setPositiveButton("Continuar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent i = new Intent(Campo1.this, Mapa.class);
+                                    i.putExtra("latitud", latitud);
+                                    i.putExtra("longitud", longitud);
+                                    i.putExtra("ubicacion",ubicacion);
+                                    startActivityForResult(i,1);
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
 
+
+        }
         //MANEJO DE las imagenes
         //Intent i = new Intent(this, ReadComments.class);
         // startActivity(i);
@@ -385,4 +411,19 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
         Intent i = new Intent(this, Caracteristicas_Vias.class);
         startActivity(i);
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1){
+            if (resultCode==RESULT_OK){
+                ubicacion=data.getStringExtra("ubicacion");
+                latitud=data.getStringExtra("latitud");
+                longitud=data.getStringExtra("longitud");
+                mensaje1.setText(ubicacion);
+            }
+        }
+    }
+
 }

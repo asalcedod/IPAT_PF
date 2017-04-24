@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void onClick_Informe(View view) {
-        Intent i = new Intent(this, Mapa.class);
-        startActivity(i);
+        Intent i = new Intent(this, Campo1.class);
+        startActivityForResult(i,0);
     }
 }

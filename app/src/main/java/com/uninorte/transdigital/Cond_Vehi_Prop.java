@@ -14,10 +14,9 @@ import android.widget.TabHost;
 
 public class Cond_Vehi_Prop extends AppCompatActivity implements View.OnClickListener{
     TabHost TbH;
-    private static final String TAG = "LogsAndroid";
     Button bfechnacond,bfechalicen,bfechavencSoat,bfechavencSSC,bfechavencSSE;
     EditText efechnacond,efechalicen,efechavencSoat,efechavencSSC,efechavencSSE;
-    private int dia,mes,ano;
+    private int dia,mes,ano,i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,22 +62,22 @@ public class Cond_Vehi_Prop extends AppCompatActivity implements View.OnClickLis
         bfechnacond.setOnClickListener(this);
 
         //DETALLES DEL CONDUCTOR
-        bfechalicen = (Button) findViewById(R.id.bfechnacond);
-        efechalicen = (EditText) findViewById(R.id.efechnacond);
+        bfechalicen = (Button) findViewById(R.id.bfechalicen);
+        efechalicen = (EditText) findViewById(R.id.efechalicen);
         bfechalicen.setOnClickListener(this);
 
         //VEHIC DETALLES
         //fechas de vencimiento
         bfechavencSoat = (Button) findViewById(R.id.bfechavencSoat);
-        efechavencSoat = (EditText) findViewById(R.id.efechnacond);
+        efechavencSoat = (EditText) findViewById(R.id.efechavencSoat);
         bfechavencSoat.setOnClickListener(this);
 
-        bfechavencSSC = (Button) findViewById(R.id.bfechavencSoat);
-        efechavencSSC= (EditText) findViewById(R.id.efechnacond);
+        bfechavencSSC = (Button) findViewById(R.id.bfechavencSSC);
+        efechavencSSC= (EditText) findViewById(R.id.efechavencSSC);
         bfechavencSSC.setOnClickListener(this);
 
-        bfechavencSSE = (Button) findViewById(R.id.bfechavencSoat);
-        efechavencSSE= (EditText) findViewById(R.id.efechnacond);
+        bfechavencSSE = (Button) findViewById(R.id.bfechavencSSE);
+        efechavencSSE= (EditText) findViewById(R.id.efechavencSSE);
         bfechavencSSE.setOnClickListener(this);
     }
 
@@ -86,40 +85,35 @@ public class Cond_Vehi_Prop extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bfechnacond:
-                fecha();
-                break;
-            case R.id.bfechalicen:
-                fecha();
-                break;
-            case R.id.bfechavencSoat:
-                fecha();
-                break;
-            case R.id.bfechavencSSC:
-                fecha();
-                break;
-            case R.id.bfechavencSSE:
-                fecha();
-                break;
-            default:
-                break;
-            }
+        if (v==bfechnacond){
+            fecha(1);
+        }
+        if (v==bfechalicen){
+            fecha(2);
+        }
+        if (v==bfechavencSoat){
+            fecha(3);
+        }
+        if (v==bfechavencSSC){
+            fecha(4);
+        }
+        if (v==bfechavencSSE){
+            fecha(5);
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.N)
-    public void fecha(){
+    public void fecha(final int i){
         final Calendar c;
         c = Calendar.getInstance();
         dia=c.get(Calendar.DAY_OF_MONTH);
         mes=c.get(Calendar.MONTH);
         ano=c.get(Calendar.YEAR);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                efechnacond.setText(dayOfMonth+"/"+(month+1)+"/"+year);
-
+                set (i,year, month, dayOfMonth);
             }
         }
                 ,dia,mes,ano);
@@ -127,5 +121,34 @@ public class Cond_Vehi_Prop extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    public void set (int i,int year, int month, int dayOfMonth){
+        String fecha=dayOfMonth+"/"+(month+1)+"/"+year;
+        switch (i) {
+            case 1:
+                efechnacond.setText(fecha);
+                break;
+            case 2:
+                efechalicen.setText(fecha);
+                break;
+            case 3:
+                efechavencSoat.setText(fecha);
+                break;
+            case 4:
+                efechavencSSC.setText(fecha);
+                break;
+            case 5:
+                efechavencSSE.setText(fecha);
+                break;
+            default:
+                break;
+
+
+        }
+    }
+
+    public void onClick_Informe3(View view) {
+        //FALTA HACER-------------------------
+        //victimas: pasajeros, acompañantes o peatones-- Recomendacion: usar un listview o recycler view, row, etc
+    }
 }
 

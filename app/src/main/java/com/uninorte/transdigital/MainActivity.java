@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void onClick_Informe(View view) {
-        Intent i = new Intent(this, Campo1.class);
+        Intent i = new Intent(this,Cond_Vehi_Prop.class);
         startActivityForResult(i,0);
     }
 }

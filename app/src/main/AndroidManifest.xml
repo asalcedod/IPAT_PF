@@ -59,7 +59,9 @@
             android:name=".Cond_Vehi_Prop"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Anexos" />
+        <activity android:name=".Anexos"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Mapa"></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"

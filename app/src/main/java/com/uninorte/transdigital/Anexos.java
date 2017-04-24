@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -12,8 +14,8 @@ import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
-public class Anexos extends Activity implements OnClickListener{
-    Button btnCam;
+public class Anexos extends AppCompatActivity implements OnClickListener{
+    FloatingActionButton btnCam;
     ImageView img;
     Bitmap bmp;
     Intent i;
@@ -22,11 +24,21 @@ public class Anexos extends Activity implements OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.anexos);
-        init();
+
+        //Floating Button
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.camara);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                init();
+            }
+        });
+
     }
 
     private void init() {
-        btnCam = (Button) findViewById(R.id.cam);
+        btnCam = (FloatingActionButton) findViewById(R.id.camara);
         btnCam.setOnClickListener(this);
 
         img = (ImageView) findViewById(R.id.imagen);
@@ -37,16 +49,7 @@ public class Anexos extends Activity implements OnClickListener{
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void ActCam(View view) {
-        int id;
-        id= view.getId();
-        switch(id){
-            case R.id.cam:
-                i=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(i,cons);
-                break;
-        }
-    }
+
 
 
     @Override
@@ -54,7 +57,7 @@ public class Anexos extends Activity implements OnClickListener{
         int id;
         id= v.getId();
         switch(id){
-            case R.id.cam:
+            case R.id.camara:
                 i=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(i,cons);
                 break;

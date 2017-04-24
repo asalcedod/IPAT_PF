@@ -177,21 +177,22 @@
                                     android:layout_weight="1"
                                     android:text="Fecha de Nacimiento" />
 
-                                <ImageButton
-                                    android:id="@+id/imageButton"
-                                    android:layout_width="wrap_content"
+                                <Button
+                                    android:id="@+id/bfechnacond"
+                                    android:layout_width="36dp"
                                     android:layout_height="match_parent"
-                                    android:background="@android:color/transparent"
-                                    android:tint="@color/Black"
-                                    app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+                                    android:background="@android:drawable/ic_menu_my_calendar"
+                                    android:backgroundTint="@color/Black"
+                                    android:tint="@color/Black" />
 
                                 <EditText
-                                    android:id="@+id/editText5"
+                                    android:id="@+id/efechnacond"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:ems="10"
                                     android:inputType="date" />
+
 
                             </LinearLayout>
 
@@ -622,13 +623,39 @@
                                         android:text="Ven" />
                                 </RadioGroup>
 
-                                <ImageButton
-                                    android:id="@+id/imageButton2"
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:background="@android:color/transparent"
-                                    android:tint="@color/Black"
-                                    app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/fechalicenc"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="Fecha de Nacimiento" />
+
+                                    <Button
+                                        android:id="@+id/bfechalicen"
+                                        android:layout_width="36dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@android:drawable/ic_menu_my_calendar"
+
+                                        android:backgroundTint="@color/Black"
+                                        android:tint="@color/Black" />
+
+                                    <EditText
+                                        android:id="@+id/efechalicen"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ems="10"
+                                        android:inputType="date" />
+
+                                </LinearLayout>
+
+
 
                             </LinearLayout>
 
@@ -1401,8 +1428,8 @@
                                         android:layout_height="match_parent"
                                         android:text="Fecha de Vencimiento" />
 
-                                    <ImageButton
-                                        android:id="@+id/imageButtonfecha"
+                                    <Button
+                                        android:id="@+id/bfechavencSoat"
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
                                         android:layout_weight="0.01"
@@ -1411,7 +1438,7 @@
                                         app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
                                     <EditText
-                                        android:id="@+id/fechavencSoat"
+                                        android:id="@+id/efechavencSoat"
                                         android:layout_width="86dp"
                                         android:layout_height="wrap_content"
                                         android:ems="10"
@@ -1523,8 +1550,8 @@
                                         android:layout_height="match_parent"
                                         android:text="Fecha de Vencimiento" />
 
-                                    <ImageButton
-                                        android:id="@+id/imageButtonfechaSSC"
+                                    <Button
+                                        android:id="@+id/bfechavencSSC"
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
                                         android:layout_weight="0.01"
@@ -1533,7 +1560,7 @@
                                         app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
                                     <EditText
-                                        android:id="@+id/fechavencSSC"
+                                        android:id="@+id/efechavencSSC"
                                         android:layout_width="86dp"
                                         android:layout_height="wrap_content"
                                         android:ems="10"
@@ -1646,8 +1673,8 @@
                                         android:layout_height="match_parent"
                                         android:text="Fecha de Vencimiento" />
 
-                                    <ImageButton
-                                        android:id="@+id/imageButtonfechaSSE"
+                                    <Button
+                                        android:id="@+id/bfechavencSSE"
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
                                         android:layout_weight="0.01"
@@ -1656,7 +1683,7 @@
                                         app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
                                     <EditText
-                                        android:id="@+id/fechavencSSE"
+                                        android:id="@+id/efechavencSSE"
                                         android:layout_width="86dp"
                                         android:layout_height="wrap_content"
                                         android:ems="10"

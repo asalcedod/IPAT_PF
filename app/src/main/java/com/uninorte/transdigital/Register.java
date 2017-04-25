@@ -1,5 +1,6 @@
 package com.uninorte.transdigital;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,6 +49,19 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
         pass = (EditText) findViewById(R.id.password);
         mRegister = (Button)findViewById(R.id.register);
         mRegister.setOnClickListener(this);
+
+        //-------------------------------------------------------------------
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Register.this,Intro.class);
+                startActivity(i);
+            }
+        });
+        //----------------------------------------------------------------------
 
     }
 

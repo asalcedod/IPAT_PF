@@ -393,6 +393,7 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
             builder.setMessage("¿Desea confirmar la ubicacion desde el Mapa?")
                     .setTitle("Advertencia")
                     .setCancelable(false)
+                    .setIcon(R.drawable.location_map)
                     .setNegativeButton("Cancelar",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {

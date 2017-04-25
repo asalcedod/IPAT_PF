@@ -53,6 +53,19 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         // register listeners
         mSubmit.setOnClickListener(this);
 
+        //-------------------------------------------------------------------
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Login.this,Intro.class);
+                startActivity(i);
+            }
+        });
+        //----------------------------------------------------------------------
+
     }
 
     @Override

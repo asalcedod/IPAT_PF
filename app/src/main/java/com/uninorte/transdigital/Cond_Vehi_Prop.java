@@ -1,10 +1,12 @@
 package com.uninorte.transdigital;
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,9 +25,24 @@ public class Cond_Vehi_Prop extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cond__vehi__prop);
 
+        //-------------------------------------------------------------------
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Cond_Vehi_Prop.this,Campo1.class);
+                startActivity(i);
+            }
+        });
+        //----------------------------------------------------------------------
+
         //tabs---------------------------------------------------------------------------------
         TbH = (TabHost) findViewById(R.id.tabHost); //llamamos al Tabhost
         TbH.setup(); //lo activamos
+
+        //tabHost.setTabMode(tabHost.MODE_FIXED);
 
 
         TabHost.TabSpec tab1 = TbH.newTabSpec("tab1");  //aspectos de cada Tab (pestaña)
@@ -79,6 +96,8 @@ public class Cond_Vehi_Prop extends AppCompatActivity implements View.OnClickLis
         bfechavencSSE = (Button) findViewById(R.id.bfechavencSSE);
         efechavencSSE= (EditText) findViewById(R.id.efechavencSSE);
         bfechavencSSE.setOnClickListener(this);
+
+
     }
 
 

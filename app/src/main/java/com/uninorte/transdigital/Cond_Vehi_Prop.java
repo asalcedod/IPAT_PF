@@ -1,31 +1,50 @@
 package com.uninorte.transdigital;
+
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Build;
-import android.os.Bundle;
+import android.preference.EditTextPreference;
+import android.support.design.widget.TabLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TabHost;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class Cond_Vehi_Prop extends AppCompatActivity implements View.OnClickListener{
-    TabHost TbH;
-    Button bfechnacond,bfechalicen,bfechavencSoat,bfechavencSSC,bfechavencSSE;
-    EditText efechnacond,efechalicen,efechavencSoat,efechavencSSC,efechavencSSE;
-    private int dia,mes,ano,i;
+public class Cond_Vehi_Prop extends AppCompatActivity {
+
+    public Button bfechnacond,bfechalicen,bfechavencSoat,bfechavencSSC,bfechavencSSE;
+    public EditText efechnacond,efechalicen,efechavencSoat,efechavencSSC,efechavencSSE;
+    public int dia,mes,ano;
+
+    private static final String TAG = "LogsAndroid";
+
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cond__vehi__prop);
 
-        //-------------------------------------------------------------------
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -36,89 +55,56 @@ public class Cond_Vehi_Prop extends AppCompatActivity implements View.OnClickLis
                 startActivity(i);
             }
         });
-        //----------------------------------------------------------------------
-
-        //tabs---------------------------------------------------------------------------------
-        TbH = (TabHost) findViewById(R.id.tabHost); //llamamos al Tabhost
-        TbH.setup(); //lo activamos
-
-        //tabHost.setTabMode(tabHost.MODE_FIXED);
 
 
-        TabHost.TabSpec tab1 = TbH.newTabSpec("tab1");  //aspectos de cada Tab (pestaña)
-        TabHost.TabSpec tab2 = TbH.newTabSpec("tab2");
-        TabHost.TabSpec tab3 = TbH.newTabSpec("tab3");
-        TabHost.TabSpec tab4 = TbH.newTabSpec("tab4");
-        TabHost.TabSpec tab5 = TbH.newTabSpec("tab5");
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        tab1.setIndicator("Datos Personales");    //qué queremos que aparezca en las pestañas
-        tab1.setContent(R.id.datoscond); //definimos el id de cada Tab (pestaña)
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        tab2.setIndicator("Detalles Conductores");
-        tab2.setContent(R.id.condetalles);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
 
-        tab3.setIndicator("Datos Vehiculo");
-        tab3.setContent(R.id.datosvehic);
-
-        tab4.setIndicator("Detalles Vehiculo");
-        tab4.setContent(R.id.vehicdetalles);
-
-        tab5.setIndicator("Propietarios");
-        tab5.setContent(R.id.propiet);
-
-        TbH.addTab(tab1); //añadimos los tabs ya programados
-        TbH.addTab(tab2);
-        TbH.addTab(tab3);
-        TbH.addTab(tab4);
-        TbH.addTab(tab5);
-        //end tabs-----------------------------------------------------------------------------
 
         //DATOS PERSONALES DEL CONDUCTOR
         bfechnacond = (Button) findViewById(R.id.bfechnacond);
         efechnacond = (EditText) findViewById(R.id.efechnacond);
-        bfechnacond.setOnClickListener(this);
 
         //DETALLES DEL CONDUCTOR
         bfechalicen = (Button) findViewById(R.id.bfechalicen);
         efechalicen = (EditText) findViewById(R.id.efechalicen);
-        bfechalicen.setOnClickListener(this);
 
         //VEHIC DETALLES
         //fechas de vencimiento
         bfechavencSoat = (Button) findViewById(R.id.bfechavencSoat);
         efechavencSoat = (EditText) findViewById(R.id.efechavencSoat);
-        bfechavencSoat.setOnClickListener(this);
 
         bfechavencSSC = (Button) findViewById(R.id.bfechavencSSC);
         efechavencSSC= (EditText) findViewById(R.id.efechavencSSC);
-        bfechavencSSC.setOnClickListener(this);
 
         bfechavencSSE = (Button) findViewById(R.id.bfechavencSSE);
         efechavencSSE= (EditText) findViewById(R.id.efechavencSSE);
-        bfechavencSSE.setOnClickListener(this);
 
 
     }
 
-
-
-    @Override
-    public void onClick(View v) {
-        if (v==bfechnacond){
-            fecha(1);
-        }
-        if (v==bfechalicen){
-            fecha(2);
-        }
-        if (v==bfechavencSoat){
-            fecha(3);
-        }
-        if (v==bfechavencSSC){
-            fecha(4);
-        }
-        if (v==bfechavencSSE){
-            fecha(5);
-        }
+    public void botonfechnacond(View view) {
+        fecha(1);
+    }
+    public void botonfechalicen(View view) {
+        fecha(2);
+    }
+    public void botonfechavencSoat(View view) {
+        fecha(3);
+    }
+    public void botonfechavencSSC(View view) {
+        fecha(4);
+    }
+    public void botonfechavencSSE(View view) {
+        fecha(5);
     }
 
     @TargetApi(Build.VERSION_CODES.N)
@@ -133,6 +119,7 @@ public class Cond_Vehi_Prop extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 set (i,year, month, dayOfMonth);
+
             }
         }
                 ,dia,mes,ano);
@@ -141,22 +128,29 @@ public class Cond_Vehi_Prop extends AppCompatActivity implements View.OnClickLis
     }
 
     public void set (int i,int year, int month, int dayOfMonth){
+        EditText et_setDate;
         String fecha=dayOfMonth+"/"+(month+1)+"/"+year;
+        Log.d(TAG, fecha);
         switch (i) {
             case 1:
-                efechnacond.setText(fecha);
+                et_setDate = (EditText) findViewById(R.id.efechnacond);
+                et_setDate.setText(fecha);
                 break;
             case 2:
-                efechalicen.setText(fecha);
+                et_setDate = (EditText) findViewById(R.id.efechalicen);
+                et_setDate.setText(fecha);
                 break;
             case 3:
-                efechavencSoat.setText(fecha);
+                et_setDate = (EditText) findViewById(R.id.efechavencSoat);
+                et_setDate.setText(fecha);
                 break;
             case 4:
-                efechavencSSC.setText(fecha);
+                et_setDate = (EditText) findViewById(R.id.efechavencSSC);
+                et_setDate.setText(fecha);
                 break;
             case 5:
-                efechavencSSE.setText(fecha);
+                et_setDate = (EditText) findViewById(R.id.efechavencSSE);
+                et_setDate.setText(fecha);
                 break;
             default:
                 break;
@@ -165,9 +159,100 @@ public class Cond_Vehi_Prop extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void onClick_Informe3(View view) {
-        //FALTA HACER-------------------------
-        //victimas: pasajeros, acompañantes o peatones-- Recomendacion: usar un listview o recycler view, row, etc
+
+    /**
+     * A placeholder fragment containing a simple view.
+     */
+    public static class PlaceholderFragment extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private static final String ARG_SECTION_NUMBER = "section_number";
+
+        public PlaceholderFragment() {
+        }
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static PlaceholderFragment newInstance(int sectionNumber) {
+            PlaceholderFragment fragment = new PlaceholderFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_cond__vehi__prop, container, false);
+            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            return rootView;
+        }
+    }
+
+    /**
+     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+     * one of the sections/tabs/pages.
+     */
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            //return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    DatosPersonales datosPersonales = new DatosPersonales();
+                    return datosPersonales;
+                case 1:
+                    DetallesConductores detallesConductores = new DetallesConductores();
+                    return detallesConductores;
+                case 2:
+                    DatosVehi datosVehi = new DatosVehi();
+                    return datosVehi;
+                case 3:
+                    DetallesVehi detallesVehi = new DetallesVehi();
+                    return detallesVehi;
+                case 4:
+                    Propietario propietario = new Propietario();
+                    return propietario;
+
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            // Show 5 total pages.
+            return 5;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return "Datos Personales";
+                case 1:
+                    return "Detalles Conductores";
+                case 2:
+                    return "Datos Vehiculo";
+                case 3:
+                    return "Detalles Vehiculo";
+                case 4:
+                    return "Propietarios";
+
+            }
+            return null;
+        }
     }
 }
-

@@ -125,9 +125,9 @@
                     android:layout_width="45dp"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_my_calendar"
-                    android:backgroundTint="@color/Black"
+                    android:backgroundTint="@color/colorGreen"
                     android:onClick="botonfechnacond"
-                    android:tint="@color/Black" />
+                    android:tint="@color/colorGreen" />
 
                 <EditText
                     android:id="@+id/efechnacond"

@@ -64,7 +64,7 @@
                     tools:ignore="UselessParent">
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/textViewCed"
                         android:layout_width="191dp"
                         android:layout_height="match_parent"
                         android:gravity=""

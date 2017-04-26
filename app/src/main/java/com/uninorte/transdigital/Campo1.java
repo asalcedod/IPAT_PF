@@ -1,7 +1,11 @@
 package com.uninorte.transdigital;
 
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,6 +20,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -36,7 +41,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class Campo1 extends Activity implements View.OnClickListener , ActivityCompat.OnRequestPermissionsResultCallback {
+public class Campo1 extends AppCompatActivity implements View.OnClickListener , ActivityCompat.OnRequestPermissionsResultCallback {
     private RadioGroup rdgGrupo;
     private static final String TAG = "LogsAndroid";
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1 ;
@@ -80,7 +85,24 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campo1);
+
+        //-------------------------------------------------------------------
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Campo1.this,MainActivity.class);
+                startActivity(i);
+            }
+        });
+        //----------------------------------------------------------------------
+
+
+
         it = new Intent(this, Cond_Vehi_Prop.class);
+
         rdgGrupo = (RadioGroup) findViewById(R.id.rb);
         rdgGrupo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 

@@ -78,7 +78,7 @@
                     app:layout_constraintHorizontal_bias="0.311"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewCed" />
 
                 <TextView
                     android:id="@+id/textView1"
@@ -107,7 +107,7 @@
                     app:layout_constraintHorizontal_bias="0.311"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewCed" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -136,7 +136,7 @@
                     app:layout_constraintHorizontal_bias="0.311"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewCed" />
 
                 <Button
                     android:id="@+id/register"

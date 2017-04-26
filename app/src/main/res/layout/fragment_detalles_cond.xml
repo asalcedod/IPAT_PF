@@ -361,8 +361,8 @@
                     android:layout_width="45dp"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_my_calendar"
-                    android:backgroundTint="@color/Black"
-                    android:tint="@color/Black"
+                    android:backgroundTint="@color/colorGreen"
+                    android:tint="@color/colorGreen"
                     android:onClick="botonfechalicen"/>
 
                 <EditText

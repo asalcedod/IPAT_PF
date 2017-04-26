@@ -71,7 +71,7 @@
                         android:text="Área" />
 
                     <Spinner
-                        android:id="@+id/spinner3"
+                        android:id="@+id/area"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
@@ -91,7 +91,7 @@
                         android:text="Sector" />
 
                     <Spinner
-                        android:id="@+id/spinner4"
+                        android:id="@+id/sector"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
@@ -111,7 +111,7 @@
                         android:text="Zona" />
 
                     <Spinner
-                        android:id="@+id/spinner5"
+                        android:id="@+id/zona"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -132,7 +132,7 @@
                         android:text="Diseño" />
 
                     <Spinner
-                        android:id="@+id/spinner6"
+                        android:id="@+id/diseño"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
@@ -152,7 +152,7 @@
                         android:text="Condición Climática" />
 
                     <Spinner
-                        android:id="@+id/spinner8"
+                        android:id="@+id/condicionc"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />

@@ -28,6 +28,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.raizlabs.android.dbflow.sql.language.Select;
+
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -58,6 +60,9 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
     String latitud = "";
     String longitud = "";
     String gravedad = "";
+    String mname="";
+    String area="",sector="",zona="",diseño="",condc="";
+    String id_cl="";
     TextView mensaje1;
     Spinner accidente;
     private Button mRegister;
@@ -118,6 +123,9 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 cla=parent.getItemAtPosition(position).toString();
+                if(parent.getItemAtPosition(position).toString().equals("Seleccione...")){
+                    cla="";
+                }
             }
 
             @Override
@@ -276,7 +284,7 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
     public void onClick(View view) {
         ArrayList<Boolean> data = new ArrayList<>();
         Accidente accidente =new Accidente();
-        String mname = name.getText().toString();
+        mname = name.getText().toString();
         String mdate = date.getText().toString();
         String mhour = hour.getText().toString();
         data.add(validar(name,mname));
@@ -296,10 +304,11 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
             accidente.setLongitud(longitud);
             accidente.setUbicacion(ubicacion);
             accidente.setGravedad(gravedad);
-            accidente.setA_fecha(salida1);
-            accidente.setA_hora(salida2);
-            accidente.setR_fecha(mdate);
-            accidente.setR_hora(mhour);
+            accidente.setR_fecha(salida1);
+            accidente.setR_hora(salida2);
+            accidente.setCaracteristicasl(id_cl);
+            accidente.setA_fecha(mdate);
+            accidente.setA_hora(mhour);
             accidente.setAccidente(cla);
             accidente.save();
             /*List<ClaseAccidente> c = new Select().from(ClaseAccidente.class).queryList();
@@ -421,13 +430,13 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
     public void onClick_lugar(View view) {
         //se va a la pestaña para las caracteristicas del lugar
         Intent i = new Intent(this, Caracteristicas_Lugar.class);
-        startActivity(i);
+        startActivityForResult(i,2);
     }
 
     public void onClick_CaracteVias(View view) {
         //se va a la pestañana para las caracteristicas de las vias
         Intent i = new Intent(this, Caracteristicas_Vias.class);
-        startActivity(i);
+        startActivityForResult(i,3);
     }
 
 
@@ -440,6 +449,27 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
                 latitud=data.getStringExtra("latitud");
                 longitud=data.getStringExtra("longitud");
                 mensaje1.setText(ubicacion);
+            }
+        }
+        if(requestCode==2){
+            if (resultCode==RESULT_OK){
+                area=data.getStringExtra("area");
+                sector=data.getStringExtra("sector");
+                zona=data.getStringExtra("zona");
+                diseño=data.getStringExtra("diseño");
+                condc=data.getStringExtra("condicionc");
+                List<Caracteristicasl> cl = new Select().from(Caracteristicasl.class).queryList();
+                for (Caracteristicasl a : cl) {
+                    
+                }
+            }
+        }
+        if(requestCode==3){
+            if (resultCode==RESULT_OK){
+                /*ubicacion=data.getStringExtra("ubicacion");
+                latitud=data.getStringExtra("latitud");
+                longitud=data.getStringExtra("longitud");
+                mensaje1.setText(ubicacion);*/
             }
         }
     }

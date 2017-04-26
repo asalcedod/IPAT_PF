@@ -13,7 +13,15 @@ public class Accidente extends BaseModel{
     @PrimaryKey(autoincrement = true)
     int id;
     @Column
-    String ot,gravedad,latitud,longitud,ubicacion,a_fecha,a_hora,r_fecha,r_hora,accidente;
+    String ot,gravedad,latitud,longitud,ubicacion,a_fecha,a_hora,r_fecha,r_hora,accidente,caracteristicasl;
+
+    public String getCaracteristicasl() {
+        return caracteristicasl;
+    }
+
+    public void setCaracteristicasl(String caracteristicasl) {
+        this.caracteristicasl = caracteristicasl;
+    }
 
     public String getAccidente() {
         return accidente;
@@ -22,6 +30,8 @@ public class Accidente extends BaseModel{
     public void setAccidente(String accidente) {
         this.accidente = accidente;
     }
+
+
 
     public String getLatitud() {
         return latitud;

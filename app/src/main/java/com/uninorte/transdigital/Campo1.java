@@ -125,7 +125,6 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
                     Log.d(TAG, "La gravedad del accidente es con solo daños");
                     gravedad = "Solo Daños";
                 }
-
             }
 
         });

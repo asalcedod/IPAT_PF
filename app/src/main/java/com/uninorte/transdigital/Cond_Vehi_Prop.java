@@ -22,17 +22,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cond_Vehi_Prop extends AppCompatActivity {
 
     public Button bfechnacond,bfechalicen,bfechavencSoat,bfechavencSSC,bfechavencSSE;
     public EditText efechnacond,efechalicen,efechavencSoat,efechavencSSC,efechavencSSE;
+    public Spinner categoria,clasev,clases,mdt,radioa;
     public int dia,mes,ano;
+    public String cat="",cv="",cs="",mt="",rada="";
 
     private static final String TAG = "LogsAndroid";
 
@@ -76,7 +84,46 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
         //DETALLES DEL CONDUCTOR
         bfechalicen = (Button) findViewById(R.id.bfechalicen);
         efechalicen = (EditText) findViewById(R.id.efechalicen);
+        /*categoria = (Spinner) findViewById(R.id.CategLicCond);
+        List<String> values = new ArrayList<String>();
+        values.add("Seleccione...");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, values);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categoria.setAdapter(dataAdapter);
+        categoria.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                cat = parent.getItemAtPosition(position).toString();
+                if (parent.getItemAtPosition(position).toString().equals("Seleccione...")) {
+                    cat = "";
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                cat="";
+            }
+        });
+        clasev = (Spinner) findViewById(R.id.idClaseVehi);
+        List<String> values2 = new ArrayList<String>();
+        values2.add("Seleccione...");
+        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, values);
+        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        clasev.setAdapter(dataAdapter2);
+        clasev.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                cv = parent.getItemAtPosition(position).toString();
+                if (parent.getItemAtPosition(position).toString().equals("Seleccione...")) {
+                    cv = "";
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                cv="";
+            }
+        });
+        */
         //VEHIC DETALLES
         //fechas de vencimiento
         bfechavencSoat = (Button) findViewById(R.id.bfechavencSoat);

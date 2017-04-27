@@ -24,33 +24,17 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.anexos);
-
+        img = (ImageView) findViewById(R.id.imagen);
         //Floating Button
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.camara);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                init();
-            }
-        });
-
-    }
-
-    private void init() {
         btnCam = (FloatingActionButton) findViewById(R.id.camara);
         btnCam.setOnClickListener(this);
 
-        img = (ImageView) findViewById(R.id.imagen);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
     }
-
-
-
 
     @Override
     public void onClick(View v) {

@@ -503,6 +503,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
 
     public void onClick_CaracteVias(View view) {
         //se va a la pestañana para las caracteristicas de las vias
+        //Intent i = new Intent(this, Caracteristicas_Vias.class);
         Intent i = new Intent(this, Anexos.class);
         startActivityForResult(i,3);
     }

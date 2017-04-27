@@ -33,6 +33,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.raizlabs.android.dbflow.sql.language.Select;
+
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -63,6 +65,10 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
     String latitud = "";
     String longitud = "";
     String gravedad = "";
+    String choque,objeto;
+    String mname="";
+    String area="",sector="",zona="",diseño="",condc="";
+    String id_cl="";
     TextView mensaje1;
     Spinner accidente;
     private Button mRegister;
@@ -140,6 +146,35 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 cla=parent.getItemAtPosition(position).toString();
+                if(parent.getItemAtPosition(position).toString().equals("Seleccione...")){
+                    cla="";
+                }
+                if(parent.getItemAtPosition(position).toString().equals("Choque")){
+                    final String[] items = {"Vehiculo","Tren","Semoviente","Objeto fijo"};
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Campo1.this);
+                    builder.setTitle("Seleccione Choque con: ");
+                    builder.setItems(items, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int item) {
+                            choque=items[item];
+                            if(items[item].equals("Objeto fijo")){
+                                final String[] items = {"Muro","Poste","Arbol","Baranda","Semaforo","Inmueble","Hidratante","Valla señal","Tarima, caseta, vehiculo estacionada","Otro"};
+                                AlertDialog.Builder builder = new AlertDialog.Builder(Campo1.this);
+                                builder.setTitle("Objeto fijo: ");
+                                builder.setItems(items, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int item) {
+                                        objeto=items[item];
+                                        dialog.cancel();
+                                    }
+                                });
+                                AlertDialog alert = builder.create();
+                                alert.show();
+                            }
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
             }
 
             @Override
@@ -147,6 +182,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
                 cla="";
             }
         });
+
 
         //NUEVO..................................................................................
         name = (EditText) findViewById(R.id.name);
@@ -318,11 +354,15 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
             accidente.setLongitud(longitud);
             accidente.setUbicacion(ubicacion);
             accidente.setGravedad(gravedad);
-            accidente.setA_fecha(salida1);
-            accidente.setA_hora(salida2);
-            accidente.setR_fecha(mdate);
-            accidente.setR_hora(mhour);
+            accidente.setR_fecha(salida1);
+            accidente.setR_hora(salida2);
+            accidente.setCaracteristicasl(id_cl);
+            accidente.setA_fecha(mdate);
+            accidente.setA_hora(mhour);
             accidente.setAccidente(cla);
+            accidente.setChoque(choque);
+            accidente.setObjetof(objeto);
+            accidente.setCaracteristicasl(id_cl);
             accidente.save();
             /*List<ClaseAccidente> c = new Select().from(ClaseAccidente.class).queryList();
             for (ClaseAccidente ca : c) {
@@ -330,7 +370,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
             }*/
 
             startActivity(it);
-            //new Campo1.Addform().execute(mname,mdate,mhour);
+            finish();
         }else{
             Toast.makeText(this,"Existen campos sin completar.",Toast.LENGTH_SHORT).show();
         }
@@ -443,13 +483,14 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
     public void onClick_lugar(View view) {
         //se va a la pestaña para las caracteristicas del lugar
         Intent i = new Intent(this, Caracteristicas_Lugar.class);
-        startActivity(i);
+        i.putExtra("idinfo",salida1+salida2);
+        startActivityForResult(i,2);
     }
 
     public void onClick_CaracteVias(View view) {
         //se va a la pestañana para las caracteristicas de las vias
         Intent i = new Intent(this, Caracteristicas_Vias.class);
-        startActivity(i);
+        startActivityForResult(i,3);
     }
 
 
@@ -462,6 +503,28 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
                 latitud=data.getStringExtra("latitud");
                 longitud=data.getStringExtra("longitud");
                 mensaje1.setText(ubicacion);
+            }
+        }
+        if(requestCode==2){
+            if (resultCode==RESULT_OK){
+                area=data.getStringExtra("area");
+                sector=data.getStringExtra("sector");
+                zona=data.getStringExtra("zona");
+                diseño=data.getStringExtra("diseño");
+                condc=data.getStringExtra("condicionc");
+                id_cl=data.getStringExtra("idcl");
+                List<Caracteristicasl> cl = new Select().from(Caracteristicasl.class).queryList();
+                for (Caracteristicasl a : cl) {
+
+                }
+            }
+        }
+        if(requestCode==3){
+            if (resultCode==RESULT_OK){
+                /*ubicacion=data.getStringExtra("ubicacion");
+                latitud=data.getStringExtra("latitud");
+                longitud=data.getStringExtra("longitud");
+                mensaje1.setText(ubicacion);*/
             }
         }
     }

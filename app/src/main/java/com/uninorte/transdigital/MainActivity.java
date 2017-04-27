@@ -8,9 +8,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.sql.language.Delete;
+import com.raizlabs.android.dbflow.sql.language.Select;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,15 +30,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FlowManager.init(new FlowConfig.Builder(this).build());
-        ClaseAccidente v=new ClaseAccidente();
-        v.setId(0);
-        v.setChoque("Choque");
-        v.setCaida("Caida");
-        v.setIncendio("Incendio");
-        v.setOcupante("Ocupante");
-        v.setVolcameinto("Volcamiento");
-        v.setOtro("Otro");
-        v.save();
+        List<Accidente> a = new Delete().from(Accidente.class).queryList();
+        List<Caracteristicasl> b = new Delete().from(Caracteristicasl.class).queryList();
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {

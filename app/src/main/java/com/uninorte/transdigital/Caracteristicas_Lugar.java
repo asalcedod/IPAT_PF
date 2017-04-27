@@ -176,12 +176,14 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
             caracter.setZona(zo);
             caracter.equals(dis);
             caracter.setCondicionc(condc);
+            caracter.setId_camp1(getIntent().getStringExtra("idinfo"));
             caracter.save();
             i.putExtra("area", ar);
             i.putExtra("sector", sec);
             i.putExtra("zona", zo);
             i.putExtra("diseño", dis);
             i.putExtra("condicionc", condc);
+            i.putExtra("idcl",getIntent().getStringExtra("idinfo"));
             setResult(Activity.RESULT_OK, i);
             finish();
         }else{

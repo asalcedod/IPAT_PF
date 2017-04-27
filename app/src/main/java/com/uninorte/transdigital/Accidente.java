@@ -1,5 +1,6 @@
 package com.uninorte.transdigital;
 
+import android.support.annotation.Nullable;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
@@ -14,6 +15,24 @@ public class Accidente extends BaseModel{
     int id;
     @Column
     String ot,gravedad,latitud,longitud,ubicacion,a_fecha,a_hora,r_fecha,r_hora,accidente,caracteristicasl;
+    @Column @Nullable
+    String choque,objetof;
+
+    public String getChoque() {
+        return choque;
+    }
+
+    public void setChoque(String choque) {
+        this.choque = choque;
+    }
+
+    public String getObjetof() {
+        return objetof;
+    }
+
+    public void setObjetof(String objetof) {
+        this.objetof = objetof;
+    }
 
     public String getCaracteristicasl() {
         return caracteristicasl;

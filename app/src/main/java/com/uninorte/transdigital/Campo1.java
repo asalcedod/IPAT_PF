@@ -60,6 +60,7 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
     String latitud = "";
     String longitud = "";
     String gravedad = "";
+    String choque,objeto;
     String mname="";
     String area="",sector="",zona="",diseño="",condc="";
     String id_cl="";
@@ -125,6 +126,32 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
                 cla=parent.getItemAtPosition(position).toString();
                 if(parent.getItemAtPosition(position).toString().equals("Seleccione...")){
                     cla="";
+                }
+                if(parent.getItemAtPosition(position).toString().equals("Choque")){
+                    final String[] items = {"Vehiculo","Tren","Semoviente","Objeto fijo"};
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Campo1.this);
+                    builder.setTitle("Seleccione Choque con: ");
+                    builder.setItems(items, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int item) {
+                            choque=items[item];
+                            if(items[item].equals("Objeto fijo")){
+                                final String[] items = {"Muro","Poste","Arbol","Baranda","Semaforo","Inmueble","Hidratante","Valla señal","Tarima, caseta, vehiculo estacionada","Otro"};
+                                AlertDialog.Builder builder = new AlertDialog.Builder(Campo1.this);
+                                builder.setTitle("Objeto fijo: ");
+                                builder.setItems(items, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int item) {
+                                        objeto=items[item];
+                                        dialog.cancel();
+                                    }
+                                });
+                                AlertDialog alert = builder.create();
+                                alert.show();
+                            }
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
                 }
             }
 
@@ -310,6 +337,9 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
             accidente.setA_fecha(mdate);
             accidente.setA_hora(mhour);
             accidente.setAccidente(cla);
+            accidente.setChoque(choque);
+            accidente.setObjetof(objeto);
+            accidente.setCaracteristicasl(id_cl);
             accidente.save();
             /*List<ClaseAccidente> c = new Select().from(ClaseAccidente.class).queryList();
             for (ClaseAccidente ca : c) {
@@ -317,6 +347,7 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
             }*/
 
             startActivity(it);
+            finish();
             //new Campo1.Addform().execute(mname,mdate,mhour);
         }else{
             Toast.makeText(this,"Existen campos sin completar.",Toast.LENGTH_SHORT).show();
@@ -430,6 +461,7 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
     public void onClick_lugar(View view) {
         //se va a la pestaña para las caracteristicas del lugar
         Intent i = new Intent(this, Caracteristicas_Lugar.class);
+        i.putExtra("idinfo",salida1+salida2);
         startActivityForResult(i,2);
     }
 
@@ -458,6 +490,7 @@ public class Campo1 extends Activity implements View.OnClickListener , ActivityC
                 zona=data.getStringExtra("zona");
                 diseño=data.getStringExtra("diseño");
                 condc=data.getStringExtra("condicionc");
+                id_cl=data.getStringExtra("idcl");
                 List<Caracteristicasl> cl = new Select().from(Caracteristicasl.class).queryList();
                 for (Caracteristicasl a : cl) {
                     

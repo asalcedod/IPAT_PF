@@ -14,7 +14,15 @@ public class Caracteristicasl extends BaseModel {
     @PrimaryKey(autoincrement = true)
     int id;
     @Column
-    String area,sector,zona,diseño,condicionc;
+    String area,sector,zona,diseño,condicionc,id_camp1;
+
+    public String getId_camp1() {
+        return id_camp1;
+    }
+
+    public void setId_camp1(String id_camp1) {
+        this.id_camp1 = id_camp1;
+    }
 
     public int getId() {
         return id;

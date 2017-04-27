@@ -51,7 +51,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 3;
 
     //Fecha y Hora...............................................................................
-    EditText name, date, hour;
+    EditText name, date, hour,otro;
     long ahora = System.currentTimeMillis();
     Date fecha = new Date(ahora);
     DateFormat df = new SimpleDateFormat("dd/MM/yy");
@@ -149,6 +149,13 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
                 if(parent.getItemAtPosition(position).toString().equals("Seleccione...")){
                     cla="";
                 }
+                if(parent.getItemAtPosition(position).toString().equals("Otro")){
+                    otro=(EditText)findViewById(R.id.otro);
+                    otro.setVisibility(View.VISIBLE);
+                }else{
+                    otro=(EditText)findViewById(R.id.otro);
+                    otro.setVisibility(View.INVISIBLE);
+                }
                 if(parent.getItemAtPosition(position).toString().equals("Choque")){
                     final String[] items = {"Vehiculo","Tren","Semoviente","Objeto fijo"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(Campo1.this);
@@ -163,6 +170,13 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
                                 builder.setItems(items, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int item) {
                                         objeto=items[item];
+                                        if(items[item].equals("Otro")){
+                                            otro=(EditText)findViewById(R.id.otro);
+                                            otro.setVisibility(View.VISIBLE);
+                                        }else{
+                                            otro=(EditText)findViewById(R.id.otro);
+                                            otro.setVisibility(View.INVISIBLE);
+                                        }
                                         dialog.cancel();
                                     }
                                 });

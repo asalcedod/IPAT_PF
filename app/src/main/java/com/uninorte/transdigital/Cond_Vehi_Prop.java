@@ -27,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +37,8 @@ import java.util.List;
 
 public class Cond_Vehi_Prop extends AppCompatActivity {
 
-    public Button bfechnacond,bfechalicen,bfechavencSoat,bfechavencSSC,bfechavencSSE;
+    public Button bfechalicen,bfechavencSoat,bfechavencSSC,bfechavencSSE;
+    public ImageButton bfechnacond;
     public EditText efechnacond,efechalicen,efechavencSoat,efechavencSSC,efechavencSSE;
     public Spinner categoria,clasev,clases,mdt,radioa;
     public int dia,mes,ano;
@@ -78,7 +80,7 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
 
 
         //DATOS PERSONALES DEL CONDUCTOR
-        bfechnacond = (Button) findViewById(R.id.bfechnacond);
+        bfechnacond = (ImageButton) findViewById(R.id.bfechnacond);
         efechnacond = (EditText) findViewById(R.id.efechnacond);
 
         //DETALLES DEL CONDUCTOR

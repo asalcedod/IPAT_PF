@@ -160,23 +160,24 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
     public void fecha(final int i){
         final Calendar c;
         c = Calendar.getInstance();
+        c.set(Calendar.YEAR,2000);
         dia=c.get(Calendar.DAY_OF_MONTH);
         mes=c.get(Calendar.MONTH);
         ano=c.get(Calendar.YEAR);
-
         final DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                set (i,year, month, dayOfMonth);
-
+                set(i,year, month, dayOfMonth);
             }
         }
-                ,dia,mes,ano);
+        //Tenias esto al reves (,dia,mes,ano
+                ,ano,mes,dia);
         datePickerDialog.show();
 
     }
 
-    public void set (int i,int year, int month, int dayOfMonth){
+    public void set(int i,int year, int month, int dayOfMonth){
         EditText et_setDate;
         String fecha=dayOfMonth+"/"+(month+1)+"/"+year;
         Log.d(TAG, fecha);

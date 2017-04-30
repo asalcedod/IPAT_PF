@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.List;
 
 
 public class DetallesConductores extends Fragment {
+    ImageButton imageButtonSave;
     public Spinner categoria,clasev,clases,mdt,radioa;
     public int dia,mes,ano;
     public String cat="",cv="",cs="",mt="",rada="";
@@ -42,6 +44,15 @@ public class DetallesConductores extends Fragment {
             }
         });
 
+
+        imageButtonSave = (ImageButton) rootView.findViewById(R.id.SaveDetaCond);
+        imageButtonSave.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return rootView;
     }
 }

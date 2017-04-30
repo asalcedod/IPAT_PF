@@ -261,8 +261,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
                 <ImageView
 
@@ -273,7 +273,6 @@
                     android:layout_weight="1"
                     android:tint="@color/colorGreen"
                     app:srcCompat="@drawable/ic_local_phone_white_48dp" />
-
 
 
                 <android.support.design.widget.TextInputLayout
@@ -292,6 +291,24 @@
                         android:inputType="number"
                         android:textSize="16sp" />
                 </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/Save"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:onClick="SaveDatoscond"
+                    android:tint="@color/colorPrimary"
+                    app:srcCompat="@drawable/save"
+                    android:layout_gravity="right"/>
 
             </LinearLayout>
 

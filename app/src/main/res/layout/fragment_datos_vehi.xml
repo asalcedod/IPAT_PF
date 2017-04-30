@@ -323,6 +323,24 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/SaveDatosVeh"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:background="@android:color/transparent"
+                    android:onClick="SaveDatosVeh"
+                    android:tint="@color/colorPrimary"
+                    app:srcCompat="@drawable/save" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

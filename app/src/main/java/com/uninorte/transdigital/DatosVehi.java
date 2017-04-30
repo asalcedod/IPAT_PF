@@ -14,7 +14,7 @@ public class DatosVehi extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootview = inflater.inflate(R.layout.fragment_datos_personales, container, false);
+        View rootview = inflater.inflate(R.layout.fragment_datos_vehi, container, false);
         imageButtonSave = (ImageButton) rootview.findViewById(R.id.SaveDatosVeh);
         imageButtonSave.setOnClickListener(new View.OnClickListener(){
 

@@ -1,10 +1,8 @@
 package com.uninorte.transdigital;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,8 +12,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -50,7 +46,7 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
         btnCam = (FloatingActionButton) findViewById(R.id.camara);
         btnCam.setOnClickListener(this);
         aleatorio = new Integer((int) (Math.random() * 100)).intValue();
-        foto = Environment.getExternalStorageDirectory() + "/imagen"+ 1 +".jpg";
+        foto = Environment.getExternalStorageDirectory() + "/DCIM/Camera/imagen"+ 1 +".jpg";
         dir = new File(foto);
     }
 
@@ -68,14 +64,14 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File file = new File(foto);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-        startActivityForResult(intent, 1); // 1 para la camara, 2 para la galeria
+        startActivityForResult(intent, TAKE_PICTURE); // 1 para la camara, 2 para la galeria
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //bmp=(Bitmap) data.getExtras().get("data");
-        //img.setImageBitmap(bmp);
+        bmp=(Bitmap) data.getExtras().get(MediaStore.EXTRA_OUTPUT);
+        img.setImageBitmap(bmp);
         if (dir.exists()) {
             UploaderFoto nuevaTarea = new UploaderFoto();
             nuevaTarea.execute(foto);

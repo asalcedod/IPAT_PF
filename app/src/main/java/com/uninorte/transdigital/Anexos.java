@@ -16,8 +16,12 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
@@ -26,6 +30,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 
 import java.io.File;
+import java.util.List;
 
 public class Anexos extends AppCompatActivity implements OnClickListener{
     FloatingActionButton btnCam;
@@ -70,8 +75,8 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        bmp=(Bitmap) data.getExtras().get(MediaStore.EXTRA_OUTPUT);
-        img.setImageBitmap(bmp);
+        //bmp=(Bitmap) data.getExtras().get(MediaStore.EXTRA_OUTPUT);
+        //img.setImageBitmap(bmp);
         if (dir.exists()) {
             UploaderFoto nuevaTarea = new UploaderFoto();
             nuevaTarea.execute(foto);
@@ -95,7 +100,7 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
                 HttpPost httppost = new HttpPost("https://transitodigital-asalcedod.c9users.io/upload.php");
                 File file = new File(miFoto);
                 MultipartEntity mpEntity = new MultipartEntity();
-                ContentBody foto = new FileBody(file, "image/jpeg");
+                ContentBody foto = new FileBody(file);
                 mpEntity.addPart("fotoUp", foto);
                 httppost.setEntity(mpEntity);
                 httpclient.execute(httppost);

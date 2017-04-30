@@ -126,7 +126,6 @@
                         android:inputType="textPersonName"
                         android:textSize="16sp" />
                 </android.support.design.widget.TextInputLayout>
-
             </LinearLayout>
 
             <LinearLayout

@@ -46,7 +46,7 @@ public class Propietario extends Fragment {
             }
         });
 
-        imageButtonSave = (ImageButton) rootView.findViewById(R.id.Save);
+        imageButtonSave = (ImageButton) rootView.findViewById(R.id.SaveProp);
         imageButtonSave.setOnClickListener(new View.OnClickListener(){
 
             @Override

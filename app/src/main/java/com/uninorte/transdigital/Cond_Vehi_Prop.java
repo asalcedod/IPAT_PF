@@ -155,7 +155,6 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
     public void botonfechavencSSE(View view) {
         fecha(5);
     }
-
     @TargetApi(Build.VERSION_CODES.N)
     public void fecha(final int i){
         final Calendar c;

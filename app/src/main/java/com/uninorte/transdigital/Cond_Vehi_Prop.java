@@ -37,8 +37,8 @@ import java.util.List;
 
 public class Cond_Vehi_Prop extends AppCompatActivity {
 
-    public Button bfechalicen,bfechavencSoat,bfechavencSSC,bfechavencSSE;
-    public ImageButton bfechnacond;
+    public Button bfechavencSoat,bfechavencSSC,bfechavencSSE;
+    public ImageButton bfechnacond,bfechalicen;
     public EditText efechnacond,efechalicen,efechavencSoat,efechavencSSC,efechavencSSE;
     public Spinner categoria,clasev,clases,mdt,radioa;
     public int dia,mes,ano;
@@ -84,7 +84,7 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
         efechnacond = (EditText) findViewById(R.id.efechnacond);
 
         //DETALLES DEL CONDUCTOR
-        bfechalicen = (Button) findViewById(R.id.bfechalicen);
+        bfechalicen = (ImageButton) findViewById(R.id.bfechalicen);
         efechalicen = (EditText) findViewById(R.id.efechalicen);
         /*categoria = (Spinner) findViewById(R.id.CategLicCond);
         List<String> values = new ArrayList<String>();

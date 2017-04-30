@@ -1,10 +1,5 @@
 package com.uninorte.transdigital;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -20,6 +15,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -60,6 +56,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
     Date hora = new Date(ahora);
     DateFormat dh = new SimpleDateFormat("HH:mm:ss");
     String salida2 = dh.format(hora);
+
     //Localizacion------------------------------------------------------------------------------
     String ubicacion = "Ubicacion";
     String latitud = "";

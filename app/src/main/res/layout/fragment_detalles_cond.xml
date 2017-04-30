@@ -2,35 +2,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.uninorte.transdigital.DetallesConductores">
 
     <!-- TODO: Update blank fragment layout -->
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="40dp">
 
         <LinearLayout
             android:id="@+id/condetalles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="30dp">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
 
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15sp"
+                    android:tint="@color/colorGreen"
+                    app:srcCompat="@drawable/ic_assignment_white_48dp" />
 
                 <TextView
                     android:id="@+id/textView10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Gravedad" />
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1.25"
+                    android:text="Gravedad"
+                    android:textSize="16sp" />
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -40,14 +53,14 @@
 
                     <RadioButton
                         android:id="@+id/radioButton8"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Muerto" />
 
                     <RadioButton
                         android:id="@+id/radioButton3"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Herido" />
@@ -65,8 +78,10 @@
                     android:id="@+id/textView21"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="Se practicó examen" />
+                    android:text="Se practicó examen"
+                    android:textSize="16sp" />
 
                 <RadioGroup
                     android:id="@+id/idexamencond"
@@ -96,14 +111,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10sp">
 
                 <TextView
                     android:id="@+id/textView23"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="Autorizó" />
+                    android:text="Autorizó"
+                    android:textSize="16sp" />
 
                 <RadioGroup
                     android:id="@+id/idAutori"
@@ -134,14 +152,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="5sp">
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="Embriaguez" />
+                    android:text="Embriaguez"
+                    android:textSize="16sp" />
 
                 <RadioGroup
                     android:id="@+id/embiaguezcond"
@@ -174,19 +195,22 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView12"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tGradoEmbr"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Grado" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
-                <EditText
-                    android:id="@+id/gradoembri"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="textPersonName" />
+                    <EditText
+                        android:id="@+id/gradoembri"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:hint="Grado de Embriaguez"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp" />
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 
@@ -200,8 +224,10 @@
                     android:id="@+id/textView20"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="Sustancias Psicoactivas" />
+                    android:text="Sustancias Psicoactivas"
+                    android:textSize="16sp" />
 
                 <RadioGroup
                     android:id="@+id/sustanpsicoac"
@@ -230,14 +256,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="5sp">
 
                 <TextView
                     android:id="@+id/textView22"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="Porta Licencia" />
+                    android:text="Porta Licencia"
+                    android:textSize="16sp" />
 
                 <RadioGroup
                     android:id="@+id/portalicencond"
@@ -267,7 +296,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+               >
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textView18"
@@ -290,56 +320,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10sp">
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="Categoria" />
+                    android:text="Categoria"
+                    android:textSize="16sp" />
 
                 <Spinner
                     android:id="@+id/CategLicCond"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView24"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="La licencia está" />
-
-                <RadioGroup
-                    android:id="@+id/estadoLicenCond"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/radioButton5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Exp" />
-
-                    <RadioButton
-                        android:id="@+id/radioButton4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ven" />
-                </RadioGroup>
+                    android:backgroundTint="@color/colorGreen" />
 
             </LinearLayout>
 
@@ -350,20 +348,51 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/fechalicenc"
+                    android:id="@+id/textView24"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="La licencia está"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/estadoLicenCond"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Fecha:" />
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/bfechalicen"
-                    android:layout_width="45dp"
+                    <RadioButton
+                        android:id="@+id/radioButton5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Exp" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Ven" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <ImageView
+                    android:id="@+id/imagefechalicen"
+                    android:layout_width="25dp"
                     android:layout_height="wrap_content"
-                    android:background="@android:drawable/ic_menu_my_calendar"
-                    android:backgroundTint="@color/colorGreen"
+                    android:layout_marginRight="15sp"
                     android:tint="@color/colorGreen"
-                    android:onClick="botonfechalicen"/>
+                    app:srcCompat="@drawable/ic_date_range_white_48dp" />
 
                 <EditText
                     android:id="@+id/efechalicen"
@@ -371,6 +400,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:inputType="date" />
+
+                <ImageButton
+                    android:id="@+id/bfechalicen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/transparent"
+                    android:onClick="botonfechalicen"
+                    android:tint="@color/colorGreen"
+                    app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
 
             </LinearLayout>
 
@@ -390,8 +428,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:hint="Codigo Oficina Transito"
-                        android:inputType="number" />
+                        android:hint="Código Oficina Transito"
+                        android:inputType="number"
+                        android:textSize="16sp" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
@@ -405,8 +444,10 @@
                     android:id="@+id/textView14"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="Chaleco" />
+                    android:text="Chaleco"
+                    android:textSize="16sp" />
 
                 <RadioGroup
                     android:id="@+id/idChaleco"
@@ -442,8 +483,10 @@
                     android:id="@+id/textView15"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="Casco" />
+                    android:text="Casco"
+                    android:textSize="16sp" />
 
                 <RadioGroup
                     android:id="@+id/idCasco"
@@ -473,14 +516,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="5sp">
 
                 <TextView
                     android:id="@+id/textView16"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="Cinturón" />
+                    android:text="Cinturón"
+                    android:textSize="16sp" />
 
                 <RadioGroup
                     android:id="@+id/idCinturon"
@@ -525,15 +571,19 @@
                         android:layout_weight="1"
                         android:hint="Hospital, clinica o centro de atención"
                         android:inputType="textPersonName" />
+
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
+
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textView19"

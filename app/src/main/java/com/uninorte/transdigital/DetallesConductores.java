@@ -7,7 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -16,9 +19,11 @@ import java.util.List;
 
 public class DetallesConductores extends Fragment {
     ImageButton imageButtonSave;
+    EditText n,m,o,p,q;
+    RadioGroup rg,examen,aut,ebriagez,gradoE,sustancias,portalicencia,estadol,catego,co_of,chal,casc,cintu;
     public Spinner categoria,clasev,clases,mdt,radioa;
     public int dia,mes,ano;
-    public String cat="",cv="",cs="",mt="",rada="";
+    public String cat="",g,e,a,embr,gE,sust,portlia,idlicencia,el,categ,cod_of,chaleco,casco,cinturon,hospital,descip;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,6 +56,128 @@ public class DetallesConductores extends Fragment {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        rg=(RadioGroup) rootView.findViewById(R.id.grav);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.muerto) {
+                    g = "Muerto";
+                } else if (checkedId == R.id.herido) {
+                    g = "Herido";
+                }
+            }
+
+        });
+        examen=(RadioGroup) rootView.findViewById(R.id.idexamencond);
+        examen.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.Si) {
+                    e = "Si";
+                } else if (checkedId == R.id.No) {
+                    e = "No";
+                }
+            }
+        });
+        aut=(RadioGroup) rootView.findViewById(R.id.idAutori);
+        aut.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.Si) {
+                    a = "Si";
+                } else if (checkedId == R.id.No) {
+                    a = "No";
+                }
+            }
+        });
+        ebriagez=(RadioGroup) rootView.findViewById(R.id.embiaguezcond);
+        ebriagez.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.mas) {
+                    embr = "+";
+                } else if (checkedId == R.id.menos) {
+                    embr = "-";
+                }
+            }
+        });
+        sustancias=(RadioGroup) rootView.findViewById(R.id.sustanpsicoac);
+        sustancias.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.Si) {
+                    sust = "Si";
+                } else if (checkedId == R.id.No) {
+                    sust = "No";
+                }
+            }
+        });
+        portalicencia=(RadioGroup) rootView.findViewById(R.id.portalicencond);
+        portalicencia.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.Si) {
+                    portlia= "Si";
+                } else if (checkedId == R.id.No) {
+                    portlia = "No";
+                }
+            }
+        });
+        estadol=(RadioGroup) rootView.findViewById(R.id.estadoLicenCond);
+        estadol.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.exp) {
+                    el= "Exp";
+                } else if (checkedId == R.id.ven) {
+                    el = "Vencida";
+                }
+            }
+        });
+        chal=(RadioGroup) rootView.findViewById(R.id.idChaleco);
+        chal.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.Si) {
+                    chaleco= "Si";
+                } else if (checkedId == R.id.No) {
+                    chaleco = "No";
+                }
+            }
+        });
+        casc=(RadioGroup) rootView.findViewById(R.id.idCasco);
+        casc.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.Si) {
+                    chaleco= "Si";
+                } else if (checkedId == R.id.No) {
+                    chaleco = "No";
+                }
+            }
+        });
+        cintu=(RadioGroup) rootView.findViewById(R.id.idCinturon);
+        cintu.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.Si) {
+                    chaleco= "Si";
+                } else if (checkedId == R.id.No) {
+                    chaleco = "No";
+                }
             }
         });
         return rootView;

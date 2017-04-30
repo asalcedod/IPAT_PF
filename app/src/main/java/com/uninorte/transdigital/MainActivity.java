@@ -7,6 +7,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.raizlabs.android.dbflow.config.FlowConfig;
@@ -26,6 +27,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //-------------------------------------------------------------------
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,Intro.class);
+                startActivity(i);
+            }
+        });
+        //----------------------------------------------------------------------
+
+
         FlowManager.init(new FlowConfig.Builder(this).build());
         List<Accidente> a = new Delete().from(Accidente.class).queryList();
         List<Caracteristicasl> b = new Delete().from(Caracteristicasl.class).queryList();

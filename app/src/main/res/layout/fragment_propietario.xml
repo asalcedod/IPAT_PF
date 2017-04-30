@@ -233,11 +233,11 @@
                     android:id="@+id/RadioAcc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:text="Radio de Accion" />
+                    android:text="Radio de Accion"
+                    android:textSize="16sp" />
 
                 <Spinner
                     android:id="@+id/idRadioAccion"
@@ -250,17 +250,36 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/Fallas"
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/ImageFecha"
+                    android:layout_width="25dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Fallas en"
+                    android:layout_marginRight="15sp"
+                    android:tint="@color/colorGreen"
+                    app:srcCompat="@drawable/ic_highlight_off_white_48dp" />
+
+                <EditText
+                    android:id="@+id/Fallas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.96"
+                    android:hint="Fallas en"
+                    android:inputType="text"
                     android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/iBFallas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/transparent"
+                    android:onClick="botonFallas"
+                    android:tint="@color/colorGreen"
+                    app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
 
             </LinearLayout>
 
@@ -288,16 +307,36 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                <TextView
+                <ImageView
+                    android:id="@+id/imageView14"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15sp"
+                    android:tint="@color/colorGreen"
+                    app:srcCompat="@drawable/ic_flash_on_white_48dp" />
+
+                <EditText
                     android:id="@+id/Impacto"
                     android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.96"
+                    android:inputType="date"
+                    android:textSize="16sp"
+                    android:hint="Lugar de impacto" />
+
+                <ImageButton
+                    android:id="@+id/imageButton2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Lugar de impacto" />
+                    android:backgroundTint="@android:color/transparent"
+                    android:tint="@color/colorGreen"
+                    app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:onClick="botonFallas"
+                    />
 
 
             </LinearLayout>

@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -53,6 +54,19 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
         aleatorio = new Integer((int) (Math.random() * 100)).intValue();
         foto = Environment.getExternalStorageDirectory() + "/DCIM/Camera/imagen"+ 1 +".jpg";
         dir = new File(foto);
+
+        //-------------------------------------------------------------------
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Anexos.this,Campo1.class);
+                startActivity(i);
+            }
+        });
+        //----------------------------------------------------------------------
     }
 
     @Override

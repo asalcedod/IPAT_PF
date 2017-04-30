@@ -618,32 +618,37 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
+                    android:weightSum="1">
 
-                    <TextView
+                    <ImageView
                         android:id="@+id/fechvenciSSE"
-                        android:layout_width="185dp"
-                        android:layout_height="match_parent"
-                        android:text="Fecha de Vencimiento" />
-
-                    <Button
-                        android:id="@+id/bfechavencSSE"
-                        android:layout_width="45dp"
+                        android:layout_width="25dp"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorGreen"
+                        android:layout_marginRight="15sp"
                         android:tint="@color/colorGreen"
-                        android:background="@android:drawable/ic_menu_my_calendar"
-                        android:onClick="botonfechavencSSE"/>
-
+                        app:srcCompat="@drawable/ic_date_range_white_48dp" />
 
                     <EditText
                         android:id="@+id/efechavencSSE"
-                        android:layout_width="86dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.96"
+                        android:inputType="date"
+                        android:textSize="16sp"
+                        android:hint="Fecha de Vencimiento SCE"
+                         />
+
+                    <ImageButton
+                        android:id="@+id/bfechavencSSE"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="date" />
+                        android:backgroundTint="@android:color/transparent"
+                        android:tint="@color/colorGreen"
+                        app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:onClick="botonfechavencSSE"/>
+
 
                 </LinearLayout>
 

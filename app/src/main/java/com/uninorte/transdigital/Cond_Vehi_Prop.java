@@ -37,9 +37,11 @@ import java.util.List;
 
 public class Cond_Vehi_Prop extends AppCompatActivity {
 
-    public Button bfechavencSoat,bfechavencSSC,bfechavencSSE;
-    public ImageButton bfechnacond,bfechalicen;
+    public ImageButton bfechnacond,bfechalicen,bfechavencSoat,bfechavencSSC,bfechavencSSE;
     public EditText efechnacond,efechalicen,efechavencSoat,efechavencSSC,efechavencSSE;
+
+    public ImageButton iBFallas;
+
     public Spinner categoria,clasev,clases,mdt,radioa;
     public int dia,mes,ano;
     public String cat="",cv="",cs="",mt="",rada="";
@@ -128,13 +130,13 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
         */
         //VEHIC DETALLES
         //fechas de vencimiento
-        bfechavencSoat = (Button) findViewById(R.id.bfechavencSoat);
+        bfechavencSoat = (ImageButton) findViewById(R.id.bfechavencSoat);
         efechavencSoat = (EditText) findViewById(R.id.efechavencSoat);
 
-        bfechavencSSC = (Button) findViewById(R.id.bfechavencSSC);
+        bfechavencSSC = (ImageButton) findViewById(R.id.bfechavencSSC);
         efechavencSSC= (EditText) findViewById(R.id.efechavencSSC);
 
-        bfechavencSSE = (Button) findViewById(R.id.bfechavencSSE);
+        bfechavencSSE = (ImageButton) findViewById(R.id.bfechavencSSE);
         efechavencSSE= (EditText) findViewById(R.id.efechavencSSE);
 
 

@@ -156,9 +156,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/transparent"
-                    android:onClick="botonfechnacond"
                     android:tint="@color/colorGreen"
-                    app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
+                    app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:onClick="botonfechnacond"/>
 
             </LinearLayout>
 

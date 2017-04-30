@@ -16,7 +16,8 @@
             android:id="@+id/propiet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="15dp"
+            android:layout_margin="20dp"
+            android:layout_alignParentTop="true"
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_marginBottom="30dp">
@@ -65,13 +66,23 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView13"
+                        android:layout_width="65sp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15sp"
+                        android:layout_weight="1"
+                        android:tint="@color/colorGreen"
+                        app:srcCompat="@drawable/ic_person_outline_white_48dp"  />
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/idprop"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
                         <EditText
                             android:id="@+id/nameProp"
@@ -100,8 +111,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:hint="Doc"
                             android:inputType="textPersonName"
-                            android:hint="Doc"/>
+                            android:textSize="16sp" />
                     </android.support.design.widget.TextInputLayout>
 
 
@@ -136,20 +148,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10sp">
 
                 <TextView
                     android:id="@+id/ClaseVehi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
-                    android:text="Clase Vehiculo" />
+                    android:text="Clase Vehiculo"
+                    android:textSize="16sp" />
 
                 <Spinner
                     android:id="@+id/idClaseVehi"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorGreen"  />
 
             </LinearLayout>
 
@@ -157,20 +174,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10sp">
 
                 <TextView
                     android:id="@+id/ClaseServ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="Clase Servicio" />
+                    android:text="Clase Servicio"
+                    android:textSize="16sp" />
 
                 <Spinner
                     android:id="@+id/idClaseServ"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorGreen" />
 
             </LinearLayout>
 
@@ -178,40 +200,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10sp">
 
                 <TextView
                     android:id="@+id/ModalidadTransp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
+                    android:textSize="16sp"
                     android:text="Modalidad de Transp." />
 
                 <Spinner
                     android:id="@+id/idModalidadTransp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorGreen" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10sp">
 
                 <TextView
                     android:id="@+id/RadioAcc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
+                    android:textSize="16sp"
                     android:text="Radio de Accion" />
 
                 <Spinner
                     android:id="@+id/idRadioAccion"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorGreen" />
 
             </LinearLayout>
 
@@ -226,79 +259,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Fallas en" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <CheckBox
-                    android:id="@+id/idFallasFrenos"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_weight="1"
-                    android:text="Frenos" />
-
-                <CheckBox
-                    android:id="@+id/idFallaDireccion"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_weight="1"
-                    android:text="Direccion" />
-
-                <CheckBox
-                    android:id="@+id/idFallaLuces"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_weight="1"
-                    android:text="Luces" />
-
-                <CheckBox
-                    android:id="@+id/idFallaBocina"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_weight="1"
-                    android:text="Bocina" />
-
-                <CheckBox
-                    android:id="@+id/idFallasLlantas"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_weight="1"
-                    android:text="Llantas" />
-
-                <CheckBox
-                    android:id="@+id/idFallaSuspencion"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_weight="1"
-                    android:text="Suspencion" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/idFallaOtra"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="Otra" />
-
-                    <EditText
-                        android:id="@+id/editText9"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:inputType="textPersonName"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                    android:text="Fallas en"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -337,26 +299,7 @@
                     android:layout_weight="1"
                     android:text="Lugar de impacto" />
 
-                <CheckBox
-                    android:id="@+id/idImpaFrontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Frontal" />
 
-                <CheckBox
-                    android:id="@+id/idImpaLateral"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Lateral" />
-
-                <CheckBox
-                    android:id="@+id/idImpaPosterior"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Posterior" />
             </LinearLayout>
 
             <LinearLayout

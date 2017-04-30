@@ -15,7 +15,8 @@
             android:id="@+id/vehicdetalles"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="15dp"
+            android:layout_margin="20dp"
+            android:layout_alignParentTop="true"
             android:orientation="vertical"
             android:layout_marginBottom="30dp">
 
@@ -361,35 +362,35 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
                     <ImageView
                         android:id="@+id/textViewCed"
                         android:layout_width="25dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="15sp"
-                        android:layout_weight="1"
                         android:tint="@color/colorGreen"
                         app:srcCompat="@drawable/ic_date_range_white_48dp" />
 
                     <EditText
                         android:id="@+id/efechavencSoat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:hint="Fecha de Vencimiento SOAT"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.96"
                         android:inputType="date"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:hint="Fecha de Vencimiento SOAT"
+                         />
 
                     <ImageButton
                         android:id="@+id/bfechavencSoat"
-                        android:layout_width="45dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@android:drawable/ic_menu_my_calendar"
-                        android:backgroundTint="@color/colorGreen"
+                        android:backgroundTint="@android:color/transparent"
                         android:tint="@color/colorGreen"
+                        app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp"
                         android:onClick="botonfechavencSoat"/>
 
 

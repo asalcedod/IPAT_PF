@@ -90,7 +90,7 @@ public class Propietario extends Fragment {
                 cv="";
             }
         });
-
+        clases=(Spinner) rootView.findViewById(R.id.idClaseServ);
         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, values2);
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         clases.setAdapter(dataAdapter2);
@@ -108,7 +108,7 @@ public class Propietario extends Fragment {
                 cs="";
             }
         });
-
+        mdt= (Spinner) rootView.findViewById(R.id.idModalidadTransp);
         ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, values3);
         dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mdt.setAdapter(dataAdapter3);
@@ -126,7 +126,7 @@ public class Propietario extends Fragment {
                 mt="";
             }
         });
-
+        radioa= (Spinner) rootView.findViewById(R.id.idRadioAccion);
         ArrayAdapter<String> dataAdapter4 = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, values4);
         dataAdapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         radioa.setAdapter(dataAdapter4);

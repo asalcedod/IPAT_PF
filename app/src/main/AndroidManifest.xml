@@ -72,9 +72,12 @@
 
         <activity
             android:name=".Victimas"
-            android:label="@string/title_activity_victimas"
+            android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AgregarVictimas"></activity>
+        <activity android:name=".AgregarVictimas"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

@@ -209,6 +209,12 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
         }
     }
 
+    public void onClick_Informe3(View view) {
+        Intent i= new Intent(Cond_Vehi_Prop.this,Victimas.class);
+        startActivity(i);
+
+    }
+
 
     /**
      * A placeholder fragment containing a simple view.

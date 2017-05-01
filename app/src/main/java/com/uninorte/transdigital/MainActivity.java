@@ -43,6 +43,45 @@ public class MainActivity extends AppCompatActivity {
 
 
         FlowManager.init(new FlowConfig.Builder(this).build());
+        AnexoDane ad=new AnexoDane();
+        /*INSTITUTO DPTAL. DE TTE Y TTO DEL ATLANTICO
+INST. DISTRITAL DE TTO. Y TTE. DE BARRANQUILLA
+INSTITUTO DPTAL. DE TTE. Y TTO. DE GALAPA
+INSTITUTO DPTAL. DE TTE. Y TTO. DEL ATLANTICO
+INSTIT. DEPTAL. DE TTE. Y TTO. DEL ATLANTICO
+INSTITUTO MUNICIPAL DE TRANSITO Y TRANSPORTE DE SOLEDAD
+
+*/
+        ad.setId_dane(8000000);
+        ad.setCiudad("Barranquilla");
+        ad.setDepartamento("Atlántico");
+        ad.setOficina_transito("INSTITUTO DPTAL. DE TTE Y TTO DEL ATLANTICO");
+        ad.save();
+        ad.setId_dane(8001000);
+        ad.setCiudad("Barranquilla");
+        ad.setDepartamento("Atlántico");
+        ad.setOficina_transito("INST. DISTRITAL DE TTO. Y TTE. DE BARRANQUILLA");
+        ad.save();
+        ad.setId_dane(8296000);
+        ad.setCiudad("Galapa");
+        ad.setDepartamento("Atlántico");
+        ad.setOficina_transito("INSTITUTO DPTAL. DE TTE. Y TTO. DE GALAPA");
+        ad.save();
+        ad.setId_dane(8433000);
+        ad.setCiudad("Malambo");
+        ad.setDepartamento("Atlántico");
+        ad.setOficina_transito("INSTITUTO DPTAL. DE TTE. Y TTO. DEL ATLANTICO");
+        ad.save();
+        ad.setId_dane(8573000);
+        ad.setCiudad("Puerto Colombia");
+        ad.setDepartamento("Atlántico");
+        ad.setOficina_transito("INSTIT. DEPTAL. DE TTE. Y TTO. DEL ATLANTICO");
+        ad.save();
+        ad.setId_dane(8758000);
+        ad.setCiudad("Soledad");
+        ad.setDepartamento("Atlántico");
+        ad.setOficina_transito("INSTITUTO MUNICIPAL DE TRANSITO Y TRANSPORTE DE SOLEDAD");
+        ad.save();
         List<Accidente> a = new Delete().from(Accidente.class).queryList();
         List<Caracteristicasl> b = new Delete().from(Caracteristicasl.class).queryList();
         if (ContextCompat.checkSelfPermission(this,
@@ -151,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void onClick_Informe(View view) {
+
         Intent i = new Intent(this,Campo1.class);
         startActivityForResult(i,0);
     }

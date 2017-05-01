@@ -335,12 +335,22 @@
                     android:text="Categoria"
                     android:textSize="16sp" />
 
-                <Spinner
-                    android:id="@+id/CategLicCond"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tCategoriaCond"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/colorGreen" />
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/idCatCond"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:hint="Grado de Embriaguez"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp" />
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 

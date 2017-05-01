@@ -62,7 +62,9 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
     String latitud = "";
     String longitud = "";
     String gravedad = "";
-    String choque,objeto;
+    String ciudad = "";
+    String departamento = "";
+    String choque,objeto,of;
     String mname="";
     String area="",sector="",zona="",diseño="",condc="";
     String id_cl="";
@@ -286,6 +288,8 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
                     Address DirCalle = list.get(0);
                     ubicacion = "Mi direccion es: \n"
                             + DirCalle.getAddressLine(0);
+                    departamento=list.get(0).getAdminArea();
+                    ciudad=list.get(0).getLocality();
                 }
 
             } catch (IOException e) {
@@ -460,7 +464,36 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
 
     public void onClick_Ubicacion(View view) {
         mensaje1.setText(ubicacion);
-        if(!latitud.equals("") && !longitud.equals("")) {
+        if (!latitud.equals("") && !longitud.equals("")) {
+            int i = 0,n=0;
+            List<AnexoDane> c = new Select().from(AnexoDane.class).queryList();
+            for (AnexoDane ca : c) {
+                if (ca.departamento.equals(departamento) && ca.ciudad.equals(ciudad)) {
+                    n++;
+                }
+            }
+            final String[] it = new String[n];
+            final String[] cod = new String[n];
+            List<AnexoDane> d = new Select().from(AnexoDane.class).queryList();
+            for (AnexoDane ca : d) {
+                if (ca.departamento.equals(departamento) && ca.ciudad.equals(ciudad)) {
+                    it[i]=ca.oficina_transito;
+                    cod[i]=ca.id_dane+"";
+                    i++;
+                }
+            }
+            //Toast.makeText(this, ca.sexo, Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(Campo1.this);
+            builder1.setTitle("Seleccione Oficina");
+            builder1.setSingleChoiceItems(it,-1, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    of = it[item];
+                    name.setText(cod[item]);
+                    dialog.cancel();
+                }
+            });
+            AlertDialog alert1 = builder1.create();
+            alert1.show();
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("¿Desea confirmar la ubicacion desde el Mapa?")
                     .setTitle("Advertencia")
@@ -478,16 +511,17 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
                                     Intent i = new Intent(Campo1.this, Mapa.class);
                                     i.putExtra("latitud", latitud);
                                     i.putExtra("longitud", longitud);
-                                    i.putExtra("ubicacion",ubicacion);
-                                    startActivityForResult(i,1);
+                                    i.putExtra("ubicacion", ubicacion);
+                                    startActivityForResult(i, 1);
                                 }
                             });
             AlertDialog alert = builder.create();
             alert.show();
+
+            //MANEJO DE las imagenes
+            //Intent i = new Intent(this, ReadComments.class);
+            // startActivity(i);
         }
-        //MANEJO DE las imagenes
-        //Intent i = new Intent(this, ReadComments.class);
-        // startActivity(i);
     }
 
     public void onClick_lugar(View view) {

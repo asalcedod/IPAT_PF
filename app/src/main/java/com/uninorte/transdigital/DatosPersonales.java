@@ -66,10 +66,10 @@ public class DatosPersonales extends Fragment {
                 dp.setCiudad(ciudad.getText().toString());
                 dp.setTel(tel.getText().toString());
                 dp.save();
-                /*List<DatosP> c = new Select().from(DatosP.class).queryList();
+                List<DatosP> c = new Select().from(DatosP.class).queryList();
                 for (DatosP ca : c) {
                     Toast.makeText(getActivity(), ca.sexo, Toast.LENGTH_SHORT).show();
-                }*/
+                }
 
             }
         });

@@ -14,7 +14,23 @@ public class DetallesCond extends BaseModel {
     @PrimaryKey
     int id;
     @Column
-    String gravedad,examen,aut,ebriagez,gradoE,sustancias,portalicencia,idlicencia,categoria,cod_of,chaleco,casco,cinturon,hospital,descip;
+    String gravedad,examen,aut,ebriagez,gradoE,sustancias,portalicencia,idlicencia,categoria,estado,fecha,cod_of,chaleco,casco,cinturon,hospital,descip;
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
 
     public int getId() {
         return id;

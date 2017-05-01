@@ -17,4 +17,20 @@
     <string name="title_activity_cond__vehi__prop">Cond_Vehi_Prop</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="seleccion_de_fallas">Fallas en: </string>
+    <string name="seleccion_de_impacto">Lugar de impacto: </string>
+
+    <string-array name="Fallas">
+        <item>Frenos</item>
+        <item>Direccion</item>
+        <item>Luces</item>
+        <item>Bocina</item>
+        <item>Llantas</item>
+        <item>Suspension</item>
+        <item>Otra</item>
+    </string-array>
+
+
+
+
 </resources>

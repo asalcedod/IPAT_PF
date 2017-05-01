@@ -63,8 +63,7 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Cond_Vehi_Prop.this,Campo1.class);
-                startActivity(i);
+                finish();
             }
         });
 

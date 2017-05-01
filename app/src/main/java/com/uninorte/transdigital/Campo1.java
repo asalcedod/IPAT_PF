@@ -132,7 +132,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
         values.add("Caida");
         values.add("Choque");
         values.add("Incendio");
-        values.add("Volcaminto");
+        values.add("Volcamiento");
         values.add("Ocupante");
         values.add("Otro");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, values);
@@ -380,7 +380,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
             }*/
 
             startActivity(it);
-            finish();
+            //finish();
         }else{
             Toast.makeText(this,"Existen campos sin completar.",Toast.LENGTH_SHORT).show();
         }

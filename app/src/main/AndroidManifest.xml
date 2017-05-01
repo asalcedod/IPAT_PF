@@ -70,7 +70,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC8sBB_CR_Ax4vi1ZRMpITdo3fv9LsslFg" />
 
-
+        <activity
+            android:name=".Victimas"
+            android:label="@string/title_activity_victimas"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AgregarVictimas"></activity>
     </application>
 
 </manifest>

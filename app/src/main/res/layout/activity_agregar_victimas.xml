@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Victimas"
+                android:textColor="@color/Black"
+                android:textSize="20sp" />
+
+
+        </android.support.v7.widget.Toolbar>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+              <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_margin="20dp"
+                android:orientation="vertical"
+
+                >
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:layout_marginTop="40dp"
+                      android:orientation="horizontal">
+
+                      <TextView
+                          android:id="@+id/textView"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginBottom="10dp"
+                          android:layout_marginTop="10dp"
+                          android:layout_weight="1"
+                          android:text="La victima es"
+                          android:textSize="16sp" />
+
+                      <Spinner
+                          android:id="@+id/TipoVictima"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1"
+                          android:backgroundTint="@color/colorGreen" />
+
+                  </LinearLayout>
+
+                  <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView16"
+                        android:layout_width="65sp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15sp"
+                        android:layout_weight="1"
+                        android:tint="@color/colorGreen"
+                        app:srcCompat="@drawable/ic_person_outline_white_48dp" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textViewName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/name"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:hint="Apellidos y nombres"
+                            android:inputType="textPersonName"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textViewDoc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/Tced"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Doc"
+                            android:inputType="textPersonName"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textViewIdentif"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/idcond"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Identificación No."
+                            android:inputType="number"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="65sp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15sp"
+                        android:layout_weight="1"
+                        android:tint="@color/colorGreen"
+                        app:srcCompat="@drawable/ic_flag_white_48dp" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/TextNacionalidadcond"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/nacionalidadcond"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Nacionalidad"
+                            android:inputType="textPersonName"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:id="@+id/fechanacvict"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15sp"
+                        android:tint="@color/colorGreen"
+                        app:srcCompat="@drawable/ic_date_range_white_48dp" />
+
+                    <EditText
+                        android:id="@+id/efechnavict"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.96"
+                        android:hint="Fecha de Nacimiento"
+                        android:inputType="date"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id="@+id/bfechnavict"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/transparent"
+                        android:onClick="botonfechnacond"
+                        android:tint="@color/colorGreen"
+                        app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageSexo"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15sp"
+                        android:tint="@color/colorGreen"
+                        app:srcCompat="@drawable/ic_wc_white_48dp" />
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="2"
+                        android:autoText="false"
+                        android:elevation="3dp"
+                        android:text="Sexo"
+                        android:textSize="16sp" />
+
+                    <RadioGroup
+                        android:id="@+id/sexocond"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/sexoF"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="F" />
+
+                        <RadioButton
+                            android:id="@+id/sexoM"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="M" />
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textView8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/ciudcond"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Ciudad"
+                            android:inputType="textPersonName"
+                            android:textSize="16sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imagendirecc"
+                        android:layout_width="65sp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15sp"
+                        android:layout_weight="1"
+                        android:tint="@color/colorGreen"
+                        app:srcCompat="@drawable/ic_pin_drop_white_48dp" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textView7"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+
+                        <EditText
+                            android:id="@+id/direcond"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:hint="Dirección de domicilio"
+                            android:inputType="textPostalAddress"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+
+                        android:id="@+id/imagenphone"
+                        android:layout_width="65sp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15sp"
+                        android:layout_weight="1"
+                        android:tint="@color/colorGreen"
+                        app:srcCompat="@drawable/ic_local_phone_white_48dp" />
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textView9"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+
+                        <EditText
+                            android:id="@+id/telcond"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:hint="Teléfono"
+                            android:inputType="number"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:orientation="horizontal">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textView5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/atencionCond"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Hospital, clinica o centro de atención"
+                            android:inputType="textPersonName" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:text="Se practicó examen"
+                        android:textSize="16sp" />
+
+                    <RadioGroup
+                        android:id="@+id/idexamencond"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/Si"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Si" />
+
+                        <RadioButton
+                            android:id="@+id/No"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="No" />
+
+                    </RadioGroup>
+                </LinearLayout>
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_marginBottom="10sp"
+                      android:layout_weight="1"
+                      android:orientation="horizontal">
+
+                      <TextView
+                          android:id="@+id/textView23"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10dp"
+                          android:layout_weight="1"
+                          android:text="Autorizó"
+                          android:textSize="16sp" />
+
+                      <RadioGroup
+                          android:id="@+id/idAutori"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:orientation="horizontal">
+
+                          <RadioButton
+                              android:id="@+id/Si"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:text="Si" />
+
+                          <RadioButton
+                              android:id="@+id/No"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:text="No" />
+
+                      </RadioGroup>
+
+                  </LinearLayout>
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="5sp"
+                      android:layout_weight="1"
+                      android:orientation="horizontal">
+
+                      <TextView
+                          android:id="@+id/textView11"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10dp"
+                          android:layout_weight="1"
+                          android:text="Embriaguez"
+                          android:textSize="16sp" />
+
+                      <RadioGroup
+                          android:id="@+id/embiaguezcond"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:orientation="horizontal">
+
+                          <RadioButton
+                              android:id="@+id/mas"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:text="+" />
+
+                          <RadioButton
+                              android:id="@+id/menos"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:text="-" />
+
+                      </RadioGroup>
+
+                  </LinearLayout>
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:orientation="horizontal">
+
+                      <android.support.design.widget.TextInputLayout
+                          android:id="@+id/tGradoEmbr"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1">
+
+                          <EditText
+                              android:id="@+id/gradoembri"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:gravity="left"
+                              android:hint="Grado de Embriaguez"
+                              android:inputType="textPersonName"
+                              android:textSize="16sp" />
+                      </android.support.design.widget.TextInputLayout>
+
+                  </LinearLayout>
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="1"
+                      android:orientation="horizontal">
+
+                      <TextView
+                          android:id="@+id/textView20"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10dp"
+                          android:layout_weight="1"
+                          android:text="Sustancias Psicoactivas"
+                          android:textSize="16sp" />
+
+                      <RadioGroup
+                          android:id="@+id/sustanpsicoac"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:orientation="horizontal">
+
+                          <RadioButton
+                              android:id="@+id/Si"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:text="Si" />
+
+                          <RadioButton
+                              android:id="@+id/No"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:text="No" />
+                      </RadioGroup>
+                  </LinearLayout>
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="5sp"
+                      android:layout_weight="1"
+                      android:orientation="horizontal">
+
+                      <TextView
+                          android:id="@+id/textView16"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_marginTop="10dp"
+                          android:layout_weight="1"
+                          android:text="Cinturón"
+                          android:textSize="16sp" />
+
+                      <RadioGroup
+                          android:id="@+id/idCinturon"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1"
+                          android:orientation="horizontal">
+
+                          <RadioButton
+                              android:id="@+id/Si"
+                              android:layout_width="wrap_content"
+                              android:layout_height="match_parent"
+                              android:layout_weight="1"
+                              android:text="Si" />
+
+                          <RadioButton
+                              android:id="@+id/No"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:text="No" />
+
+                      </RadioGroup>
+
+                  </LinearLayout>
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:orientation="horizontal">
+
+                      <TextView
+                          android:id="@+id/textView15"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_marginTop="10dp"
+                          android:layout_weight="1"
+                          android:text="Casco"
+                          android:textSize="16sp" />
+
+                      <RadioGroup
+                          android:id="@+id/idCasco"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1"
+                          android:orientation="horizontal">
+
+                          <RadioButton
+                              android:id="@+id/Si"
+                              android:layout_width="wrap_content"
+                              android:layout_height="match_parent"
+                              android:layout_weight="1"
+                              android:text="Si" />
+
+                          <RadioButton
+                              android:id="@+id/No"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:text="No" />
+                      </RadioGroup>
+
+                  </LinearLayout>
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:orientation="horizontal">
+
+                      <TextView
+                          android:id="@+id/textView14"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_marginTop="10dp"
+                          android:layout_weight="1"
+                          android:text="Chaleco"
+                          android:textSize="16sp" />
+
+                      <RadioGroup
+                          android:id="@+id/idChaleco"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1"
+                          android:orientation="horizontal">
+
+                          <RadioButton
+                              android:id="@+id/Si"
+                              android:layout_width="wrap_content"
+                              android:layout_height="match_parent"
+                              android:layout_weight="1"
+                              android:text="Si" />
+
+                          <RadioButton
+                              android:id="@+id/No"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:text="No" />
+                      </RadioGroup>
+
+                  </LinearLayout>
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal">
+
+
+                      <ImageView
+                          android:id="@+id/imageView3"
+                          android:layout_width="25dp"
+                          android:layout_height="wrap_content"
+                          android:layout_marginRight="15sp"
+                          android:tint="@color/colorGreen"
+                          app:srcCompat="@drawable/ic_assignment_white_48dp" />
+
+                      <TextView
+                          android:id="@+id/textView10"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10dp"
+                          android:layout_weight="1.25"
+                          android:text="Gravedad"
+                          android:textSize="16sp" />
+
+                      <RadioGroup
+                          android:id="@+id/grav"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:orientation="horizontal">
+
+                          <RadioButton
+                              android:id="@+id/muerto"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:text="Muerto" />
+
+                          <RadioButton
+                              android:id="@+id/herido"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:text="Herido" />
+
+                      </RadioGroup>
+                  </LinearLayout>
+
+
+              </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

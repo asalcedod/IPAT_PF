@@ -28,8 +28,7 @@ public class Propietario extends Fragment {
     private String[] Fallas;
     private boolean[] seleccionFallas;
     String[] items = {"Frontal","Lateral","Posterior"};
-    private String[] Impacto;
-    private boolean[] seleccionImpacto;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,6 +80,7 @@ public class Propietario extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                         seleccionFallas[which] = isChecked;
+                        //falta agregar al editText
                     }
                 });
                 builder.setPositiveButton(android.R.string.ok,null);
@@ -113,9 +113,6 @@ public class Propietario extends Fragment {
             }
         });
         //---------------------------------------------
-
-
-
 
         return rootView;
         /*Spinner sector=(Spinner)rootView .findViewById(R.id.idClaseVehi);

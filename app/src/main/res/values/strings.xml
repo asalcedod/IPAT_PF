@@ -29,8 +29,7 @@
         <item>Suspension</item>
         <item>Otra</item>
     </string-array>
-
-
+    <string name="title_activity_victimas">Victimas</string>
 
 
 </resources>

@@ -277,7 +277,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/transparent"
-                    android:onClick="botonFallas"
                     android:tint="@color/colorGreen"
                     app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
 
@@ -335,7 +334,6 @@
                     android:backgroundTint="@android:color/transparent"
                     android:tint="@color/colorGreen"
                     app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:onClick="botonFallas"
                     />
 
 

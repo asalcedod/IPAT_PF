@@ -60,7 +60,6 @@ public class Mapa extends AppCompatActivity implements OnMapReadyCallback {
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
         googleMap.animateCamera(cameraUpdate);
         googleMap.setMyLocationEnabled(true);
-        ubicacion=googleMap.getMyLocation().toString();
         googleMap.addMarker(new MarkerOptions().position(new LatLng(lat,lngi)).title("Aqui Estoy"));
     }
 

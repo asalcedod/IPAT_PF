@@ -9,11 +9,11 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioGroup;
 
 public class AgregarVictimas extends AppCompatActivity {
     EditText editText1;
@@ -21,6 +21,7 @@ public class AgregarVictimas extends AppCompatActivity {
     private boolean customview;
     public ImageButton bfechnavic;
     public EditText efechnavict;
+
     public int dia,mes,ano;
 
 
@@ -44,7 +45,6 @@ public class AgregarVictimas extends AppCompatActivity {
 
         editText1.setFocusable(!customview);
         editText1.setFocusableInTouchMode(!customview);
-
 
         //DATOS Victima
         bfechnavic = (ImageButton) findViewById(R.id.bfechnavict);
@@ -84,10 +84,6 @@ public class AgregarVictimas extends AppCompatActivity {
                 et_setDate = (EditText) findViewById(R.id.efechnavict);
                 et_setDate.setText(fecha);
         }
-
-
-
-
 
 
     //termine hasta el video 3 - creacion de la primera entrada---------------------------

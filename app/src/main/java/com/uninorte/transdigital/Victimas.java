@@ -1,16 +1,21 @@
 package com.uninorte.transdigital;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,6 +26,8 @@ public class Victimas extends AppCompatActivity {
     private DataEntryDAO mDataEntryDao;
     private ArrayList<DataEntry> Entries;
     private CustomAdapter customAdapter;
+    Button imageButtonDelete;
+
 
 
     @Override
@@ -48,6 +55,7 @@ public class Victimas extends AppCompatActivity {
 
             }
         });
+
 
         //Agregar victimas----------------------------------------------
         //video 4- LisAll y borrado
@@ -79,6 +87,10 @@ public class Victimas extends AppCompatActivity {
 
     }
 
+    public void cancelar() {
+    //    finish();
+    }
+
     protected void onDestroy(){
         mDataEntryDao.close();
         super.onDestroy();
@@ -98,12 +110,33 @@ public class Victimas extends AppCompatActivity {
 
     }
     public void onClickButtonRow(View view){
-        DataEntry dataEntry= (DataEntry) view.getTag();
+        final DataEntry dataEntry= (DataEntry) view.getTag();
         Log.d(TAG,"Click en "+dataEntry.id);
-        mDataEntryDao.deleteEntry(dataEntry);
-        Entries = mDataEntryDao.getAllEntrys();
-        customAdapter.setData(Entries);
-        ((CustomAdapter)listView.getAdapter()).notifyDataSetChanged();
+
+        //confirmacion de eliminar---------------------------------------
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+        dialogo1.setTitle("Eliminar Victima");
+        dialogo1.setMessage("Si elimina esta victima, se borraran todos los datos en el ¿Desea continuar?");
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                mDataEntryDao.deleteEntry(dataEntry);
+                Entries = mDataEntryDao.getAllEntrys();
+                customAdapter.setData(Entries);
+                ((CustomAdapter)listView.getAdapter()).notifyDataSetChanged();
+
+                Toast t=Toast.makeText(Victimas.this,"La victima ha sido borrada con exito", Toast.LENGTH_SHORT);
+                t.show();
+            }
+        });
+        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                cancelar();
+            }
+        });
+        dialogo1.show();
+        //-------------------------------------------------------
+
 
     }
 

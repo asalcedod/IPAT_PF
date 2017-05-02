@@ -141,7 +141,7 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/idcond"
+                            android:id="@+id/idvict"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -172,7 +172,7 @@
                         android:layout_weight="1">
 
                         <EditText
-                            android:id="@+id/nacionalidadcond"
+                            android:id="@+id/nacionalidadvict"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -241,7 +241,7 @@
                         android:textSize="16sp" />
 
                     <RadioGroup
-                        android:id="@+id/sexocond"
+                        android:id="@+id/sexovict"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="10dp"
@@ -276,7 +276,7 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/ciudcond"
+                            android:id="@+id/ciudvict"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -310,7 +310,7 @@
 
 
                         <EditText
-                            android:id="@+id/direcond"
+                            android:id="@+id/direcvict"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -345,7 +345,7 @@
 
 
                         <EditText
-                            android:id="@+id/telcond"
+                            android:id="@+id/telvict"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -368,7 +368,7 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/atencionCond"
+                            android:id="@+id/atencionVict"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -395,7 +395,7 @@
                         android:textSize="16sp" />
 
                     <RadioGroup
-                        android:id="@+id/idexamencond"
+                        android:id="@+id/idexamenvict"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -435,7 +435,7 @@
                           android:textSize="16sp" />
 
                       <RadioGroup
-                          android:id="@+id/idAutori"
+                          android:id="@+id/idAutoriVict"
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_weight="1"
@@ -476,7 +476,7 @@
                           android:textSize="16sp" />
 
                       <RadioGroup
-                          android:id="@+id/embiaguezcond"
+                          android:id="@+id/embiaguezvict"
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_weight="1"

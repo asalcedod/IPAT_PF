@@ -79,6 +79,11 @@ public class Victimas extends AppCompatActivity {
 
     }
 
+    protected void onDestroy(){
+        mDataEntryDao.close();
+        super.onDestroy();
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode==1){
             if(resultCode== Activity.RESULT_OK){
@@ -90,6 +95,15 @@ public class Victimas extends AppCompatActivity {
             }
         }
 
+
+    }
+    public void onClickButtonRow(View view){
+        DataEntry dataEntry= (DataEntry) view.getTag();
+        Log.d(TAG,"Click en "+dataEntry.id);
+        mDataEntryDao.deleteEntry(dataEntry);
+        Entries = mDataEntryDao.getAllEntrys();
+        customAdapter.setData(Entries);
+        ((CustomAdapter)listView.getAdapter()).notifyDataSetChanged();
 
     }
 

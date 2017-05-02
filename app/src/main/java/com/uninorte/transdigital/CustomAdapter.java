@@ -61,6 +61,10 @@ public class CustomAdapter extends BaseAdapter{
         }
 
         TextView TextField1= (TextView) view.findViewById(R.id.textView12);
+        Button button =(Button) view.findViewById(R.id.buttonrow);
+        button.setFocusable(false);
+        button.setFocusableInTouchMode(false);
+        button.setTag(entry);
         TextField1.setText(String.valueOf(value1));
         return view;
     }

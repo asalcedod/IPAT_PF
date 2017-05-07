@@ -13,6 +13,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -45,7 +46,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1 ;
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_LOCATION_EXTRA_COMMANDS = 2;
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 3;
-
+    int REQUEST_CODE = 1;
     //Fecha y Hora...............................................................................
     EditText name, date, hour,otro;
     long ahora = System.currentTimeMillis();
@@ -264,8 +265,45 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,
                 (LocationListener) Local);
         mensaje1.setText(ubicacion);
+        final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+
+        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+            buildAlertMessageNoGps();
+        }
     }
     //-----------------------------------------
+
+    private void buildAlertMessageNoGps() {
+        final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+
+        builder.setTitle("GPS Desactivado");
+        builder.setMessage("Su GPS se encuentra desactivado, desea activarlo?");
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("Si", new DialogInterface.OnClickListener()
+        {
+            public void onClick(final DialogInterface dialog, final int id)
+            {
+                launchGPSOptions();
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener()
+        {
+            public void onClick(final DialogInterface dialog, final int id)
+            {
+                dialog.cancel();
+            }
+        });
+
+        builder.create().show();
+    }
+
+    private void launchGPSOptions()
+    {
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
 
     //-----------------------------------------
 

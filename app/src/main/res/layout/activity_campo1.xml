@@ -82,7 +82,8 @@
                         android:layout_weight="1"
                         android:hint="Organismo de Tránsito"
                         android:inputType="textPersonName"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:enabled="false"/>
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>

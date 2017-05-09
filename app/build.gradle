@@ -24,6 +24,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -78,5 +79,9 @@ dependencies {
 }
 dependencies {
     compile 'com.android.support.constraint:constraint-layout:+'
+}
+dependencies {
+    compile 'com.android.support:design:25.+'
+    compile 'com.android.support:support-vector-drawable:25.+'
 }
 

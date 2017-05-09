@@ -17,7 +17,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:navigationIcon="?attr/homeAsUpIndicator">
+            >
 
             <TextView
                 android:id="@+id/toolbar_title"
@@ -57,37 +57,28 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textView4"
+                    <!--  Email Label -->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/login_input_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="70dp"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:layout_marginTop="76dp"
-                        android:layout_weight="1"
-                        android:text="Cédula:"
-                        android:textSize="16sp"
-                        app:layout_constraintHorizontal_bias="0.108"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        >
 
-                    <EditText
-                        android:id="@+id/cedula"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="30dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:inputType="number"
-                        app:layout_constraintHorizontal_bias="0.311"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                        <EditText
+                            android:id="@+id/cedula"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Cédula"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            />
+                    </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/PASS"
@@ -97,56 +88,32 @@
                     android:orientation="vertical"
                     android:layout_marginTop="10dp">
 
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Contraseña:"
-                        android:textSize="16sp"
-                        app:layout_constraintHorizontal_bias="0.108"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
+                    <!--  Password Label -->
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/textInputPass"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="30dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="0.00"
-                        android:ems="10"
+                        android:layout_below="@+id/login_input_email"
                         app:passwordToggleContentDescription="Description"
                         app:passwordToggleEnabled="true"
-                        app:passwordToggleTint="@color/colorGreen">
+                        app:passwordToggleTint="@color/colorGreen"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        >
 
                         <android.support.design.widget.TextInputEditText
                             android:id="@+id/textInputEditText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:inputType="textPassword" />
+                            android:hint="Contraseña"
+                            android:inputType="textPassword"
+                            android:maxLines="1" />
                     </android.support.design.widget.TextInputLayout>
+
+
+
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/login"
-                    android:layout_width="145dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_margin="20dp"
-                    android:layout_marginTop="20dp"
-                    android:onClick="Onclick_Login"
-                    android:text="Iniciar Sesión"
-                    android:theme="@style/AppTheme.ButtonBlue"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/username"
-                    tools:ignore="MissingConstraints" />
             </LinearLayout>
         </ScrollView>
 

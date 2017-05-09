@@ -116,7 +116,7 @@ public class Victimas extends AppCompatActivity {
         //confirmacion de eliminar---------------------------------------
         AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
         dialogo1.setTitle("Eliminar Victima");
-        dialogo1.setMessage("Si elimina esta victima, se borraran todos los datos en el ¿Desea continuar?");
+        dialogo1.setMessage("Si elimina esta víctima, se borraran todos los datos en el ¿Desea continuar?");
         dialogo1.setCancelable(false);
         dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
@@ -125,7 +125,7 @@ public class Victimas extends AppCompatActivity {
                 customAdapter.setData(Entries);
                 ((CustomAdapter)listView.getAdapter()).notifyDataSetChanged();
 
-                Toast t=Toast.makeText(Victimas.this,"La victima ha sido borrada con exito", Toast.LENGTH_SHORT);
+                Toast t=Toast.makeText(Victimas.this,"La víctima ha sido borrada con éxito", Toast.LENGTH_SHORT);
                 t.show();
             }
         });

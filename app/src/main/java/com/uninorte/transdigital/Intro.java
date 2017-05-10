@@ -128,7 +128,7 @@ public class Intro extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(Intro.this);
-            pDialog.setMessage("Attempting login...");
+            pDialog.setMessage("Iniciando sesión...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
@@ -239,7 +239,7 @@ public class Intro extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(Intro.this);
-            pDialog.setMessage("Creating User...");
+            pDialog.setMessage("Creando usuario...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();

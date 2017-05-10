@@ -78,6 +78,10 @@
             android:name=".AgregarVictimas"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Enviar"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 

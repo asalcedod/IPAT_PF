@@ -210,7 +210,7 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
     }
 
     public void onClick_Informe3(View view) {
-        Intent i= new Intent(Cond_Vehi_Prop.this,Victimas.class);
+        Intent i= new Intent(Cond_Vehi_Prop.this,Enviar.class);
         startActivity(i);
 
     }

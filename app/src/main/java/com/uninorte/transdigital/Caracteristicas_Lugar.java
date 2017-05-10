@@ -174,7 +174,7 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
             caracter.setArea(ar);
             caracter.setSector(sec);
             caracter.setZona(zo);
-            caracter.equals(dis);
+            caracter.setDiseño(dis);
             caracter.setCondicionc(condc);
             caracter.setId_camp1(getIntent().getStringExtra("idinfo"));
             caracter.save();

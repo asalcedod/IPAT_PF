@@ -59,7 +59,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
     String salida2 = dh.format(hora);
 
     //Localizacion------------------------------------------------------------------------------
-    String ubicacion = "Ubicacion";
+    String ubicacion = "Ubicacion",direccion="";
     String latitud = "";
     String longitud = "";
     String gravedad = "";
@@ -327,6 +327,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
                     Address DirCalle = list.get(0);
                     ubicacion = "Mi direccion es: \n"
                             + DirCalle.getAddressLine(0);
+                    direccion=""+DirCalle.getAddressLine(0);
                     departamento=list.get(0).getAdminArea();
                     ciudad=list.get(0).getLocality();
                 }
@@ -393,6 +394,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
         data.add(validar(name,mname));
         data.add(validar(date,mdate));
         data.add(validar(hour,mhour));
+        id_cl=mdate+"%"+mhour;
         int cont=0;
         boolean sw=true;
         while(cont<data.size()){
@@ -405,7 +407,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
             accidente.setOt(mname);
             accidente.setLatitud(latitud);
             accidente.setLongitud(longitud);
-            accidente.setUbicacion(ubicacion);
+            accidente.setUbicacion(direccion);
             accidente.setGravedad(gravedad);
             accidente.setR_fecha(salida1);
             accidente.setR_hora(salida2);

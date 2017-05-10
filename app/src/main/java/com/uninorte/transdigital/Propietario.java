@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +22,19 @@ import java.util.List;
 public class Propietario extends Fragment {
     ImageButton imageButtonSave,fallas,impacto;
     EditText Editimpacto;
+    EditText Editfallas;
 
     public Spinner clasev,clases,mdt,radioa;
     public int dia,mes,ano;
     public String cat="",cs="",mt="",rada="";
     String cv;
-    private String[] Fallas;
-    private boolean[] seleccionFallas;
+    public String cad;
     String[] items = {"Frontal","Lateral","Posterior"};
+
+    String[] listItems;
+    boolean[] checkedItems;
+    ArrayList<Integer> mUserItems = new ArrayList<>();
+
 
 
     @Override
@@ -155,26 +162,63 @@ public class Propietario extends Fragment {
         });
 
         //lista de fallas en:----------------------------------
-        Fallas= getResources().getStringArray(R.array.Fallas);
-        seleccionFallas = new boolean[Fallas.length];
+        listItems = getResources().getStringArray(R.array.Fallas);
+        checkedItems = new boolean[listItems.length];
+
+        Editfallas = (EditText) rootView.findViewById(R.id.id_Fallas);;
+
 
         fallas = (ImageButton) rootView.findViewById(R.id.iBFallas);
         fallas.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle(R.string.seleccion_de_fallas);
-                builder.setMultiChoiceItems(R.array.Fallas, seleccionFallas, new DialogInterface.OnMultiChoiceClickListener() {
+                AlertDialog.Builder mBuilder  = new AlertDialog.Builder(getActivity());
+                mBuilder.setTitle(R.string.seleccion_de_fallas);
+                mBuilder.setMultiChoiceItems(listItems, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        seleccionFallas[which] = isChecked;
-                        //falta agregar al editText
+                    public void onClick(DialogInterface dialogInterface, int position, boolean isChecked) {
+
+                        if(isChecked){
+                            mUserItems.add(position);
+                        }else{
+                            mUserItems.remove((Integer.valueOf(position)));
+                        }
                     }
                 });
-                builder.setPositiveButton(android.R.string.ok,null);
-                builder.setNegativeButton(android.R.string.cancel,null);
-                builder.create().show();
+                mBuilder.setCancelable(false);
+                mBuilder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        String item = "";
+                        for (int i = 0; i < mUserItems.size(); i++) {
+                            item = item + listItems[mUserItems.get(i)];
+                            if (i != mUserItems.size() - 1) {
+                                item = item + ", ";
+                            }
+                        }
+                        Editfallas.setText(item);
+                    }
+                });
+                mBuilder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                mBuilder.setNeutralButton("Borrar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        for (int i = 0; i < checkedItems.length; i++) {
+                            checkedItems[i] = false;
+                            mUserItems.clear();
+                            Editfallas.setText("");
+                        }
+                    }
+                });
+                AlertDialog mDialog = mBuilder.create();
+                mDialog.show();
             }
         });
         //---------------------------------------------
@@ -191,13 +235,19 @@ public class Propietario extends Fragment {
                 builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Editimpacto.setText(items[which]);
+                         cad = items[which];
                     }
-
-
                 });
-                builder.setPositiveButton(android.R.string.ok,null);
-                builder.setNegativeButton(android.R.string.cancel,null);
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int id) {
+                        Editimpacto.setText(cad);
+                    }
+                });
+                builder.setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
                 builder.create().show();
             }
         });

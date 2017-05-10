@@ -263,13 +263,13 @@
                     app:srcCompat="@drawable/ic_highlight_off_white_48dp" />
 
                 <EditText
-                    android:id="@+id/Fallas"
+                    android:id="@+id/id_Fallas"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_weight="0.96"
                     android:hint="Fallas en"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     android:textSize="16sp" />
 
                 <ImageButton

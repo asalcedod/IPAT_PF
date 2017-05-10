@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,20 +31,30 @@ import java.util.List;
 
 public class Intro extends AppCompatActivity {
 
+    //DECLARACION DE VARIABLES--------------------------------------------
+
+    //LOGIN Y REGISTRO
     private TextInputEditText pass;
     private EditText ced;
-
-
+    // Progress Dialog
     private ProgressDialog pDialog;
-
     // Clase JSONParser
     JSONParser jsonParser = new JSONParser();
-
-    private static final String LOGIN_URL = "https://transitodigital-asalcedod.c9users.io/login.php";
-
-    // La respuesta del JSON es
+    //ids---// La respuesta del JSON es
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
+
+    //LOGIN
+    private static final String LOGIN_URL = "https://transitodigital-asalcedod.c9users.io/login.php";
+
+    //REGISTRO
+    EditText user;
+    //si lo trabajan de manera local en xxx.xxx.x.x va su ip local
+    // private static final String REGISTER_URL = "http://xxx.xxx.x.x:1234/cas/register.php";
+
+    //testing on Emulator:
+    private static final String REGISTER_URL = "https://transitodigital-asalcedod.c9users.io/register.php";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,27 +66,22 @@ public class Intro extends AppCompatActivity {
 
     public void Onclik_Iniciar(View view) {
         showLoginDialog();
-        // Intent i = new Intent(this, Login.class);
-        //startActivity(i);
-
     }
 
     public void Onclick_Registro(View view) {
-        Intent i = new Intent(this, Register.class);
-        startActivity(i);
-
+        showRegisterDialog();
     }
 
     //LOGIN--------------------------------------------------------------------------------
     private void showLoginDialog()
     {
         LayoutInflater li = LayoutInflater.from(this);
-        View prompt = li.inflate(R.layout.activity_login, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        final View prompt = li.inflate(R.layout.activity_login, null);
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setView(prompt);
+
         final EditText ced = (EditText) prompt.findViewById(R.id.cedula);
         final EditText pass = (TextInputEditText) prompt.findViewById(R.id.textInputEditText);
-
 
         alertDialogBuilder.setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -85,25 +91,19 @@ public class Intro extends AppCompatActivity {
                         String cedula = ced.getText().toString();
                         String password = pass.getText().toString();
 
-                        if (cedula.length()==0&& password.length()==0){
+
+                        if (TextUtils.isEmpty(cedula)||	TextUtils.isEmpty(password)){
+
+                            Toast.makeText(Intro.this,"Cedula o contraseña no puede estar vacío", Toast.LENGTH_LONG).show();
+
                             //ced.setError("No Puede Estar Vacio");
                             //pass.setError("No Puede Estar Vacio");
-                            Toast.makeText(Intro.this,"Error!... Hay campos vacíos", Toast.LENGTH_LONG).show();
-                            showLoginDialog();
                             //showLoginDialog();
+                            //alertDialogBuilder.setView(prompt);
                         }
                         else{
-                            if (cedula.length()==0) {
-                                Toast.makeText(Intro.this,"Error!... Ingrese cedula", Toast.LENGTH_LONG).show();
-                                showLoginDialog();
-                            }
-                            else
-                            if (password.length()==0) {
-                                Toast.makeText(Intro.this,"Error!... Ingrese contraseña", Toast.LENGTH_LONG).show();
-                                showLoginDialog();
-                            } else {
                                 new Intro.AttemptLogin().execute(cedula,password);
-                            }
+
                         }
                         //---------------------------------
                     }
@@ -194,5 +194,109 @@ public class Intro extends AppCompatActivity {
     }
 //END LOGIN-----------------------------------------------------------------------------------
 
+    //REGISTER-----------------------------------------------------------------------------------
+    private void showRegisterDialog() {
+        LayoutInflater li = LayoutInflater.from(this);
+        final View prompt = li.inflate(R.layout.activity_register, null);
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setView(prompt);
+
+       final EditText ced = (EditText) prompt.findViewById(R.id.cedula);
+        final EditText user = (EditText) prompt.findViewById(R.id.username);
+        final EditText pass = (TextInputEditText) prompt.findViewById(R.id.password);
+
+
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        String cedula = ced.getText().toString();
+                        String username = user.getText().toString();
+                        String password = pass.getText().toString();
+
+                        new CreateUser().execute(cedula, username, password);
+                        //---------------------------------
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id)
+            {
+                dialog.cancel();
+
+            }
+        });
+
+        alertDialogBuilder.show();
+
+
+    }
+    class CreateUser extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(Intro.this);
+            pDialog.setMessage("Creating User...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            // TODO Auto-generated method stub
+            // Check for success tag
+            int success;
+            String cedula = args[0];
+            String username = args[1];
+            String password = args[2];
+
+            try {
+                // Building Parameters
+                List params = new ArrayList();
+                params.add(new BasicNameValuePair("cedula", cedula));
+                params.add(new BasicNameValuePair("username", username));
+                params.add(new BasicNameValuePair("password", password));
+
+                Log.d("request!", "starting");
+
+                //Posting user data to script
+                JSONObject json = jsonParser.makeHttpRequest(
+                        REGISTER_URL, "POST", params);
+
+                // full json response
+                Log.d("Registering attempt", json.toString());
+
+                // json success element
+                success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    Log.d("User Created!", json.toString());
+                    finish();
+                    return json.getString(TAG_MESSAGE);
+                } else {
+                    Log.d("Registering Failure!", json.getString(TAG_MESSAGE));
+                    return json.getString(TAG_MESSAGE);
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+
+        }
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once product deleted
+            pDialog.dismiss();
+            if (file_url != null) {
+                Toast.makeText(Intro.this, file_url, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+    //END REGISTER-------------------------------------------------------------------------------
 
 }

@@ -199,6 +199,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
 
         //NUEVO..................................................................................
         name = (EditText) findViewById(R.id.name);
+        name.setEnabled(false);
         date = (EditText) findViewById(R.id.date);
         hour = (EditText) findViewById(R.id.hour);
         date.setText(salida1);
@@ -408,7 +409,6 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
             accidente.setGravedad(gravedad);
             accidente.setR_fecha(salida1);
             accidente.setR_hora(salida2);
-            accidente.setCaracteristicasl(id_cl);
             accidente.setA_fecha(mdate);
             accidente.setA_hora(mhour);
             accidente.setAccidente(cla);

@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -247,6 +248,8 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_cond__vehi__prop, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+
+            LinearLayout linearLayoutExamenes = (LinearLayout) rootView.findViewById(R.id.layout_examenes);
             return rootView;
         }
     }

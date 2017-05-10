@@ -58,25 +58,25 @@
                     android:orientation="vertical">
 
                     <!--  Email Label -->
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/login_input_email"
+                    <TextView
+                        android:id="@+id/textView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="70dp"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="30dp"
                         android:layout_marginRight="20dp"
-                        >
+                        android:layout_marginTop="76dp"
+                        android:text="Cédula:"
+                        />
 
-                        <EditText
-                            android:id="@+id/cedula"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Cédula"
-                            android:inputType="number"
-                            android:maxLines="1"
-                            />
-                    </android.support.design.widget.TextInputLayout>
-
+                    <EditText
+                        android:id="@+id/cedula"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:ems="10"
+                        android:inputType="number"
+                       />
                 </LinearLayout>
 
 
@@ -86,26 +86,34 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="5dp">
 
                     <!--  Password Label -->
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Contraseña:"
+                       />
+
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/textInputPass"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/login_input_email"
+                        android:layout_height="47dp"
                         app:passwordToggleContentDescription="Description"
                         app:passwordToggleEnabled="true"
                         app:passwordToggleTint="@color/colorGreen"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="30dp"
                         android:layout_marginRight="20dp"
                         >
 
                         <android.support.design.widget.TextInputEditText
                             android:id="@+id/textInputEditText"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Contraseña"
+                            android:layout_height="43dp"
                             android:inputType="textPassword"
                             android:maxLines="1" />
                     </android.support.design.widget.TextInputLayout>

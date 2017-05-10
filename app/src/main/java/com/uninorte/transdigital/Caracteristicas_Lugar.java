@@ -18,7 +18,7 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
     Spinner area,sector,zona,diseño,condicionc;
     String ar,sec,zo,dis,condc;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caracteristicas__lugar);
 

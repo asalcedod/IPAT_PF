@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -569,6 +570,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
         Intent i = new Intent(this, Caracteristicas_Lugar.class);
         i.putExtra("idinfo",salida1+salida2);
         startActivityForResult(i,2);
+
     }
 
     public void onClick_CaracteVias(View view) {

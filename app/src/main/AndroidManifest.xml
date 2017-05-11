@@ -34,11 +34,11 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".Comenzar"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Campo1"
+            android:name=".Anexo1"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

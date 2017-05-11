@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Campo 2"
+                android:text="Anexo 2"
                 android:textColor="@color/Black"
                 android:textSize="20sp" />
 

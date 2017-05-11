@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,12 +14,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.raizlabs.android.dbflow.config.FlowConfig;
-import com.raizlabs.android.dbflow.config.FlowManager;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
@@ -165,7 +160,7 @@ public class Intro extends AppCompatActivity {
                     edit.putString("cedula", cedula);
                     edit.commit();
                     // Intent i = new Intent(Login.this, ReadComments.class);
-                    Intent i = new Intent(Intro.this, MainActivity.class);
+                    Intent i = new Intent(Intro.this, Comenzar.class);
                     // Intent i = new Intent(Login.this, Cond_Vehi_Prop.class);
 
 

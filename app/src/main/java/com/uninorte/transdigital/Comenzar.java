@@ -16,7 +16,7 @@ import com.raizlabs.android.dbflow.sql.language.Delete;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class Comenzar extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1 ;
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_LOCATION_EXTRA_COMMANDS = 2;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Intro.class);
+                Intent i = new Intent(Comenzar.this,Intro.class);
                 startActivity(i);
             }
         });
@@ -191,7 +191,7 @@ INSTITUTO MUNICIPAL DE TRANSITO Y TRANSPORTE DE SOLEDAD
     }
     public void onClick_Informe(View view) {
 
-        Intent i = new Intent(this,Campo1.class);
+        Intent i = new Intent(this,Anexo1.class);
         startActivityForResult(i,0);
     }
 }

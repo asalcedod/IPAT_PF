@@ -20,7 +20,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -41,7 +40,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class Campo1 extends AppCompatActivity implements View.OnClickListener , ActivityCompat.OnRequestPermissionsResultCallback {
+public class Anexo1 extends AppCompatActivity implements View.OnClickListener , ActivityCompat.OnRequestPermissionsResultCallback {
     private RadioGroup rdgGrupo;
     private static final String TAG = "LogsAndroid";
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1 ;
@@ -100,7 +99,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Campo1.this,MainActivity.class);
+                Intent i = new Intent(Anexo1.this,Comenzar.class);
                 startActivity(i);
             }
         });
@@ -158,14 +157,14 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
                 }
                 if(parent.getItemAtPosition(position).toString().equals("Choque")){
                     final String[] items = {"Vehiculo","Tren","Semoviente","Objeto fijo"};
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Campo1.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Anexo1.this);
                     builder.setTitle("Seleccione Choque con: ");
                     builder.setItems(items, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int item) {
                             choque=items[item];
                             if(items[item].equals("Objeto fijo")){
                                 final String[] items = {"Muro","Poste","Arbol","Baranda","Semaforo","Inmueble","Hidratante","Valla señal","Tarima, caseta, vehiculo estacionada","Otro"};
-                                AlertDialog.Builder builder = new AlertDialog.Builder(Campo1.this);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(Anexo1.this);
                                 builder.setTitle("Objeto fijo: ");
                                 builder.setItems(items, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int item) {
@@ -339,13 +338,13 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
         }
     }
     public class Ubica implements LocationListener {
-        Campo1 localiza;
+        Anexo1 localiza;
 
-        public Campo1 getLocaliza() {
+        public Anexo1 getLocaliza() {
             return localiza;
         }
 
-        public void setLocaliza(Campo1 localiza) {
+        public void setLocaliza(Anexo1 localiza) {
             this.localiza = localiza;
         }
 
@@ -435,7 +434,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(Campo1.this);
+            pDialog = new ProgressDialog(Anexo1.this);
             pDialog.setMessage("Saving...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
@@ -491,7 +490,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
             // dismiss the dialog once product deleted
             pDialog.dismiss();
             if (file_url != null){
-                Toast.makeText(Campo1.this, file_url, Toast.LENGTH_LONG).show();
+                Toast.makeText(Anexo1.this, file_url, Toast.LENGTH_LONG).show();
             }
         }
     }*/
@@ -524,7 +523,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
                 }
             }
             //Toast.makeText(this, ca.sexo, Toast.LENGTH_SHORT).show();
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(Campo1.this);
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(Anexo1.this);
             builder1.setTitle("Seleccione Oficina");
             builder1.setSingleChoiceItems(it,-1, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int item) {
@@ -549,7 +548,7 @@ public class Campo1 extends AppCompatActivity implements View.OnClickListener , 
                     .setPositiveButton("Continuar",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Intent i = new Intent(Campo1.this, Mapa.class);
+                                    Intent i = new Intent(Anexo1.this, Mapa.class);
                                     i.putExtra("latitud", latitud);
                                     i.putExtra("longitud", longitud);
                                     i.putExtra("ubicacion", ubicacion);

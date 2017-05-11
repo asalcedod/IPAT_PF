@@ -20,7 +20,7 @@ public class Caracteristicas_Vias extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Caracteristicas_Vias.this,Campo1.class);
+                Intent i = new Intent(Caracteristicas_Vias.this,Anexo1.class);
                 startActivity(i);
             }
         });

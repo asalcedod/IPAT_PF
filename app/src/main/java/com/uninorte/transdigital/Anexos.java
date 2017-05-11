@@ -17,12 +17,8 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
@@ -31,7 +27,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 
 import java.io.File;
-import java.util.List;
 
 public class Anexos extends AppCompatActivity implements OnClickListener{
     FloatingActionButton btnCam;
@@ -62,7 +57,7 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Anexos.this,Campo1.class);
+                Intent i = new Intent(Anexos.this,Anexo1.class);
                 startActivity(i);
             }
         });

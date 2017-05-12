@@ -91,6 +91,7 @@
                     android:id="@+id/botonOrganismo"
                     android:layout_width="38dp"
                     android:layout_height="wrap_content"
+                    android:onClick="oficinas"
                     android:background="@drawable/ic_arrow_drop_down_black_24dp"
                     android:backgroundTint="@color/colorPrimary" />
 
@@ -314,7 +315,7 @@
                     android:layout_weight="0.5"
                     android:background="@drawable/ic_insert_photo_white_48dp"
                     android:backgroundTint="@color/colorPrimary"
-                    android:onClick="onClick_CaracteVias" />
+                    android:onClick="onClick_anexos" />
 
             </LinearLayout>
 

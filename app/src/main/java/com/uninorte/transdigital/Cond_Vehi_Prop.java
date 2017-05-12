@@ -33,6 +33,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.raizlabs.android.dbflow.config.FlowConfig;
+import com.raizlabs.android.dbflow.config.FlowManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +71,7 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
             }
         });
 
-
+        FlowManager.init(new FlowConfig.Builder(this).build());
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -211,7 +214,7 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
     }
 
     public void onClick_Informe3(View view) {
-        Intent i= new Intent(Cond_Vehi_Prop.this,Enviar.class);
+        Intent i= new Intent(Cond_Vehi_Prop.this,Victimas.class);
         startActivity(i);
 
     }

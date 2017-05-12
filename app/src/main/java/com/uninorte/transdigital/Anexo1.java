@@ -30,6 +30,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.raizlabs.android.dbflow.config.FlowConfig;
+import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.io.IOException;
@@ -105,7 +107,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
         });
         //----------------------------------------------------------------------
 
-
+        FlowManager.init(new FlowConfig.Builder(this).build());
 
         it = new Intent(this, Cond_Vehi_Prop.class);
 
@@ -337,6 +339,43 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
             }
         }
     }
+
+    public void oficinas(View view) {
+        if (!latitud.equals("") && !longitud.equals("")) {
+            int i = 0, n = 0;
+            List<AnexoDane> c = new Select().from(AnexoDane.class).queryList();
+            for (AnexoDane ca : c) {
+                if (ca.departamento.equals(departamento) && ca.ciudad.equals(ciudad)) {
+                    n++;
+                }
+            }
+            final String[] it = new String[n];
+            final String[] cod = new String[n];
+            List<AnexoDane> d = new Select().from(AnexoDane.class).queryList();
+            for (AnexoDane ca : d) {
+                if (ca.departamento.equals(departamento) && ca.ciudad.equals(ciudad)) {
+                    it[i] = ca.oficina_transito;
+                    cod[i] = ca.id_dane + "";
+                    i++;
+                }
+            }
+            //Toast.makeText(this, ca.sexo, Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(Anexo1.this);
+            builder1.setTitle("Seleccione Oficina");
+            builder1.setSingleChoiceItems(it, -1, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    of = it[item];
+                    name.setText(cod[item]);
+                    dialog.cancel();
+                }
+            });
+            AlertDialog alert1 = builder1.create();
+            alert1.show();
+        }else{
+            Toast.makeText(this, "Espere mientras se carga su ubicacion...", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public class Ubica implements LocationListener {
         Anexo1 localiza;
 
@@ -505,35 +544,6 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
     public void onClick_Ubicacion(View view) {
         mensaje1.setText(ubicacion);
         if (!latitud.equals("") && !longitud.equals("")) {
-            int i = 0,n=0;
-            List<AnexoDane> c = new Select().from(AnexoDane.class).queryList();
-            for (AnexoDane ca : c) {
-                if (ca.departamento.equals(departamento) && ca.ciudad.equals(ciudad)) {
-                    n++;
-                }
-            }
-            final String[] it = new String[n];
-            final String[] cod = new String[n];
-            List<AnexoDane> d = new Select().from(AnexoDane.class).queryList();
-            for (AnexoDane ca : d) {
-                if (ca.departamento.equals(departamento) && ca.ciudad.equals(ciudad)) {
-                    it[i]=ca.oficina_transito;
-                    cod[i]=ca.id_dane+"";
-                    i++;
-                }
-            }
-            //Toast.makeText(this, ca.sexo, Toast.LENGTH_SHORT).show();
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(Anexo1.this);
-            builder1.setTitle("Seleccione Oficina");
-            builder1.setSingleChoiceItems(it,-1, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int item) {
-                    of = it[item];
-                    name.setText(cod[item]);
-                    dialog.cancel();
-                }
-            });
-            AlertDialog alert1 = builder1.create();
-            alert1.show();
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("¿Desea confirmar la ubicacion desde el Mapa?")
                     .setTitle("Advertencia")
@@ -569,10 +579,9 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
         Intent i = new Intent(this, Caracteristicas_Lugar.class);
         i.putExtra("idinfo",salida1+salida2);
         startActivityForResult(i,2);
-
     }
 
-    public void onClick_CaracteVias(View view) {
+    public void onClick_anexos(View view) {
         //se va a la pestañana para las caracteristicas de las vias
         //Intent i = new Intent(this, Caracteristicas_Vias.class);
         Intent i = new Intent(this, Anexos.class);

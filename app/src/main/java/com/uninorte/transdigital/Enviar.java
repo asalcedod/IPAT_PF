@@ -132,11 +132,15 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 JSONObject json = jsonParser.makeHttpRequest(
                         CAMPO1_URL, "POST", params);
 
-                // full json response
-                Log.d("Registering attempt", json.toString());
+                if(json != null) {
+                    // check your log for json response
+                    Log.d("Registering attempt", json.toString());
 
-                // json success element
-                success = json.getInt(TAG_SUCCESS);
+                    // json success tag
+                    success = json.getInt(TAG_SUCCESS);
+                }else{
+                    return "Falla en el servidor";
+                }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
                     //finish();
@@ -206,11 +210,15 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 JSONObject json = jsonParser.makeHttpRequest(
                         CAR_LUG_URL, "POST", params);
 
-                // full json response
-                Log.d("Registering attempt", json.toString());
+                if(json != null) {
+                    // check your log for json response
+                    Log.d("Registering attempt", json.toString());
 
-                // json success element
-                success = json.getInt(TAG_SUCCESS);
+                    // json success tag
+                    success = json.getInt(TAG_SUCCESS);
+                }else{
+                    return "Falla en el servidor";
+                }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
                     finish();

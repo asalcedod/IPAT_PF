@@ -133,7 +133,8 @@ public class JSONParser {
                     is, "iso-8859-1"), 8);
             StringBuilder sb = new StringBuilder();
             String line = null;
-            while ((line = reader.readLine()) != null) {
+
+            while ((line = reader.readLine()) != null && !sb.toString().equals("<html>" + "\n")) {
                 sb.append(line + "\n");
             }
             is.close();

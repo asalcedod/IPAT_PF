@@ -145,12 +145,15 @@ public class Intro extends AppCompatActivity {
                 // getting product details by making HTTP request
                 JSONObject json = jsonParser.makeHttpRequest(LOGIN_URL, "POST",
                         params);
+                if(json != null) {
+                    // check your log for json response
+                    Log.d("Login attempt", json.toString());
 
-                // check your log for json response
-                Log.d("Login attempt", json.toString());
-
-                // json success tag
-                success = json.getInt(TAG_SUCCESS);
+                    // json success tag
+                    success = json.getInt(TAG_SUCCESS);
+                }else{
+                    return "Falla en el servidor";
+                }
                 if (success == 1) {
                     Log.d("Login Successful!", json.toString());
                     // save user data
@@ -262,11 +265,15 @@ public class Intro extends AppCompatActivity {
                 JSONObject json = jsonParser.makeHttpRequest(
                         REGISTER_URL, "POST", params);
 
-                // full json response
-                Log.d("Registering attempt", json.toString());
+                if(json != null) {
+                    // check your log for json response
+                    Log.d("Registering attempt", json.toString());
 
-                // json success element
-                success = json.getInt(TAG_SUCCESS);
+                    // json success tag
+                    success = json.getInt(TAG_SUCCESS);
+                }else{
+                    return "Falla en el servidor";
+                }
                 if (success == 1) {
                     Log.d("User Created!", json.toString());
                     finish();

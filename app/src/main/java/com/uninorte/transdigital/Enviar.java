@@ -22,7 +22,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
     private static final String TAG = "LogsAndroid";
     // Progress Dialog
     private ProgressDialog pDialog;
-
+    String id_cl="";
     // JSON parser class
     JSONParser jsonParser = new JSONParser();
 
@@ -58,6 +58,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             choque_con = ca.choque;
             objeto_fijo = ca.objetof;
             id_c_l = ca.caracteristicasl;
+            id_cl=id_c_l;
             fecha_a = ca.a_fecha;
             hora_a = ca.a_hora;
             fecha_i = ca.r_fecha;
@@ -67,7 +68,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         new Enviar.Addform1().execute(organismo,gravedad,direccion_a,latitud,longitud,clase_a,choque_con,objeto_fijo,id_c_l,fecha_a,hora_a,fecha_i,hora_i);
         List<Caracteristicasl> cl = new Select().from(Caracteristicasl.class).queryList();
         for (Caracteristicasl ca : cl) {
-            id_carac_l = ca.id_camp1;
+            id_carac_l = id_cl;
             area = ca.area;
             sector = ca.sector;
             zona = ca.zona;

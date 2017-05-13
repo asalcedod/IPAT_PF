@@ -43,6 +43,7 @@ public class Comenzar extends AppCompatActivity {
 
 
         FlowManager.init(new FlowConfig.Builder(this).build());
+        List<AnexoDane> inic = new Delete().from(AnexoDane.class).queryList();
         AnexoDane ad=new AnexoDane();
         /*INSTITUTO DPTAL. DE TTE Y TTO DEL ATLANTICO
 INST. DISTRITAL DE TTO. Y TTE. DE BARRANQUILLA

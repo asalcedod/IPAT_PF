@@ -70,7 +70,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
     String choque,objeto,of;
     String mname="";
     String area="",sector="",zona="",diseño="",condc="";
-    String id_cl="";
+    String id_cl=salida1+"%"+salida2;
     TextView mensaje1;
     Spinner accidente;
     private Button mRegister;
@@ -433,7 +433,6 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
         data.add(validar(name,mname));
         data.add(validar(date,mdate));
         data.add(validar(hour,mhour));
-        id_cl=mdate+"%"+mhour;
         int cont=0;
         boolean sw=true;
         while(cont<data.size()){
@@ -468,71 +467,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
             Toast.makeText(this,"Existen campos sin completar.",Toast.LENGTH_SHORT).show();
         }
     }
-    /*class Addform extends AsyncTask<String, String, String> {
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pDialog = new ProgressDialog(Anexo1.this);
-            pDialog.setMessage("Saving...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
-        }
-
-        @Override
-        protected String doInBackground(String... args) {
-            // TODO Auto-generated method stub
-            // Check for success tag
-            int success;
-            String name = args[0];
-            String date = args[1];
-            String hour = args[2];
-
-            try {
-                // Building Parameters
-                List params = new ArrayList();
-                params.add(new BasicNameValuePair("name", name));
-                params.add(new BasicNameValuePair("date", date));
-                params.add(new BasicNameValuePair("hour", hour));
-
-                Log.d("request!", "starting");
-
-                //Posting user data to script
-                JSONObject json = jsonParser.makeHttpRequest(
-                        REGISTER_URL, "POST", params);
-
-                // full json response
-                Log.d("Registering attempt", json.toString());
-
-                // json success element
-                success = json.getInt(TAG_SUCCESS);
-                if (success == 1) {
-                    Log.d("Formulario enviado!", json.toString());
-                    //finish();
-                    startActivity(it);
-                    return json.getString(TAG_MESSAGE);
-                } else {
-                    Log.d("Failure!", json.getString(TAG_MESSAGE));
-                    return json.getString(TAG_MESSAGE);
-
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-
-        }
-
-        protected void onPostExecute(String file_url) {
-            // dismiss the dialog once product deleted
-            pDialog.dismiss();
-            if (file_url != null){
-                Toast.makeText(Anexo1.this, file_url, Toast.LENGTH_LONG).show();
-            }
-        }
-    }*/
     //------------------------------------------------------------------------------------------------------------
 
     public void onClick_Informe2(View view) {
@@ -577,7 +512,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
     public void onClick_lugar(View view) {
         //se va a la pestaña para las caracteristicas del lugar
         Intent i = new Intent(this, Caracteristicas_Lugar.class);
-        i.putExtra("idinfo",salida1+salida2);
+        i.putExtra("idinfo",id_cl);
         startActivityForResult(i,2);
     }
 

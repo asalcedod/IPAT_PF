@@ -66,8 +66,8 @@ public class DatosVehi extends Fragment {
                 tonel=toneladas.getText().toString();
                 n_per=n_personas.getText().toString();
                 id_l=id_licencia.getText().toString();
-                List<DatosV> a = new Delete().from(DatosV.class).queryList();
-                DatosV dv = new DatosV();
+                List<DBDatosV> a = new Delete().from(DBDatosV.class).queryList();
+                DBDatosV dv = new DBDatosV();
                 dv.setPlaca(pla);
                 dv.setRemorque(remo);
                 dv.setNacionalidad(naci);
@@ -80,8 +80,8 @@ public class DatosVehi extends Fragment {
                 dv.setN_personas(n_per);
                 dv.setId_licencia(id_l);
                 dv.save();
-                List<DatosV> c = new Select().from(DatosV.class).queryList();
-                for (DatosV ca : c) {
+                List<DBDatosV> c = new Select().from(DBDatosV.class).queryList();
+                for (DBDatosV ca : c) {
                     Toast.makeText(getActivity(), ca.placa, Toast.LENGTH_SHORT).show();
                 }
             }

@@ -46,8 +46,8 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
 
     public void onClick_Informe(View view) {
         String organismo = "",gravedad = "",direccion_a="",latitud = "",longitud="",clase_a="",choque_con="",objeto_fijo="",id_c_l="",fecha_a="",hora_a="",fecha_i="",hora_i="";
-        List<Accidente> c = new Select().from(Accidente.class).queryList();
-        for (Accidente ca : c) {
+        List<DBAccidente> c = new Select().from(DBAccidente.class).queryList();
+        for (DBAccidente ca : c) {
             organismo = ca.ot;
             gravedad = ca.gravedad;
             Toast.makeText(this, gravedad, Toast.LENGTH_SHORT).show();
@@ -66,8 +66,8 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         }
         String id_carac_l= "", area= "", sector= "", zona= "", diseño= "", condicionesc= "";
         new Enviar.Addform1().execute(organismo,gravedad,direccion_a,latitud,longitud,clase_a,choque_con,objeto_fijo,id_c_l,fecha_a,hora_a,fecha_i,hora_i);
-        List<Caracteristicasl> cl = new Select().from(Caracteristicasl.class).queryList();
-        for (Caracteristicasl ca : cl) {
+        List<DBCaracteristicasl> cl = new Select().from(DBCaracteristicasl.class).queryList();
+        for (DBCaracteristicasl ca : cl) {
             id_carac_l = id_cl;
             area = ca.area;
             sector = ca.sector;

@@ -12,8 +12,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.raizlabs.android.dbflow.sql.language.Delete;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,27 +24,38 @@ import java.util.List;
 
 public class Propietario extends Fragment {
     ImageButton imageButtonSave,fallas,impacto;
-    EditText Editimpacto;
-    EditText Editfallas;
-
+    EditText Editimpacto,Editfallas,enombre,et_doc,id_doc,descrip;
+    String mismo_cond,nombre,t_doc,n_doc,sclasev,sclases,modalidad_t,sradioa,falla,descrip_daño,lugar_impacto;
     public Spinner clasev,clases,mdt,radioa;
     public int dia,mes,ano;
     public String cat="",cs="",mt="",rada="";
     String cv;
     public String cad;
     String[] items = {"Frontal","Lateral","Posterior"};
-
+    RadioGroup rg;
     String[] listItems;
     boolean[] checkedItems;
     ArrayList<Integer> mUserItems = new ArrayList<>();
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_propietario, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_propietario, container, false);
+        rg=(RadioGroup)rootView.findViewById(R.id.m_c);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.checkBox11) {
+                    mismo_cond = "Si";
+                } else if (checkedId == R.id.checkBox10) {
+                    mismo_cond = "No";
+                }
+            }
+
+        });
         clasev = (Spinner) rootView.findViewById(R.id.idClaseVehi);
         List<String> values = new ArrayList<String>();
         values.add("Seleccione...");
@@ -157,7 +171,24 @@ public class Propietario extends Fragment {
 
             @Override
             public void onClick(View v) {
-
+                enombre=(EditText)rootView.findViewById(R.id.nameProp);
+                et_doc=(EditText)rootView.findViewById(R.id.tipoDOc);
+                id_doc=(EditText)rootView.findViewById(R.id.idecond);
+                descrip=(EditText)rootView.findViewById(R.id.idDesDaños);
+                List<DBPropietario> a = new Delete().from(DBPropietario.class).queryList();
+                DBPropietario p = new DBPropietario();
+                p.setMismo_cond(mismo_cond);
+                p.setNombre(enombre.getText().toString());
+                p.setT_doc(et_doc.getText().toString());
+                p.setN_doc(id_doc.getText().toString());
+                p.setClasev(cv);
+                p.setClases(cs);
+                p.setModalidad_t(mt);
+                p.setRadioa(rada);
+                p.setFallas(Editfallas.getText().toString());
+                p.setDescrip_daño(descrip.getText().toString());
+                p.setLugar_impacto(Editimpacto.getText().toString());
+                p.save();
             }
         });
 

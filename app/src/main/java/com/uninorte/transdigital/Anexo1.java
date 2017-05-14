@@ -426,7 +426,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
 
     public void onClick(View view) {
         ArrayList<Boolean> data = new ArrayList<>();
-        Accidente accidente =new Accidente();
+        DBAccidente accidente =new DBAccidente();
         String mname = name.getText().toString();
         String mdate = date.getText().toString();
         String mhour = hour.getText().toString();
@@ -456,8 +456,8 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
             accidente.setObjetof(objeto);
             accidente.setCaracteristicasl(id_cl);
             accidente.save();
-            /*List<ClaseAccidente> c = new Select().from(ClaseAccidente.class).queryList();
-            for (ClaseAccidente ca : c) {
+            /*List<DBClaseAccidente> c = new Select().from(DBClaseAccidente.class).queryList();
+            for (DBClaseAccidente ca : c) {
                 Toast.makeText(this, ca.a, Toast.LENGTH_LONG).show();
             }*/
 
@@ -543,8 +543,8 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
                 diseño=data.getStringExtra("diseño");
                 condc=data.getStringExtra("condicionc");
                 id_cl=data.getStringExtra("idcl");
-                List<Caracteristicasl> cl = new Select().from(Caracteristicasl.class).queryList();
-                for (Caracteristicasl a : cl) {
+                List<DBCaracteristicasl> cl = new Select().from(DBCaracteristicasl.class).queryList();
+                for (DBCaracteristicasl a : cl) {
 
                 }
             }

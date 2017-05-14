@@ -170,7 +170,7 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
     public void Save_Caract_Lugar(View view) {
         Intent i = new Intent();
         if(!ar.equals("") && !sec.equals("") && !zo.equals("") && !dis.equals("") && !condc.equals("") ) {
-            Caracteristicasl caracter = new Caracteristicasl();
+            DBCaracteristicasl caracter = new DBCaracteristicasl();
             caracter.setArea(ar);
             caracter.setSector(sec);
             caracter.setZona(zo);

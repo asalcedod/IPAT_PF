@@ -2,7 +2,6 @@ package com.uninorte.transdigital;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
@@ -54,8 +52,8 @@ public class DatosPersonales extends Fragment {
         imageButtonSave.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                List<DatosP> a = new Delete().from(DatosP.class).queryList();
-                DatosP dp = new DatosP();
+                List<DBDatosP> a = new Delete().from(DBDatosP.class).queryList();
+                DBDatosP dp = new DBDatosP();
                 dp.setNombre(nombre.getText().toString());
                 dp.setTdoc(tdoc.getText().toString());
                 dp.setNdoc(ndoc.getText().toString());
@@ -66,8 +64,8 @@ public class DatosPersonales extends Fragment {
                 dp.setCiudad(ciudad.getText().toString());
                 dp.setTel(tel.getText().toString());
                 dp.save();
-                List<DatosP> c = new Select().from(DatosP.class).queryList();
-                for (DatosP ca : c) {
+                List<DBDatosP> c = new Select().from(DBDatosP.class).queryList();
+                for (DBDatosP ca : c) {
                     Toast.makeText(getActivity(), ca.sexo, Toast.LENGTH_SHORT).show();
                 }
 

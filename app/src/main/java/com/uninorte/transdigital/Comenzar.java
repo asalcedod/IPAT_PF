@@ -46,13 +46,12 @@ public class Comenzar extends AppCompatActivity {
         List<AnexoDane> inic = new Delete().from(AnexoDane.class).queryList();
         AnexoDane ad=new AnexoDane();
         /*INSTITUTO DPTAL. DE TTE Y TTO DEL ATLANTICO
-INST. DISTRITAL DE TTO. Y TTE. DE BARRANQUILLA
-INSTITUTO DPTAL. DE TTE. Y TTO. DE GALAPA
-INSTITUTO DPTAL. DE TTE. Y TTO. DEL ATLANTICO
-INSTIT. DEPTAL. DE TTE. Y TTO. DEL ATLANTICO
-INSTITUTO MUNICIPAL DE TRANSITO Y TRANSPORTE DE SOLEDAD
-
-*/
+        INST. DISTRITAL DE TTO. Y TTE. DE BARRANQUILLA
+        INSTITUTO DPTAL. DE TTE. Y TTO. DE GALAPA
+        INSTITUTO DPTAL. DE TTE. Y TTO. DEL ATLANTICO
+        INSTIT. DEPTAL. DE TTE. Y TTO. DEL ATLANTICO
+        INSTITUTO MUNICIPAL DE TRANSITO Y TRANSPORTE DE SOLEDAD
+        */
         ad.setId_dane(8000000);
         ad.setCiudad("Barranquilla");
         ad.setDepartamento("Atlántico");
@@ -83,8 +82,8 @@ INSTITUTO MUNICIPAL DE TRANSITO Y TRANSPORTE DE SOLEDAD
         ad.setDepartamento("Atlántico");
         ad.setOficina_transito("INSTITUTO MUNICIPAL DE TRANSITO Y TRANSPORTE DE SOLEDAD");
         ad.save();
-        List<Accidente> a = new Delete().from(Accidente.class).queryList();
-        List<Caracteristicasl> b = new Delete().from(Caracteristicasl.class).queryList();
+        List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
+        List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {

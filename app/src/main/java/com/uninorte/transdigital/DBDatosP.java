@@ -8,7 +8,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  * Created by antonio on 30/04/17.
  */
 @Table(database = AppDatabase.class)
-public class DatosP extends BaseModel {
+public class DBDatosP extends BaseModel {
     @PrimaryKey
     int id;
     @Column

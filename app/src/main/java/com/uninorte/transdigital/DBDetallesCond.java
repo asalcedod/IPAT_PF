@@ -10,7 +10,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  * Created by antonio on 30/04/17.
  */
 @Table(database = AppDatabase.class)
-public class DetallesCond extends BaseModel {
+public class DBDetallesCond extends BaseModel {
     @PrimaryKey
     int id;
     @Column

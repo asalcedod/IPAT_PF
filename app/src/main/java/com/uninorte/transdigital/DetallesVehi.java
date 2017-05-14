@@ -117,8 +117,8 @@ public class DetallesVehi extends Fragment {
                 asign=asignatura.getText().toString();
                 f_vsre=fecha_vsre.getText().toString();
                 f_vsce=fecha_vsce.getText().toString();
-                List<DetallesV> a = new Delete().from(DetallesV.class).queryList();
-                DetallesV dv = new DetallesV();
+                List<DBDetallesV> a = new Delete().from(DBDetallesV.class).queryList();
+                DBDetallesV dv = new DBDetallesV();
                 dv.setEmpresa(emp);
                 dv.setNit(nt);
                 dv.setMatriculado(matri);
@@ -137,8 +137,8 @@ public class DetallesVehi extends Fragment {
                 dv.setPorta_seguro2(porta_seguro2);
                 dv.setFecha_vsce(f_vsce);
                 dv.save();
-                List<DetallesV> c = new Select().from(DetallesV.class).queryList();
-                for (DetallesV ca : c) {
+                List<DBDetallesV> c = new Select().from(DBDetallesV.class).queryList();
+                for (DBDetallesV ca : c) {
                     Toast.makeText(getActivity(), ca.empresa, Toast.LENGTH_SHORT).show();
                 }
             }

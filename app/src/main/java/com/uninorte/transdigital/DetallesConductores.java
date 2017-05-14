@@ -5,18 +5,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.raizlabs.android.dbflow.sql.language.Delete;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -173,8 +169,8 @@ public class DetallesConductores extends Fragment {
                 hospital=hosp.getText().toString();
                 descip=extra.getText().toString();
                 //cat,g,e,a,embr,gE,sust,portlia,idlicencia,fcha,el,cod_of,chaleco,casco,cinturon,hospital,descip;
-                List<DetallesCond> b = new Delete().from(DetallesCond.class).queryList();
-                DetallesCond dc=new DetallesCond();
+                List<DBDetallesCond> b = new Delete().from(DBDetallesCond.class).queryList();
+                DBDetallesCond dc=new DBDetallesCond();
                 dc.setGravedad(g);
                 dc.setExamen(e);
                 dc.setCategoria(cat);

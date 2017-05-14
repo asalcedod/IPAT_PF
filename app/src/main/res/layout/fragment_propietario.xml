@@ -36,6 +36,7 @@
                     android:textSize="16sp" />
 
                 <RadioGroup
+                    android:id="@+id/m_c"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -107,7 +108,7 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/editText22"
+                            android:id="@+id/tipoDOc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -320,13 +321,13 @@
                     app:srcCompat="@drawable/ic_flash_on_white_48dp" />
 
                 <EditText
-                    android:id="@+id/Impacto"
+                    android:id="@+id/idImpacto"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="0.96"
+                    android:hint="Lugar de impacto"
                     android:inputType="date"
-                    android:textSize="16sp"
-                    android:hint="Lugar de impacto" />
+                    android:textSize="16sp" />
 
                 <ImageButton
                     android:id="@+id/iBImpacto"

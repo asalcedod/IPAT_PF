@@ -5,10 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Build;
-import android.preference.EditTextPreference;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -22,9 +19,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -35,8 +29,8 @@ import android.widget.Toast;
 
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.sql.language.Select;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Cond_Vehi_Prop extends AppCompatActivity {
@@ -214,9 +208,46 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
     }
 
     public void onClick_Informe3(View view) {
-        Intent i= new Intent(Cond_Vehi_Prop.this,Enviar.class);
-        startActivity(i);
-
+        boolean sw=true;
+        List<DBAccidente> c = new Select().from(DBAccidente.class).queryList();
+        List<DBCaracteristicasl> cl = new Select().from(DBCaracteristicasl.class).queryList();
+        List<DBDatosP> dp = new Select().from(DBDatosP.class).queryList();
+        List<DBDetallesCond> dc = new Select().from(DBDetallesCond.class).queryList();
+        List<DBDatosV> dv = new Select().from(DBDatosV.class).queryList();
+        List<DBDetallesV> dev = new Select().from(DBDetallesV.class).queryList();
+        List<DBPropietario> p = new Select().from(DBPropietario.class).queryList();
+        if(c.size()<=0){
+            sw=false;
+            Toast.makeText(this, "Anexo 1 esta vacio", Toast.LENGTH_SHORT).show();
+        }
+        if(cl.size()<=0){
+            sw=false;
+            Toast.makeText(this, "Caracteristicas del lugar esta vacio", Toast.LENGTH_SHORT).show();
+        }
+        if(dp.size()<=0){
+            sw=false;
+            Toast.makeText(this, "Datos persnales esta vacio", Toast.LENGTH_SHORT).show();
+        }
+        if(dc.size()<=0){
+            sw=false;
+            Toast.makeText(this, "Datos del conductor esta vacio", Toast.LENGTH_SHORT).show();
+        }
+        if(dv.size()<=0){
+            sw=false;
+            Toast.makeText(this, "Datos del vehiculo esta vacio", Toast.LENGTH_SHORT).show();
+        }
+        if(dev.size()<=0){
+            sw=false;
+            Toast.makeText(this, "Detalles esta vacio", Toast.LENGTH_SHORT).show();
+        }
+        if(p.size()<=0){
+            sw=false;
+            Toast.makeText(this, "Propietario esta vacio", Toast.LENGTH_SHORT).show();
+        }
+        if(sw==true) {
+            Intent i = new Intent(Cond_Vehi_Prop.this, Enviar.class);
+            startActivity(i);
+        }
     }
 
 

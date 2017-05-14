@@ -255,7 +255,7 @@ public class Propietario extends Fragment {
         //---------------------------------------------
 
         //lista de lugar de impacto
-        Editimpacto = (EditText) rootView.findViewById(R.id.Impacto);;
+        Editimpacto = (EditText) rootView.findViewById(R.id.idImpacto);
         impacto = (ImageButton) rootView.findViewById(R.id.iBImpacto);
         impacto.setOnClickListener(new View.OnClickListener(){
 

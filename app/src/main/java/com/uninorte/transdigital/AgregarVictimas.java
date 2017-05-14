@@ -14,6 +14,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+
+import com.raizlabs.android.dbflow.sql.language.Delete;
+
+import java.util.List;
 
 public class AgregarVictimas extends AppCompatActivity {
     EditText editText1;
@@ -21,7 +26,7 @@ public class AgregarVictimas extends AppCompatActivity {
     private boolean customview;
     public ImageButton bfechnavic;
     public EditText efechnavict;
-
+    Spinner tipo_victima;
     public int dia,mes,ano;
 
 
@@ -94,11 +99,30 @@ public class AgregarVictimas extends AppCompatActivity {
         if (TextUtils.isEmpty(editText1.getText().toString())){
             editText1.setError("No puede estar vacio");
         }   else {
-                DataEntry de = new DataEntry(editText1.getText().toString());
-                Intent i = getIntent();
-                i.putExtra("entry", de);
-                setResult(Activity.RESULT_OK, i);
-                finish();
+            /*DBVictima dv = new DBVictima();
+            dv.setNombre(nombre.getText().toString());
+            dv.setTdoc(tdoc.getText().toString());
+            dv.setNdoc(ndoc.getText().toString());
+            dv.setNacionalidad(nacionalidad.getText().toString());
+            dv.setFecha_n(fecha_n.getText().toString());
+            dv.setSexo(x);
+            dv.setDirec(direc.getText().toString());
+            dv.setCiudad(ciudad.getText().toString());
+            dv.setTel(tel.getText().toString());
+            dv.setGravedad(g);
+            dv.setExamen(e);
+            dv.setAut(a);
+            dv.setEbriagez(embr);
+            dv.setChaleco(chaleco);
+            dv.setCasco(casco);
+            dv.setCinturon(cinturon);
+            dv.setHospital(hospital);
+            dv.save();*/
+            DataEntry de = new DataEntry(editText1.getText().toString());
+            Intent i = getIntent();
+            i.putExtra("entry", de);
+            setResult(Activity.RESULT_OK, i);
+            finish();
             }
         }
 

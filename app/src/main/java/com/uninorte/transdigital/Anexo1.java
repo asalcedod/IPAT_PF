@@ -68,25 +68,12 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
     String ciudad = "";
     String departamento = "";
     String choque,objeto,of;
-    String mname="";
     String area="",sector="",zona="",diseño="",condc="";
     String id_cl=salida1+"%"+salida2;
     TextView mensaje1;
     Spinner accidente;
     private Button mRegister;
     Intent it;
-
-    // Progress Dialog
-    private ProgressDialog pDialog;
-
-    // JSON parser class
-    JSONParser jsonParser = new JSONParser();
-
-    //testing on Emulator:
-    private static final String REGISTER_URL = "https://transitodigital-asalcedod.c9users.io/form.php";
-    //ids
-    private static final String TAG_SUCCESS = "success";
-    private static final String TAG_MESSAGE = "message";
 //--------------------------------------------------------------------------------------------------------
 
     @Override
@@ -426,6 +413,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
 
     public void onClick(View view) {
         ArrayList<Boolean> data = new ArrayList<>();
+        List<DBCaracteristicasl> cl = new Select().from(DBCaracteristicasl.class).queryList();
         DBAccidente accidente =new DBAccidente();
         String mname = name.getText().toString();
         String mdate = date.getText().toString();
@@ -441,7 +429,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
                 break;
             }
             cont++;
-        }if(sw == true && !TextUtils.isEmpty(latitud) && !TextUtils.isEmpty(longitud) && !TextUtils.isEmpty(gravedad) && !TextUtils.isEmpty(salida1) && !TextUtils.isEmpty(salida2)){
+        }if(sw == true && !TextUtils.isEmpty(latitud) && !TextUtils.isEmpty(longitud) && !TextUtils.isEmpty(gravedad) && !TextUtils.isEmpty(salida1) && !TextUtils.isEmpty(salida2) && !TextUtils.isEmpty(cla) && cl.size()>=1){
             accidente.setOt(mname);
             accidente.setLatitud(latitud);
             accidente.setLongitud(longitud);

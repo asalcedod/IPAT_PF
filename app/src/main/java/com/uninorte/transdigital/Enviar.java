@@ -29,9 +29,11 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
     //testing on Emulator:
     private static final String CAMPO1_URL = "https://transitodigital-asalcedod.c9users.io/accidente.php";
     private static final String CAR_LUG_URL = "https://transitodigital-asalcedod.c9users.io/car_lug.php";
-    private static final String REGISTER_URL3 = "https://transitodigital-asalcedod.c9users.io/accidente.php";
-    private static final String REGISTER_URL4 = "https://transitodigital-asalcedod.c9users.io/accidente.php";
-    private static final String REGISTER_URL5 = "https://transitodigital-asalcedod.c9users.io/accidente.php";
+    private static final String DATOS_PERSONALES_URL = "https://transitodigital-asalcedod.c9users.io/datospersonales.php";
+    private static final String DETALLES_CONDUCTOR_URL = "https://transitodigital-asalcedod.c9users.io/detallesconductor.php";
+    private static final String DATOS_VEHICULO_URL = "https://transitodigital-asalcedod.c9users.io/datosvehiculo.php";
+    private static final String DETALLES_VEHICULO_URL = "https://transitodigital-asalcedod.c9users.io/detallesvehiculo.php";
+    private static final String PROPIETARIO_URL = "https://transitodigital-asalcedod.c9users.io/propietario.php";
 
     //ids
     private static final String TAG_SUCCESS = "success";
@@ -75,8 +77,100 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             diseño = ca.diseño;
             condicionesc = ca.condicionc;
         }
-        //id_carac_l, area, sector, zona, diseño, condicionesc
         new Enviar.Caract_lugar().execute(id_carac_l, area, sector, zona, diseño, condicionesc);
+        String nombre="",tdoc="",ndoc="",nacionalidad="",fecha_n="",sexo="",direc="",ciudad="",tel="";
+        List<DBDatosP> dp = new Select().from(DBDatosP.class).queryList();
+        for (DBDatosP ca : dp) {
+            nombre=ca.nombre;
+            tdoc=ca.tdoc;
+            ndoc=ca.ndoc;
+            nacionalidad=ca.nacionalidad;
+            fecha_n=ca.fecha_n;
+            sexo=ca.sexo;
+            direc=ca.direc;
+            ciudad=ca.ciudad;
+            tel=ca.tel;
+        }
+        //execute()
+        String gravedad2="",examen="",aut="",ebriagez="",gradoE="",sustancias="",portalicencia="",idlicencia="",categoria="",estado="",fecha="",cod_of="",chaleco="",casco="",cinturon="",hospital="",descip="";
+        List<DBDetallesCond> dec = new Select().from(DBDetallesCond.class).queryList();
+        for (DBDetallesCond ca : dec) {
+            //gravedad2,examen,aut,ebriagez,gradoE,sustancias,portalicencia,idlicencia,categoria,estado,fecha,cod_of,chaleco,casco,cinturon,hospital,descip
+            gravedad2=ca.gravedad;
+            examen=ca.examen;
+            aut=ca.aut;
+            ebriagez=ca.ebriagez;
+            sustancias=ca.sustancias;
+            portalicencia=ca.portalicencia;
+            idlicencia=ca.idlicencia;
+            categoria=ca.categoria;
+            estado=ca.estado;
+            fecha=ca.fecha;
+            cod_of=ca.cod_of;
+            chaleco=ca.chaleco;
+            casco=ca.casco;
+            cinturon=ca.cinturon;
+            hospital=ca.hospital;
+            descip=ca.descip;
+        }
+        //execute()
+        String placa="",remorque="",nacionalidad2="",marca="",linea="",color="",modelo="",carroceria="",toneladas="",n_personas="",id_licencia="";
+        List<DBDatosV> dv = new Select().from(DBDatosV.class).queryList();
+        for (DBDatosV ca : dv) {
+            //placa,remorque,nacionalidad,marca,linea,color,modelo,carroceria,toneladas,n_personas,id_licencia;
+            placa=ca.placa;
+            remorque=ca.remorque;
+            nacionalidad2=ca.nacionalidad;
+            marca=ca.marca;
+            linea=ca.linea;
+            color=ca.color;
+            modelo=ca.modelo;
+            carroceria=ca.carroceria;
+            toneladas=ca.toneladas;
+            n_personas=ca.n_personas;
+            id_licencia=ca.id_licencia;
+        }
+        //execute()
+        String empresa="",nit="",matriculado="",inmovilizado="",dispocicion="",t_registro="",rev_tecnica="",n_acompañantes="",SOAT="",id_soat="",poliza="",fecha_v_soat="",porta_seguro="",id_seguro="",asignatura="",fecha_vsre="",porta_seguro2="",fecha_vsce="";
+        //empresa,nit,matriculado,inmovilizado,dispocicion,t_registro,rev_tecnica,n_acompañantes,SOAT,id_soat,poliza,fecha_v_soat,porta_seguro,id_seguro,asignatura,fecha_vsre,porta_seguro2,fecha_vsce;
+        List<DBDetallesV> dev = new Select().from(DBDetallesV.class).queryList();
+        for (DBDetallesV a : dev) {
+            empresa=a.empresa;
+            nit=a.nit;
+            matriculado=a.matriculado;
+            inmovilizado=a.inmovilizado;
+            dispocicion=a.dispocicion;
+            t_registro=a.t_registro;
+            rev_tecnica=a.rev_tecnica;
+            n_acompañantes=a.n_acompañantes;
+            SOAT=a.SOAT;
+            id_soat=a.id_soat;
+            poliza=a.poliza;
+            fecha_v_soat=a.fecha_v_soat;
+            porta_seguro=a.porta_seguro;
+            asignatura=a.asignatura;
+            fecha_vsre=a.fecha_vsre;
+            porta_seguro2=a.porta_seguro2;
+            fecha_vsce=a.fecha_vsce;
+        }
+        //execute()
+        String mismo_cond,nombre2,t_doc,n_doc,clasev,clases,modalidad_t,radioa,fallas,descrip_daño,lugar_impacto;
+        List<DBPropietario> pr = new Select().from(DBPropietario.class).queryList();
+        for (DBPropietario a : pr) {
+            //mismo_cond,nombre2,t_doc,n_doc,clasev,clases,modalidad_t,radioa,fallas,descrip_daño,lugar_impacto
+            mismo_cond=a.mismo_cond;
+            nombre2=a.nombre;
+            t_doc=a.t_doc;
+            n_doc=a.n_doc;
+            clasev=a.clasev;
+            clases=a.clases;
+            modalidad_t=a.modalidad_t;
+            radioa=a.radioa;
+            fallas=a.fallas;
+            descrip_daño=a.descrip_daño;
+            lugar_impacto=a.lugar_impacto;
+        }
+        //execute()
     }
 
     class Addform1 extends AsyncTask<String, String, String> {

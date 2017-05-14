@@ -210,7 +210,6 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
     public void onClick_Informe3(View view) {
         boolean sw=true;
         List<DBAccidente> c = new Select().from(DBAccidente.class).queryList();
-        List<DBCaracteristicasl> cl = new Select().from(DBCaracteristicasl.class).queryList();
         List<DBDatosP> dp = new Select().from(DBDatosP.class).queryList();
         List<DBDetallesCond> dc = new Select().from(DBDetallesCond.class).queryList();
         List<DBDatosV> dv = new Select().from(DBDatosV.class).queryList();
@@ -219,10 +218,6 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
         if(c.size()<=0){
             sw=false;
             Toast.makeText(this, "Anexo 1 esta vacio", Toast.LENGTH_SHORT).show();
-        }
-        if(cl.size()<=0){
-            sw=false;
-            Toast.makeText(this, "Caracteristicas del lugar esta vacio", Toast.LENGTH_SHORT).show();
         }
         if(dp.size()<=0){
             sw=false;
@@ -238,7 +233,7 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
         }
         if(dev.size()<=0){
             sw=false;
-            Toast.makeText(this, "Detalles esta vacio", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Detalles Vehiculo esta vacio", Toast.LENGTH_SHORT).show();
         }
         if(p.size()<=0){
             sw=false;

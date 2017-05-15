@@ -14,7 +14,52 @@ public class DBDetallesV extends BaseModel {
     @PrimaryKey
     int id;
     @Column
-    String empresa,nit,matriculado,inmovilizado,dispocicion,t_registro,rev_tecnica,n_acompañantes,SOAT,id_soat,poliza,fecha_v_soat,porta_seguro,id_seguro,asignatura,fecha_vsre,porta_seguro2,fecha_vsce;
+    String empresa;
+    @Column
+    String nit;
+    @Column
+    String matriculado;
+    @Column
+    String inmovilizado;
+    @Column
+    String dispocicion;
+    @Column
+    String t_registro;
+    @Column
+    String rev_tecnica;
+
+    public String getNrevt() {
+        return nrevt;
+    }
+
+    public void setNrevt(String nrevt) {
+        this.nrevt = nrevt;
+    }
+
+    @Column
+    String nrevt;
+    @Column
+    String n_acompañantes;
+    @Column
+    String SOAT;
+    @Column
+    String aseguradora;
+    @Column
+    String poliza;
+    @Column
+    String fecha_v_soat;
+    @Column
+    String porta_seguro;
+    @Column
+    String id_seguro;
+    @Column
+    String asignatura;
+    @Column
+    String fecha_vsre;
+    @Column
+    String porta_seguro2;
+    @Column
+    String fecha_vsce;
 
     public int getId() {
         return id;
@@ -96,12 +141,12 @@ public class DBDetallesV extends BaseModel {
         this.SOAT = SOAT;
     }
 
-    public String getId_soat() {
-        return id_soat;
+    public String getAseguradora() {
+        return aseguradora;
     }
 
-    public void setId_soat(String id_soat) {
-        this.id_soat = id_soat;
+    public void setAseguradora(String aseguradora) {
+        this.aseguradora = aseguradora;
     }
 
     public String getPoliza() {

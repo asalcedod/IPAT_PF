@@ -77,7 +77,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             diseño = ca.diseño;
             condicionesc = ca.condicionc;
         }
-        new Enviar.Caract_lugar().execute(id_carac_l, area, sector, zona, diseño, condicionesc);
+        new Caract_lugar().execute(id_carac_l, area, sector, zona, diseño, condicionesc);
         String nombre="",tdoc="",ndoc="",nacionalidad="",fecha_n="",sexo="",direc="",ciudad="",tel="";
         List<DBDatosP> dp = new Select().from(DBDatosP.class).queryList();
         for (DBDatosP ca : dp) {
@@ -91,8 +91,8 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             ciudad=ca.ciudad;
             tel=ca.tel;
         }
-        //execute()
-        String gravedad2="",examen="",aut="",ebriagez="",gradoE="",sustancias="",portalicencia="",idlicencia="",categoria="",estado="",fecha="",cod_of="",chaleco="",casco="",cinturon="",hospital="",descip="";
+        new DatosPersonales().execute(nombre,tdoc,ndoc,nacionalidad,fecha_n,sexo,direc,ciudad,tel,id_cl);
+        String gravedad2="",examen="",aut="",ebriagez="",gradoE="",sustancias="",portalicencia="",idlicencia="",restriccion="",categoria="",estado="",fecha="",cod_of="",chaleco="",casco="",cinturon="",hospital="",descip="";
         List<DBDetallesCond> dec = new Select().from(DBDetallesCond.class).queryList();
         for (DBDetallesCond ca : dec) {
             //gravedad2,examen,aut,ebriagez,gradoE,sustancias,portalicencia,idlicencia,categoria,estado,fecha,cod_of,chaleco,casco,cinturon,hospital,descip
@@ -104,6 +104,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             portalicencia=ca.portalicencia;
             idlicencia=ca.idlicencia;
             categoria=ca.categoria;
+            restriccion=ca.restriccion;
             estado=ca.estado;
             fecha=ca.fecha;
             cod_of=ca.cod_of;
@@ -113,7 +114,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             hospital=ca.hospital;
             descip=ca.descip;
         }
-        //execute()
+        new DetallesConductor().execute(gravedad2,examen,aut,ebriagez,gradoE,sustancias,portalicencia,idlicencia,categoria,restriccion,estado,fecha,cod_of,chaleco,casco,cinturon,hospital,descip,id_cl);
         String placa="",remorque="",nacionalidad2="",marca="",linea="",color="",modelo="",carroceria="",toneladas="",n_personas="",id_licencia="";
         List<DBDatosV> dv = new Select().from(DBDatosV.class).queryList();
         for (DBDatosV ca : dv) {
@@ -130,9 +131,9 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             n_personas=ca.n_personas;
             id_licencia=ca.id_licencia;
         }
-        //execute()
-        String empresa="",nit="",matriculado="",inmovilizado="",dispocicion="",t_registro="",rev_tecnica="",n_acompañantes="",SOAT="",id_soat="",poliza="",fecha_v_soat="",porta_seguro="",id_seguro="",asignatura="",fecha_vsre="",porta_seguro2="",fecha_vsce="";
-        //empresa,nit,matriculado,inmovilizado,dispocicion,t_registro,rev_tecnica,n_acompañantes,SOAT,id_soat,poliza,fecha_v_soat,porta_seguro,id_seguro,asignatura,fecha_vsre,porta_seguro2,fecha_vsce;
+        new DatosVehiculos().execute(placa,remorque,nacionalidad2,marca,linea,color,modelo,carroceria,toneladas,n_personas,id_licencia,id_cl);
+        String empresa="",nit="",matriculado="",inmovilizado="",dispocicion="",t_registro="",rev_tecnica="",nrevic="",n_acompañantes="",SOAT="",aseguradora="",poliza="",fecha_v_soat="",porta_seguro="",id_seguro="",asignatura="",fecha_vsre="",porta_seguro2="",fecha_vsce="";
+        //empresa,nit,matriculado,inmovilizado,dispocicion,t_registro,rev_tecnica,n_acompañantes,SOAT,aseguradora,poliza,fecha_v_soat,porta_seguro,id_seguro,asignatura,fecha_vsre,porta_seguro2,fecha_vsce;
         List<DBDetallesV> dev = new Select().from(DBDetallesV.class).queryList();
         for (DBDetallesV a : dev) {
             empresa=a.empresa;
@@ -142,9 +143,10 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             dispocicion=a.dispocicion;
             t_registro=a.t_registro;
             rev_tecnica=a.rev_tecnica;
+            nrevic=a.nrevt;
             n_acompañantes=a.n_acompañantes;
             SOAT=a.SOAT;
-            id_soat=a.id_soat;
+            aseguradora=a.aseguradora;
             poliza=a.poliza;
             fecha_v_soat=a.fecha_v_soat;
             porta_seguro=a.porta_seguro;
@@ -153,8 +155,8 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             porta_seguro2=a.porta_seguro2;
             fecha_vsce=a.fecha_vsce;
         }
-        //execute()
-        String mismo_cond,nombre2,t_doc,n_doc,clasev,clases,modalidad_t,radioa,fallas,descrip_daño,lugar_impacto;
+        new DetallesVehiculos().execute(empresa,nit,matriculado,inmovilizado,dispocicion,t_registro,rev_tecnica,nrevic,n_acompañantes,SOAT,aseguradora,poliza,fecha_v_soat,porta_seguro,id_seguro,asignatura,fecha_vsre,porta_seguro2,fecha_vsce,id_cl);
+        String mismo_cond="",nombre2="",t_doc="",n_doc="",clasev="",clases="",modalidad_t="",radioa="",fallas="",descrip_daño="",lugar_impacto="";
         List<DBPropietario> pr = new Select().from(DBPropietario.class).queryList();
         for (DBPropietario a : pr) {
             //mismo_cond,nombre2,t_doc,n_doc,clasev,clases,modalidad_t,radioa,fallas,descrip_daño,lugar_impacto
@@ -170,7 +172,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             descrip_daño=a.descrip_daño;
             lugar_impacto=a.lugar_impacto;
         }
-        //execute()
+        new Propietario().execute(mismo_cond,nombre2,t_doc,n_doc,clasev,clases,modalidad_t,radioa,fallas,descrip_daño,lugar_impacto,id_cl);
     }
 
     class Addform1 extends AsyncTask<String, String, String> {
@@ -263,7 +265,6 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         }
     }
 
-
     class Caract_lugar extends AsyncTask<String, String, String> {
 
         @Override
@@ -334,6 +335,91 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
 
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once product deleted
+            //pDialog.dismiss();
+            if (file_url != null){
+                Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    class DatosPersonales extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            /*pDialog = new ProgressDialog(Enviar.this);
+            pDialog.setMessage("Saving...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();*/
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            // TODO Auto-generated method stub
+            // Check for success tag
+            int success;
+            String nombre=args[0];
+            String tdoc=args[1];
+            String ndoc=args[2];
+            String nacionalidad=args[3];
+            String fecha_n=args[4];
+            String sexo=args[5];
+            String direc=args[6];
+            String ciudad=args[7];
+            String tel=args[8];
+            String anexo1=args[9];
+
+
+            try {
+                // Building Parameters
+                List params = new ArrayList();
+                params.add(new BasicNameValuePair("nombre", nombre));
+                params.add(new BasicNameValuePair("tipo_doc", tdoc));
+                params.add(new BasicNameValuePair("doc_id", ndoc));
+                params.add(new BasicNameValuePair("nacionalidad", nacionalidad));
+                params.add(new BasicNameValuePair("fecha_n", fecha_n));
+                params.add(new BasicNameValuePair("sexo", sexo));
+                params.add(new BasicNameValuePair("domicilio", direc));
+                params.add(new BasicNameValuePair("ciudad", ciudad));
+                params.add(new BasicNameValuePair("telefono", tel));
+                params.add(new BasicNameValuePair("id_Anexo_1", anexo1));
+
+                Log.d("request!", "starting");
+
+                //Posting user data to script
+                JSONObject json = jsonParser.makeHttpRequest(
+                        DATOS_PERSONALES_URL, "POST", params);
+
+                if(json != null) {
+                    // check your log for json response
+                    Log.d("Registering attempt", json.toString());
+
+                    // json success tag
+                    success = json.getInt(TAG_SUCCESS);
+                }else{
+                    return "Falla en el servidor";
+                }
+                if (success == 1) {
+                    Log.d("Formulario enviado!", json.toString());
+                    finish();
+                    //startActivity(it);
+                    return json.getString(TAG_MESSAGE);
+                } else {
+                    Log.d("Failure!", json.getString(TAG_MESSAGE));
+                    return json.getString(TAG_MESSAGE);
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+
+        }
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once product deleted
             pDialog.dismiss();
             if (file_url != null){
                 Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
@@ -341,4 +427,390 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         }
     }
 
+    class DetallesConductor extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            /*pDialog = new ProgressDialog(Enviar.this);
+            pDialog.setMessage("Saving...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();*/
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            // TODO Auto-generated method stub
+            // Check for success tag
+            int success;
+            //cod_of,chaleco,casco,cinturon,hospital,descip
+            String gravedad=args[0];
+            String aut=args[1];
+            String ebriagez=args[2];
+            String gradoE=args[3];
+            String sustancias=args[4];
+            String portalicencia=args[5];
+            String idlicencia=args[6];
+            String categoria=args[7];
+            String restriccion=args[8];
+            String estado=args[9];
+            String fecha=args[10];
+            String cod_of=args[11];
+            String chaleco=args[12];
+            String casco=args[13];
+            String cinturon=args[14];
+            String hospital=args[15];
+            String descip=args[16];
+            String anexo1=args[17];
+
+
+            try {
+                // Building Parameters
+                List params = new ArrayList();
+                params.add(new BasicNameValuePair("gravedad", gravedad));
+                params.add(new BasicNameValuePair("examen", aut));
+                params.add(new BasicNameValuePair("embriagez", ebriagez));
+                params.add(new BasicNameValuePair("grade_emb", gradoE));
+                params.add(new BasicNameValuePair("sustancias_psico", sustancias));
+                params.add(new BasicNameValuePair("porta_licencia", portalicencia));
+                params.add(new BasicNameValuePair("id_licencia", idlicencia));
+                params.add(new BasicNameValuePair("categoria", categoria));
+                params.add(new BasicNameValuePair("restriccion", restriccion));
+                params.add(new BasicNameValuePair("estado_licencia", estado));
+                params.add(new BasicNameValuePair("fecha_lic", fecha));
+                params.add(new BasicNameValuePair("oficina_transito", cod_of));
+                params.add(new BasicNameValuePair("chaleco", chaleco));
+                params.add(new BasicNameValuePair("casco", casco));
+                params.add(new BasicNameValuePair("cinturon", cinturon));
+                params.add(new BasicNameValuePair("centro_hospital", hospital));
+                params.add(new BasicNameValuePair("descripcion", descip));
+                params.add(new BasicNameValuePair("id_Anexo_1", anexo1));
+
+                Log.d("request!", "starting");
+
+                //Posting user data to script
+                JSONObject json = jsonParser.makeHttpRequest(
+                        DETALLES_CONDUCTOR_URL, "POST", params);
+
+                if(json != null) {
+                    // check your log for json response
+                    Log.d("Registering attempt", json.toString());
+
+                    // json success tag
+                    success = json.getInt(TAG_SUCCESS);
+                }else{
+                    return "Falla en el servidor";
+                }
+                if (success == 1) {
+                    Log.d("Formulario enviado!", json.toString());
+                    finish();
+                    //startActivity(it);
+                    return json.getString(TAG_MESSAGE);
+                } else {
+                    Log.d("Failure!", json.getString(TAG_MESSAGE));
+                    return json.getString(TAG_MESSAGE);
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+
+        }
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once product deleted
+            pDialog.dismiss();
+            if (file_url != null){
+                Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    class DatosVehiculos extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            /*pDialog = new ProgressDialog(Enviar.this);
+            pDialog.setMessage("Saving...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();*/
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            // TODO Auto-generated method stub
+            // Check for success tag
+            int success;
+            //placa,remorque,nacionalidad,marca,linea,color,modelo,carroceria,toneladas,n_personas,id_licencia;
+            String placa=args[0];
+            String remorque=args[1];
+            String nacionalidad=args[2];
+            String marca=args[3];
+            String linea=args[4];
+            String color=args[5];
+            String modelo=args[6];
+            String carroceria=args[7];
+            String toneladas=args[8];
+            String n_personas=args[9];
+            String id_licencia=args[10];
+            String id_anexo1=args[11];
+
+            try {
+                // Building Parameters
+                List params = new ArrayList();
+                params.add(new BasicNameValuePair("placa", placa));
+                params.add(new BasicNameValuePair("placa_remolque", remorque));
+                params.add(new BasicNameValuePair("nacionalidad", nacionalidad));
+                params.add(new BasicNameValuePair("marca", marca));
+                params.add(new BasicNameValuePair("linea", linea));
+                params.add(new BasicNameValuePair("color", color));
+                params.add(new BasicNameValuePair("modelo", modelo));
+                params.add(new BasicNameValuePair("carroceria", carroceria));
+                params.add(new BasicNameValuePair("toneladas", toneladas));
+                params.add(new BasicNameValuePair("n_pasajeros", n_personas));
+                params.add(new BasicNameValuePair("licencia_transp", id_licencia));
+                params.add(new BasicNameValuePair("id_anexo1", id_anexo1));
+
+                Log.d("request!", "starting");
+
+                //Posting user data to script
+                JSONObject json = jsonParser.makeHttpRequest(
+                        DATOS_VEHICULO_URL, "POST", params);
+
+                if(json != null) {
+                    // check your log for json response
+                    Log.d("Registering attempt", json.toString());
+
+                    // json success tag
+                    success = json.getInt(TAG_SUCCESS);
+                }else{
+                    return "Falla en el servidor";
+                }
+                if (success == 1) {
+                    Log.d("Formulario enviado!", json.toString());
+                    finish();
+                    //startActivity(it);
+                    return json.getString(TAG_MESSAGE);
+                } else {
+                    Log.d("Failure!", json.getString(TAG_MESSAGE));
+                    return json.getString(TAG_MESSAGE);
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+
+        }
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once product deleted
+            pDialog.dismiss();
+            if (file_url != null){
+                Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    class DetallesVehiculos extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            /*pDialog = new ProgressDialog(Enviar.this);
+            pDialog.setMessage("Saving...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();*/
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            // TODO Auto-generated method stub
+            // Check for success tag
+            int success;
+            //cod_of,chaleco,casco,cinturon,hospital,descip
+            String empresa=args[0];
+            String nit=args[1];
+            String matriculado=args[2];
+            String inmovilizado=args[3];
+            String disposicion=args[4];
+            String tarjeta_registro=args[5];
+            String rev_tec=args[6];
+            String n_rev=args[7];
+            String n_acom=args[8];
+            String porta_soat=args[9];
+            String aseguradora=args[10];
+            String poliza=args[11];
+            String fecha_venci_soat=args[12];
+            String porta_seg_contra=args[13];
+            String n_seg=args[14];
+            String name_aseg=args[15];
+            String fecha_seg_contra=args[16];
+            String porta_seg_extra=args[17];
+            String fecha_seg_extra=args[18];
+            String anexo1=args[19];
+
+
+            try {
+                // Building Parameters
+                List params = new ArrayList();
+                params.add(new BasicNameValuePair("empresa", empresa));
+                params.add(new BasicNameValuePair("nit", nit));
+                params.add(new BasicNameValuePair("matriculado", matriculado));
+                params.add(new BasicNameValuePair("inmovilizado", inmovilizado));
+                params.add(new BasicNameValuePair("disposicion", disposicion));
+                params.add(new BasicNameValuePair("tarjeta_registro", tarjeta_registro));
+                params.add(new BasicNameValuePair("rev_tec", rev_tec));
+                params.add(new BasicNameValuePair("n_rev", n_rev));
+                params.add(new BasicNameValuePair("n_acom", n_acom));
+                params.add(new BasicNameValuePair("porta_soat", porta_soat));
+                params.add(new BasicNameValuePair("aseguradora", aseguradora));
+                params.add(new BasicNameValuePair("poliza", poliza));
+                params.add(new BasicNameValuePair("fecha_venci_soat", fecha_venci_soat));
+                params.add(new BasicNameValuePair("porta_seg_contra", porta_seg_contra));
+                params.add(new BasicNameValuePair("n_seg", n_seg));
+                params.add(new BasicNameValuePair("name_aseg", name_aseg));
+                params.add(new BasicNameValuePair("fecha_seg_contra", fecha_seg_contra));
+                params.add(new BasicNameValuePair("porta_seg_extra", porta_seg_extra));
+                params.add(new BasicNameValuePair("fecha_seg_extra", fecha_seg_extra));
+                params.add(new BasicNameValuePair("id_anexo1", anexo1));
+
+                Log.d("request!", "starting");
+
+                //Posting user data to script
+                JSONObject json = jsonParser.makeHttpRequest(
+                        DETALLES_VEHICULO_URL, "POST", params);
+
+                if(json != null) {
+                    // check your log for json response
+                    Log.d("Registering attempt", json.toString());
+
+                    // json success tag
+                    success = json.getInt(TAG_SUCCESS);
+                }else{
+                    return "Falla en el servidor";
+                }
+                if (success == 1) {
+                    Log.d("Formulario enviado!", json.toString());
+                    finish();
+                    //startActivity(it);
+                    return json.getString(TAG_MESSAGE);
+                } else {
+                    Log.d("Failure!", json.getString(TAG_MESSAGE));
+                    return json.getString(TAG_MESSAGE);
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+
+        }
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once product deleted
+            pDialog.dismiss();
+            if (file_url != null){
+                Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    class Propietario extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            /*pDialog = new ProgressDialog(Enviar.this);
+            pDialog.setMessage("Saving...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();*/
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            // TODO Auto-generated method stub
+            // Check for success tag
+            int success;
+            //cod_of,chaleco,casco,cinturon,hospital,descip
+            String mismo_cond=args[0];
+            String nombre_cond=args[1];
+            String typo_doc=args[2];
+            String id_doc=args[3];
+            String clase_v=args[4];
+            String clase_s=args[5];
+            String modalidad_transp=args[6];
+            String radio_accion=args[7];
+            String fallas_en=args[8];
+            String descripcion_daños=args[9];
+            String lugar_impacto=args[10];
+            String anexo1=args[11];
+
+
+            try {
+                // Building Parameters
+                List params = new ArrayList();
+                params.add(new BasicNameValuePair("mismo_cond", mismo_cond));
+                params.add(new BasicNameValuePair("nombre_cond", nombre_cond));
+                params.add(new BasicNameValuePair("typo_doc", typo_doc));
+                params.add(new BasicNameValuePair("id_doc", id_doc));
+                params.add(new BasicNameValuePair("clase_v", clase_v));
+                params.add(new BasicNameValuePair("clase_s", clase_s));
+                params.add(new BasicNameValuePair("modalidad_transp", modalidad_transp));
+                params.add(new BasicNameValuePair("radio_accion", radio_accion));
+                params.add(new BasicNameValuePair("fallas_en", fallas_en));
+                params.add(new BasicNameValuePair("descripcion_daños", descripcion_daños));
+                params.add(new BasicNameValuePair("lugar_impacto", lugar_impacto));
+                params.add(new BasicNameValuePair("id_anexo1", anexo1));
+
+                Log.d("request!", "starting");
+
+                //Posting user data to script
+                JSONObject json = jsonParser.makeHttpRequest(
+                        PROPIETARIO_URL, "POST", params);
+
+                if(json != null) {
+                    // check your log for json response
+                    Log.d("Registering attempt", json.toString());
+
+                    // json success tag
+                    success = json.getInt(TAG_SUCCESS);
+                }else{
+                    return "Falla en el servidor";
+                }
+                if (success == 1) {
+                    Log.d("Formulario enviado!", json.toString());
+                    finish();
+                    //startActivity(it);
+                    return json.getString(TAG_MESSAGE);
+                } else {
+                    Log.d("Failure!", json.getString(TAG_MESSAGE));
+                    return json.getString(TAG_MESSAGE);
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+
+        }
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once product deleted
+            pDialog.dismiss();
+            if (file_url != null){
+                Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }

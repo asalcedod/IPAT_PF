@@ -20,13 +20,14 @@ public class DetallesVehi extends Fragment {
     ImageButton imageButtonSave;
     RadioGroup rev_tecnica,portaSOAT,portas,portas2;
     String emp,nt,matri,inmovi,dis,t_reg,rev_tecn,n_acomp,SOAT,id_s,pol,f_v_soat,porta_seguro,id_seg,asign,f_vsre,porta_seguro2,f_vsce;
-    EditText empresa,nit,matriculado,inmovilizado,dispocicion,t_registro,n_acompañantes,aseguradora,poliza,fecha_v_soat,id_seguro,asignatura,fecha_vsre,fecha_vsce;
+    EditText id_rev,empresa,nit,matriculado,inmovilizado,dispocicion,t_registro,n_acompañantes,aseguradora,poliza,fecha_v_soat,id_seguro,asignatura,fecha_vsre,fecha_vsce;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview =  inflater.inflate(R.layout.fragment_detalles_vehi, container, false);
 
+        id_rev=(EditText)rootview.findViewById(R.id.editText);
         empresa=(EditText)rootview.findViewById(R.id.idEmpresa);
         nit=(EditText)rootview.findViewById(R.id.idNitVehic);
         matriculado=(EditText)rootview.findViewById(R.id.idMatricula);
@@ -126,9 +127,10 @@ public class DetallesVehi extends Fragment {
                 dv.setDispocicion(dis);
                 dv.setT_registro(t_reg);
                 dv.setRev_tecnica(rev_tecn);
+                dv.setNrevt(id_rev.getText().toString());
                 dv.setN_acompañantes(n_acomp);
                 dv.setSOAT(SOAT);
-                dv.setId_soat(id_s);
+                dv.setAseguradora(id_s);
                 dv.setPoliza(pol);
                 dv.setFecha_v_soat(f_v_soat);
                 dv.setPorta_seguro(porta_seguro);

@@ -14,7 +14,50 @@ public class DBDetallesCond extends BaseModel {
     @PrimaryKey
     int id;
     @Column
-    String gravedad,examen,aut,ebriagez,gradoE,sustancias,portalicencia,idlicencia,categoria,estado,fecha,cod_of,chaleco,casco,cinturon,hospital,descip;
+    String gravedad;
+    @Column
+    String examen;
+    @Column
+    String aut;
+    @Column
+    String ebriagez;
+    @Column
+    String gradoE;
+    @Column
+    String sustancias;
+    @Column
+    String portalicencia;
+    @Column
+    String idlicencia;
+    @Column
+    String categoria;
+    @Column
+    String estado;
+
+    public String getRestriccion() {
+        return restriccion;
+    }
+
+    public void setRestriccion(String restriccion) {
+        this.restriccion = restriccion;
+    }
+
+    @Column
+    String restriccion;
+    @Column
+    String fecha;
+    @Column
+    String cod_of;
+    @Column
+    String chaleco;
+    @Column
+    String casco;
+    @Column
+    String cinturon;
+    @Column
+    String hospital;
+    @Column
+    String descip;
 
     public String getEstado() {
         return estado;

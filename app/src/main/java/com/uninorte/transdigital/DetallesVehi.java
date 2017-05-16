@@ -19,7 +19,7 @@ import java.util.List;
 public class DetallesVehi extends Fragment {
     ImageButton imageButtonSave;
     RadioGroup rev_tecnica,portaSOAT,portas,portas2;
-    String emp,nt,matri,inmovi,dis,t_reg,rev_tecn,n_acomp,SOAT,id_s,pol,f_v_soat,porta_seguro,id_seg,asign,f_vsre,porta_seguro2,f_vsce;
+    String emp="",nt="",matri="",inmovi="",dis,t_reg="",rev_tecn="",n_acomp="",SOAT="",id_s="",pol="",f_v_soat="",porta_seguro="",id_seg,asign="",f_vsre="",porta_seguro2="",f_vsce="";
     EditText id_rev,empresa,nit,matriculado,inmovilizado,dispocicion,t_registro,n_acompañantes,aseguradora,poliza,fecha_v_soat,id_seguro,asignatura,fecha_vsre,fecha_vsce;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

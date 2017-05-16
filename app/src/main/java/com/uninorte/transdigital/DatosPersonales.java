@@ -19,7 +19,7 @@ import java.util.List;
 public class DatosPersonales extends Fragment {
     ImageButton imageButtonSave;
     RadioGroup sexo;
-    String x;
+    String x="";
     EditText nombre,tdoc,ndoc,nacionalidad,fecha_n,direc,ciudad,tel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

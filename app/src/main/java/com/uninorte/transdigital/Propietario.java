@@ -25,12 +25,12 @@ import java.util.List;
 public class Propietario extends Fragment {
     ImageButton imageButtonSave,fallas,impacto;
     EditText Editimpacto,Editfallas,enombre,et_doc,id_doc,descrip;
-    String mismo_cond,nombre,t_doc,n_doc,sclasev,sclases,modalidad_t,sradioa,falla,descrip_daño,lugar_impacto;
+    String mismo_cond="",nombre="",t_doc,n_doc,sclasev,sclases,modalidad_t,sradioa,falla,descrip_daño,lugar_impacto;
     public Spinner clasev,clases,mdt,radioa;
     public int dia,mes,ano;
     public String cat="",cs="",mt="",rada="";
-    String cv;
-    public String cad;
+    String cv="";
+    public String cad="";
     String[] items = {"Frontal","Lateral","Posterior"};
     RadioGroup rg;
     String[] listItems;

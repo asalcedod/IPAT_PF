@@ -90,7 +90,6 @@ public class Intro extends AppCompatActivity {
                         if (TextUtils.isEmpty(cedula)||	TextUtils.isEmpty(password)){
 
                             Toast.makeText(Intro.this,"Cedula o contraseña no puede estar vacío", Toast.LENGTH_LONG).show();
-
                             //ced.setError("No Puede Estar Vacio");
                             //pass.setError("No Puede Estar Vacio");
                             //showLoginDialog();

@@ -84,6 +84,11 @@ public class Comenzar extends AppCompatActivity {
         ad.save();
         List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
         List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();
+        List<DBDatosP> c = new Delete().from(DBDatosP.class).queryList();
+        List<DBDetallesCond> d = new Delete().from(DBDetallesCond.class).queryList();
+        List<DBDatosV> e = new Delete().from(DBDatosV.class).queryList();
+        List<DBDetallesV> f = new Delete().from(DBDetallesV.class).queryList();
+        List<DBPropietario> g = new Delete().from(DBPropietario.class).queryList();
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {

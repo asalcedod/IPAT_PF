@@ -19,7 +19,7 @@ import java.util.List;
 public class DatosVehi extends Fragment {
     ImageButton imageButtonSave;
     RadioGroup nacionalidad;
-    String pla,remo,naci,mar,lin,col,mode,carroc,tonel,n_per,id_l;
+    String pla="",remo="",naci="",mar="",lin="",col="",mode="",carroc="",tonel="",n_per="",id_l="";
     EditText placa,remorque,marca,linea,color,modelo,carroceria,toneladas,n_personas,id_licencia;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

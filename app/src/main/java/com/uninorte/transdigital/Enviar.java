@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -100,6 +101,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             examen=ca.examen;
             aut=ca.aut;
             ebriagez=ca.ebriagez;
+            gradoE=ca.gradoE;
             sustancias=ca.sustancias;
             portalicencia=ca.portalicencia;
             idlicencia=ca.idlicencia;
@@ -173,6 +175,13 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             lugar_impacto=a.lugar_impacto;
         }
         new Propietario().execute(mismo_cond,nombre2,t_doc,n_doc,clasev,clases,modalidad_t,radioa,fallas,descrip_daño,lugar_impacto,id_cl);
+        List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
+        List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();
+        List<DBDatosP> cc = new Delete().from(DBDatosP.class).queryList();
+        List<DBDetallesCond> d = new Delete().from(DBDetallesCond.class).queryList();
+        List<DBDatosV> e = new Delete().from(DBDatosV.class).queryList();
+        List<DBDetallesV> f = new Delete().from(DBDetallesV.class).queryList();
+        List<DBPropietario> g = new Delete().from(DBPropietario.class).queryList();
     }
 
     class Addform1 extends AsyncTask<String, String, String> {
@@ -258,7 +267,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
 
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once product deleted
-            //pDialog.dismiss();
+            pDialog.dismiss();
             if (file_url != null){
                 Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
             }
@@ -270,11 +279,11 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            /*pDialog = new ProgressDialog(Enviar.this);
+            pDialog = new ProgressDialog(Enviar.this);
             pDialog.setMessage("Saving...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
-            pDialog.show();*/
+            pDialog.show();
         }
 
         @Override
@@ -335,7 +344,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
 
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once product deleted
-            //pDialog.dismiss();
+            pDialog.dismiss();
             if (file_url != null){
                 Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
             }
@@ -347,11 +356,11 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            /*pDialog = new ProgressDialog(Enviar.this);
+            pDialog = new ProgressDialog(Enviar.this);
             pDialog.setMessage("Saving...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
-            pDialog.show();*/
+            pDialog.show();
         }
 
         @Override
@@ -432,11 +441,11 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            /*pDialog = new ProgressDialog(Enviar.this);
+            pDialog = new ProgressDialog(Enviar.this);
             pDialog.setMessage("Saving...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
-            pDialog.show();*/
+            pDialog.show();
         }
 
         @Override
@@ -446,30 +455,32 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             int success;
             //cod_of,chaleco,casco,cinturon,hospital,descip
             String gravedad=args[0];
-            String aut=args[1];
-            String ebriagez=args[2];
-            String gradoE=args[3];
-            String sustancias=args[4];
-            String portalicencia=args[5];
-            String idlicencia=args[6];
-            String categoria=args[7];
-            String restriccion=args[8];
-            String estado=args[9];
-            String fecha=args[10];
-            String cod_of=args[11];
-            String chaleco=args[12];
-            String casco=args[13];
-            String cinturon=args[14];
-            String hospital=args[15];
-            String descip=args[16];
-            String anexo1=args[17];
+            String examen=args[1];
+            String aut=args[2];
+            String ebriagez=args[3];
+            String gradoE=args[4];
+            String sustancias=args[5];
+            String portalicencia=args[6];
+            String idlicencia=args[7];
+            String categoria=args[8];
+            String restriccion=args[9];
+            String estado=args[10];
+            String fecha=args[11];
+            String cod_of=args[12];
+            String chaleco=args[13];
+            String casco=args[14];
+            String cinturon=args[15];
+            String hospital=args[16];
+            String descip=args[17];
+            String anexo1=args[18];
 
 
             try {
                 // Building Parameters
                 List params = new ArrayList();
                 params.add(new BasicNameValuePair("gravedad", gravedad));
-                params.add(new BasicNameValuePair("examen", aut));
+                params.add(new BasicNameValuePair("examen", examen));
+                params.add(new BasicNameValuePair("aut", aut));
                 params.add(new BasicNameValuePair("embriagez", ebriagez));
                 params.add(new BasicNameValuePair("grade_emb", gradoE));
                 params.add(new BasicNameValuePair("sustancias_psico", sustancias));
@@ -485,7 +496,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 params.add(new BasicNameValuePair("cinturon", cinturon));
                 params.add(new BasicNameValuePair("centro_hospital", hospital));
                 params.add(new BasicNameValuePair("descripcion", descip));
-                params.add(new BasicNameValuePair("id_Anexo_1", anexo1));
+                params.add(new BasicNameValuePair("id_anexo1", anexo1));
 
                 Log.d("request!", "starting");
 
@@ -534,11 +545,11 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            /*pDialog = new ProgressDialog(Enviar.this);
+            pDialog = new ProgressDialog(Enviar.this);
             pDialog.setMessage("Saving...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
-            pDialog.show();*/
+            pDialog.show();
         }
 
         @Override
@@ -623,11 +634,11 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            /*pDialog = new ProgressDialog(Enviar.this);
+            pDialog = new ProgressDialog(Enviar.this);
             pDialog.setMessage("Saving...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
-            pDialog.show();*/
+            pDialog.show();
         }
 
         @Override
@@ -729,11 +740,11 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            /*pDialog = new ProgressDialog(Enviar.this);
+            pDialog = new ProgressDialog(Enviar.this);
             pDialog.setMessage("Saving...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
-            pDialog.show();*/
+            pDialog.show();
         }
 
         @Override
@@ -741,7 +752,6 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             // TODO Auto-generated method stub
             // Check for success tag
             int success;
-            //cod_of,chaleco,casco,cinturon,hospital,descip
             String mismo_cond=args[0];
             String nombre_cond=args[1];
             String typo_doc=args[2];
@@ -768,7 +778,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 params.add(new BasicNameValuePair("modalidad_transp", modalidad_transp));
                 params.add(new BasicNameValuePair("radio_accion", radio_accion));
                 params.add(new BasicNameValuePair("fallas_en", fallas_en));
-                params.add(new BasicNameValuePair("descripcion_daños", descripcion_daños));
+                params.add(new BasicNameValuePair("descripcion_danos", descripcion_daños));
                 params.add(new BasicNameValuePair("lugar_impacto", lugar_impacto));
                 params.add(new BasicNameValuePair("id_anexo1", anexo1));
 

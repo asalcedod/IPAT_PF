@@ -22,7 +22,7 @@ public class DetallesConductores extends Fragment {
     RadioGroup rg,examen,aut,ebriagez,gradoE,sustancias,portalicencia,estadol,catego,co_of,chal,casc,cintu;
     public Spinner clasev,clases,mdt,radioa;
     public int dia,mes,ano;
-    public String cat="",res,g,e,a,embr,gE,sust,portlia,idlicencia,fcha,el,cod_of,chaleco,casco,cinturon,hospital,descip;
+    public String cat="",res="",g="",e="",a="",embr="",gE="",sust="",portlia="",idlicencia="",fcha="",el="",cod_of="",chaleco="",casco="",cinturon="",hospital="",descip="";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -175,9 +175,11 @@ public class DetallesConductores extends Fragment {
                 DBDetallesCond dc=new DBDetallesCond();
                 dc.setGravedad(g);
                 dc.setExamen(e);
+                dc.setSustancias(sust);
                 dc.setCategoria(cat);
                 dc.setRestriccion(res);
                 dc.setAut(a);
+                dc.setGradoE(gE);
                 dc.setEbriagez(embr);
                 dc.setPortalicencia(portlia);
                 dc.setIdlicencia(idlicencia);

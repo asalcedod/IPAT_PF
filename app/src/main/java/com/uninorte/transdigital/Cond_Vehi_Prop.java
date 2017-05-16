@@ -209,7 +209,7 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
 
     public void onClick_Informe3(View view) {
         boolean sw=true;
-        List<DBAccidente> c = new Select().from(DBAccidente.class).queryList();
+       List<DBAccidente> c = new Select().from(DBAccidente.class).queryList();
         List<DBDatosP> dp = new Select().from(DBDatosP.class).queryList();
         List<DBDetallesCond> dc = new Select().from(DBDetallesCond.class).queryList();
         List<DBDatosV> dv = new Select().from(DBDatosV.class).queryList();
@@ -240,7 +240,7 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
             Toast.makeText(this, "Propietario esta vacio", Toast.LENGTH_SHORT).show();
         }
         if(sw==true) {
-            Intent i = new Intent(Cond_Vehi_Prop.this, Enviar.class);
+            Intent i = new Intent(Cond_Vehi_Prop.this, Victimas.class);
             startActivity(i);
         }
     }

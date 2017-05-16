@@ -9,7 +9,9 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="40dp">
+        android:layout_marginBottom="40dp"
+
+        >
 
         <LinearLayout
             android:id="@+id/vehicdetalles"
@@ -510,7 +512,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="0.96"
-                        android:hint="Fecha de Vencimiento SRE"
+                        android:hint="Fecha de Vencimiento SRCC"
                         android:inputType="date"
                         android:textSize="16sp" />
 
@@ -519,7 +521,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@android:color/transparent"
-                        android:onClick="botonfechnacond"
+                        android:onClick="botonfechavencSSC"
                         android:tint="@color/colorGreen"
                         app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp"/>
 
@@ -538,7 +540,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Porta Seg. Reponsabilidad Civil Contractual" />
+                    android:text="Porta Seg. Reponsabilidad Civil Extracontractual"
+                    android:textSize="16sp" />
 
                 <RadioGroup
                     android:id="@+id/idSCExtracon"
@@ -570,7 +573,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -610,8 +613,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="textPersonName"
-                            android:hint="Aseguradora"/>
+                            android:hint="Aseguradora"
+                            android:inputType="textPersonName" />
+
                     </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
@@ -619,6 +623,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal"
                     android:weightSum="1">
 
@@ -635,19 +640,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="0.96"
+                        android:hint="Fecha de Vencimiento SRCE"
                         android:inputType="date"
-                        android:textSize="16sp"
-                        android:hint="Fecha de Vencimiento SCE"
-                         />
+                        android:textSize="16sp" />
 
                     <ImageButton
                         android:id="@+id/bfechavencSSE"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@android:color/transparent"
+                        android:onClick="botonfechavencSSE"
                         android:tint="@color/colorGreen"
-                        app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp"
-                        android:onClick="botonfechavencSSE"/>
+                        app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
 
 
                 </LinearLayout>
@@ -669,6 +673,8 @@
                         android:layout_gravity="right"/>
 
                 </LinearLayout>
+
+
 
 
             </LinearLayout>

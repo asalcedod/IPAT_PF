@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +17,10 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
+import com.github.clans.fab.FloatingActionMenu;
+import com.github.clans.fab.FloatingActionButton;
+
 import java.util.ArrayList;
 
 public class Victimas extends AppCompatActivity {
@@ -27,6 +31,8 @@ public class Victimas extends AppCompatActivity {
     private ArrayList<DataEntry> Entries;
     private CustomAdapter customAdapter;
     Button imageButtonDelete;
+    FloatingActionMenu materialDesignFAM;
+    FloatingActionButton save, floatingActionButton2, edit;
 
 
 
@@ -44,18 +50,35 @@ public class Victimas extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                  //      .setAction("Action", null).show();
-                Intent i = new Intent(Victimas.this,AgregarVictimas.class);
-                startActivityForResult(i,1);
+        materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
+        save = (FloatingActionButton) findViewById(R.id.floating_action_save);
+        floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
+        edit = (FloatingActionButton) findViewById(R.id.floating_action_edit);
+
+        save.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //TODO something when floating action menu first item clicked
+                //GUARDAR
+                Intent i = new Intent(Victimas.this, Enviar.class);
+                startActivity(i);
 
             }
         });
+        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //TODO something when floating action menu second item clicked
+                //ANEXOS--
 
+            }
+        });
+        edit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //TODO something when floating action menu third item clicked
+                //EDITAR
+                Intent i = new Intent(Victimas.this,AgregarVictimas.class);
+                startActivityForResult(i,1);
+            }
+        });
 
         //Agregar victimas----------------------------------------------
         //video 4- LisAll y borrado

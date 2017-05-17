@@ -1,7 +1,11 @@
 package com.uninorte.transdigital;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +25,13 @@ public class DatosPersonales extends Fragment {
     RadioGroup sexo;
     String x="";
     EditText nombre,tdoc,ndoc,nacionalidad,fecha_n,direc,ciudad,tel;
+    FloatingActionButton save;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_datos_personales, container, false);
-        imageButtonSave = (ImageButton) rootview.findViewById(R.id.Save);
+        imageButtonSave = (FloatingActionButton) rootview.findViewById(R.id.Save);
         nombre = (EditText) rootview.findViewById(R.id.name);
         tdoc = (EditText) rootview.findViewById(R.id.Tced);
         ndoc = (EditText) rootview.findViewById(R.id.idcond);
@@ -54,9 +59,13 @@ public class DatosPersonales extends Fragment {
             public void onClick(View v) {
                 List<DBDatosP> a = new Delete().from(DBDatosP.class).queryList();
                 DBDatosP dp = new DBDatosP();
-                dp.setNombre(nombre.getText().toString());
-                dp.setTdoc(tdoc.getText().toString());
-                dp.setNdoc(ndoc.getText().toString());
+                String nombreC = nombre.getText().toString();
+                String TdocC = tdoc.getText().toString();
+                String IdentC = ndoc.getText().toString();
+
+                dp.setNombre(nombreC);
+                dp.setTdoc(TdocC);
+                dp.setNdoc(IdentC);
                 dp.setNacionalidad(nacionalidad.getText().toString());
                 dp.setFecha_n(fecha_n.getText().toString());
                 dp.setSexo(x);
@@ -65,6 +74,24 @@ public class DatosPersonales extends Fragment {
                 dp.setTel(tel.getText().toString());
                 dp.save();
                 List<DBDatosP> c = new Select().from(DBDatosP.class).queryList();
+
+
+                //pasar datos a fragment
+                DatosPersonales fragment = new DatosPersonales();
+
+                Bundle args = new Bundle();
+                args.putString("nombreC", nombreC);
+                args.putString("TdocC", TdocC);
+                args.putString("IdenC", IdentC);
+                Log.d("valor", nombreC);
+                fragment.setArguments(args);
+                Log.d("Args",String.valueOf(args));//Bundle[{IdenC=, TdocC=, nombreC=Lauryv }]
+
+
+
+
+                //
+
                 for (DBDatosP ca : c) {
                     Toast.makeText(getActivity(), "Guardado", Toast.LENGTH_SHORT).show();
                 }
@@ -78,3 +105,4 @@ public class DatosPersonales extends Fragment {
 
 
 }
+c cfcfwd<z

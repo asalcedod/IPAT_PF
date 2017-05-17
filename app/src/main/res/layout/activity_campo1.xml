@@ -40,8 +40,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        >
+        android:layout_marginTop="50dp">
 
 
         <LinearLayout
@@ -50,8 +49,8 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_margin="20dp"
-            android:orientation="vertical"
-            android:layout_marginBottom="30dp">
+            android:layout_marginBottom="30dp"
+            android:orientation="vertical">
 
 
             <LinearLayout
@@ -91,9 +90,9 @@
                     android:id="@+id/botonOrganismo"
                     android:layout_width="38dp"
                     android:layout_height="wrap_content"
-                    android:onClick="oficinas"
                     android:background="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:backgroundTint="@color/colorPrimary" />
+                    android:backgroundTint="@color/colorPrimary"
+                    android:onClick="oficinas" />
 
             </LinearLayout>
 
@@ -111,13 +110,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Gravedad" />
+                    android:text="Gravedad"
+                    android:textSize="16sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10sp">
 
                     <RadioGroup
                         android:id="@+id/rb"
@@ -193,7 +194,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
-                    android:text="Fecha y Hora" />
+                    android:text="Fecha y Hora"
+                    android:textSize="16sp" />
                 <!--Este tiene un ID; date, copia tal cual ese ID-->
                 <EditText
                     android:id="@+id/date"
@@ -215,14 +217,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10sp">
 
                 <TextView
                     android:id="@+id/textViewCed"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Clase de Accidente" />
+                    android:text="Clase de Accidente"
+                    android:textSize="16sp" />
 
                 <Spinner
                     android:id="@+id/acc"
@@ -238,7 +242,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
                 <EditText
                     android:id="@+id/otro"
@@ -248,7 +253,8 @@
                     android:ems="10"
                     android:hint="Otro"
                     android:inputType="textPersonName"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <LinearLayout
@@ -272,7 +278,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:text="Características del Lugar"
-                    android:textSize="16dp"/>
+                    android:textSize="16dp" />
 
                 <Button
                     android:id="@+id/button5"
@@ -306,7 +312,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="12"
-                    android:text="Adjuntar Anexos" />
+                    android:text="Adjuntar Anexos"
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/button7"
@@ -322,7 +329,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10sp">
 
                 <Button
                     android:id="@+id/next"

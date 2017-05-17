@@ -143,7 +143,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
                     otro.setVisibility(View.VISIBLE);
                 }else{
                     otro=(EditText)findViewById(R.id.otro);
-                    otro.setVisibility(View.INVISIBLE);
+                    otro.setVisibility(View.GONE);
                 }
                 if(parent.getItemAtPosition(position).toString().equals("Choque")){
                     final String[] items = {"Vehiculo","Tren","Semoviente","Objeto fijo"};
@@ -164,7 +164,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
                                             otro.setVisibility(View.VISIBLE);
                                         }else{
                                             otro=(EditText)findViewById(R.id.otro);
-                                            otro.setVisibility(View.INVISIBLE);
+                                            otro.setVisibility(View.GONE);
                                         }
                                         dialog.cancel();
                                     }
@@ -202,7 +202,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
         //
         mensaje1 = (TextView) findViewById(R.id.mensaje1);
 
-		/* Uso de la clase LocationManager para obtener la localizacion del GPS */
+      /* Uso de la clase LocationManager para obtener la localizacion del GPS */
         LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Ubica Local = new Ubica();
         Local.setLocaliza(this);
@@ -315,7 +315,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
                         loc.getLatitude(), loc.getLongitude(), 1);
                 if (!list.isEmpty()) {
                     Address DirCalle = list.get(0);
-                    ubicacion = "Mi direccion es: \n"
+                    ubicacion = "Mi dirección es: \n"
                             + DirCalle.getAddressLine(0);
                     direccion=""+DirCalle.getAddressLine(0);
                     departamento=list.get(0).getAdminArea();
@@ -360,7 +360,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
             AlertDialog alert1 = builder1.create();
             alert1.show();
         }else{
-            Toast.makeText(this, "Espere mientras se carga su ubicacion...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Espere mientras se carga su ubicación...", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -469,7 +469,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
         mensaje1.setText(ubicacion);
         if (!latitud.equals("") && !longitud.equals("")) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("¿Desea confirmar la ubicacion desde el Mapa?")
+            builder.setMessage("¿Desea confirmar la ubicación desde el Mapa?")
                     .setTitle("Advertencia")
                     .setCancelable(false)
                     .setIcon(R.drawable.location_map)

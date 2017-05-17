@@ -1,6 +1,7 @@
 package com.uninorte.transdigital;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,7 @@ import java.util.List;
 
 
 public class DatosVehi extends Fragment {
-    ImageButton imageButtonSave;
+    FloatingActionButton imageButtonSave;
     RadioGroup nacionalidad;
     String pla="",remo="",naci="",mar="",lin="",col="",mode="",carroc="",tonel="",n_per="",id_l="";
     EditText placa,remorque,marca,linea,color,modelo,carroceria,toneladas,n_personas,id_licencia;
@@ -52,7 +53,7 @@ public class DatosVehi extends Fragment {
         id_licencia=(EditText) rootview.findViewById(R.id.idNumLicenciaVeh);
 
         //---------------------------------------------------------------------------
-        imageButtonSave = (ImageButton) rootview.findViewById(R.id.SaveDatosVeh);
+        imageButtonSave = (FloatingActionButton) rootview.findViewById(R.id.SaveDatosVeh);
         imageButtonSave.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

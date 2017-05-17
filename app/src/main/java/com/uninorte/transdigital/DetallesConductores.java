@@ -1,6 +1,7 @@
 package com.uninorte.transdigital;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +12,14 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.raizlabs.android.dbflow.list.IFlowCursorIterator;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 
 import java.util.List;
 
 
 public class DetallesConductores extends Fragment {
-    ImageButton imageButtonSave;
+    FloatingActionButton imageButtonSave;
     EditText categoria,egez,nlic,fecha,cof,hosp,extra,rest;
     RadioGroup rg,examen,aut,ebriagez,gradoE,sustancias,portalicencia,estadol,catego,co_of,chal,casc,cintu;
     public Spinner clasev,clases,mdt,radioa;
@@ -50,10 +52,12 @@ public class DetallesConductores extends Fragment {
                 // TODO Auto-generated method stub
                 if (checkedId == R.id.Si) {
                     e = "Si";
+                   
                 } else if (checkedId == R.id.No) {
                     e = "No";
                 }
             }
+
         });
         aut=(RadioGroup) rootView.findViewById(R.id.idAutori);
         aut.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -158,7 +162,7 @@ public class DetallesConductores extends Fragment {
         hosp=(EditText)rootView.findViewById(R.id.atencionCond);
         extra=(EditText)rootView.findViewById(R.id.DescripcLesionCond);
 
-        imageButtonSave = (ImageButton) rootView.findViewById(R.id.SaveDetaCond);
+        imageButtonSave = (FloatingActionButton) rootView.findViewById(R.id.SaveDetaCond);
         imageButtonSave.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

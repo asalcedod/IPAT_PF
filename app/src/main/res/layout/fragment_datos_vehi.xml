@@ -331,15 +331,15 @@
                 android:layout_marginBottom="20dp"
                 android:orientation="vertical">
 
-                <ImageButton
+                <android.support.design.widget.FloatingActionButton
                     android:id="@+id/SaveDatosVeh"
-                    android:layout_width="64dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:background="@android:color/transparent"
-                    android:onClick="SaveDatosVeh"
-                    android:tint="@color/colorPrimary"
-                    app:srcCompat="@drawable/save" />
+                    android:clickable="true"
+                    app:fabSize="normal"
+                    app:srcCompat="@drawable/save"
+                    tools:backgroundTint="@color/colorPrimary"  />
 
             </LinearLayout>
 

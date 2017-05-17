@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -40,6 +41,7 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
     public EditText efechnacond,efechalicen,efechavencSoat,efechavencSSC,efechavencSSE;
 
     public ImageButton iBFallas;
+    public FloatingActionButton floatingActionButtonSend;
 
     public Spinner categoria,clasev,clases,mdt,radioa;
     public int dia,mes,ano;
@@ -218,27 +220,27 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
         List<DBPropietario> p = new Select().from(DBPropietario.class).queryList();
         if(c.size()<=0){
             sw=false;
-            Toast.makeText(this, "Anexo 1 esta vacio", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Anexo 1 esta vacío", Toast.LENGTH_SHORT).show();
         }
         if(dp.size()<=0){
             sw=false;
-            Toast.makeText(this, "Datos persnales esta vacio", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Datos personales esta vacío", Toast.LENGTH_SHORT).show();
         }
         if(dc.size()<=0){
             sw=false;
-            Toast.makeText(this, "Datos del conductor esta vacio", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Datos del conductor esta vacío", Toast.LENGTH_SHORT).show();
         }
         if(dv.size()<=0){
             sw=false;
-            Toast.makeText(this, "Datos del vehiculo esta vacio", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Datos del Vehículo esta vacío", Toast.LENGTH_SHORT).show();
         }
         if(dev.size()<=0){
             sw=false;
-            Toast.makeText(this, "Detalles Vehiculo esta vacio", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Detalles Vehículo esta vacío", Toast.LENGTH_SHORT).show();
         }
         if(p.size()<=0){
             sw=false;
-            Toast.makeText(this, "Propietario esta vacio", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Propietario esta vacío", Toast.LENGTH_SHORT).show();
         }
         if(sw==true) {
             Intent i = new Intent(Cond_Vehi_Prop.this, Victimas.class);

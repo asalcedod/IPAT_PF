@@ -1,6 +1,7 @@
 package com.uninorte.transdigital;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -12,10 +13,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.github.clans.fab.FloatingActionMenu;
+import com.github.clans.fab.FloatingActionButton;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 
 import java.util.ArrayList;
@@ -23,7 +27,12 @@ import java.util.List;
 
 
 public class Propietario extends Fragment {
-    ImageButton imageButtonSave,fallas,impacto;
+    ImageButton fallas,impacto;
+    FloatingActionButton imageButtonSave;
+
+    FloatingActionMenu materialDesignFAM;
+    FloatingActionButton floatingActionButtonsend;
+
     EditText Editimpacto,Editfallas,enombre,et_doc,id_doc,descrip;
     String mismo_cond="",nombre="",t_doc,n_doc,sclasev,sclases,modalidad_t,sradioa,falla,descrip_daño,lugar_impacto;
     public Spinner clasev,clases,mdt,radioa;
@@ -36,12 +45,31 @@ public class Propietario extends Fragment {
     String[] listItems;
     boolean[] checkedItems;
     ArrayList<Integer> mUserItems = new ArrayList<>();
+    String Bnombre, Tdoc,Doc;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+       // Bundle bundle = getIntent().getExtras();
+        //String valorRecibido= getIntent().getStringExtra("dato_bundle");
+
+
+       // setContentView(R.layout.fragment_propietario);
+       // mNum = getArguments() != null ? getArguments().getInt("num") : 1;
+    }
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_propietario, container, false);
+
+
+
         rg=(RadioGroup)rootView.findViewById(R.id.m_c);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
@@ -50,6 +78,28 @@ public class Propietario extends Fragment {
                 // TODO Auto-generated method stub
                 if (checkedId == R.id.checkBox11) {
                     mismo_cond = "Si";
+
+                    //recibe el dato
+                    if (getArguments() != null) {
+                        LinearLayout ln = (LinearLayout) rootView.findViewById(R.id.GrupoDatosProp);
+                        //ln.setEnable(false); //no me deja desactivarlo
+
+                        Bnombre = getArguments().getString("nombreC");
+                        Tdoc = getArguments().getString("TdocC");
+                        Doc= getArguments().getString("IdenC");
+
+                        enombre=(EditText) rootView.findViewById(R.id.nameProp);
+                        enombre.setText(Bnombre);
+
+                        et_doc=(EditText)rootView.findViewById(R.id.tipoDOc);
+                        et_doc.setText(Tdoc);
+
+                        id_doc=(EditText)rootView.findViewById(R.id.idecond);
+                        id_doc.setText(Doc);///eroro en asignar - se va al sino y muestra null
+
+                    }else{
+                        Log.d("El dato del cond esx", String.valueOf(getArguments()));
+                    }
                 } else if (checkedId == R.id.checkBox10) {
                     mismo_cond = "No";
                 }
@@ -166,7 +216,7 @@ public class Propietario extends Fragment {
             }
         });
 
-        imageButtonSave = (ImageButton) rootView.findViewById(R.id.SaveProp);
+        imageButtonSave = (FloatingActionButton) rootView.findViewById(R.id.SaveProp);
         imageButtonSave.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -192,6 +242,7 @@ public class Propietario extends Fragment {
                 Toast.makeText(getActivity(), "Guardado", Toast.LENGTH_SHORT).show();
             }
         });
+
 
         //lista de fallas en:----------------------------------
         listItems = getResources().getStringArray(R.array.Fallas);
@@ -314,6 +365,7 @@ public class Propietario extends Fragment {
 
         
     }
+
 
 
 }

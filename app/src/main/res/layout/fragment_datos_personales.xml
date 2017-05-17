@@ -309,7 +309,17 @@
                 android:layout_marginBottom="30dp"
                 android:orientation="vertical">
 
-                <ImageButton
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/Save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:clickable="true"
+                    app:fabSize="normal"
+                    app:srcCompat="@drawable/save"
+                    tools:backgroundTint="@color/colorPrimary" />
+
+                <!-- <ImageButton
                     android:id="@+id/Save"
                     android:layout_width="64dp"
                     android:layout_height="wrap_content"
@@ -317,7 +327,7 @@
                     android:background="@android:color/transparent"
                     android:onClick="SaveDatoscond"
                     android:tint="@color/colorPrimary"
-                    app:srcCompat="@drawable/save" />
+                    app:srcCompat="@drawable/save" /> -->
 
             </LinearLayout>
 

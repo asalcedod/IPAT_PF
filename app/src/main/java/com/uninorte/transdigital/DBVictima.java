@@ -10,7 +10,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 @Table(database = AppDatabase.class)
 public class DBVictima extends BaseModel {
-    @PrimaryKey
+    @PrimaryKey(autoincrement = true)
     int id;
     @Column
     String detalle_victima,nombre,tdoc,ndoc,nacionalidad,fecha_n,sexo,direc,ciudad,tel,gravedad,examen,aut,ebriagez,gradoE,sustancias,chaleco,casco,cinturon,hospital;
@@ -135,8 +135,8 @@ public class DBVictima extends BaseModel {
         this.ebriagez = ebriagez;
     }
 
-    public String getGradoE() {
-        return gradoE;
+    public String getGradoE(String gradoE) {
+        return this.gradoE;
     }
 
     public void setGradoE(String gradoE) {

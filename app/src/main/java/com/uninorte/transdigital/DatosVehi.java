@@ -82,7 +82,7 @@ public class DatosVehi extends Fragment {
                 dv.save();
                 List<DBDatosV> c = new Select().from(DBDatosV.class).queryList();
                 for (DBDatosV ca : c) {
-                    Toast.makeText(getActivity(), ca.placa, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Guardado", Toast.LENGTH_SHORT).show();
                 }
             }
         });

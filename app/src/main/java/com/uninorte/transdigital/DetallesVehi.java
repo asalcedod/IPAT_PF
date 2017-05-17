@@ -141,7 +141,7 @@ public class DetallesVehi extends Fragment {
                 dv.save();
                 List<DBDetallesV> c = new Select().from(DBDetallesV.class).queryList();
                 for (DBDetallesV ca : c) {
-                    Toast.makeText(getActivity(), ca.empresa, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Guardado", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -21,12 +21,14 @@ import com.raizlabs.android.dbflow.sql.language.Delete;
 import java.util.List;
 
 public class AgregarVictimas extends AppCompatActivity {
-    EditText editText1;
+    EditText editText1,devic,nom,tdc,ndc,nac,fechn,se,dir,ciud,telef,grdoE,hospi;;
+    String detalle_victima="",nombre="",tdoc="",ndoc="",nacionalidad="",fecha_n="",x="",direc="",ciudad="",tel="",gravedad="",exam="",aut="",ebriagez="",gradoE="",sustancia="",chaleco="",casco="",cinturon="",hospital="";
     public String TAG = Constants.TAG;
     private boolean customview;
     public ImageButton bfechnavic;
     public EditText efechnavict;
     Spinner tipo_victima;
+    RadioGroup rg,sexo,examen,auto,ebriag,sustancias,chal,casc,cintu;
     public int dia,mes,ano;
 
 
@@ -34,7 +36,126 @@ public class AgregarVictimas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_victimas);
+        nom = (EditText) findViewById(R.id.name);
+        tdc = (EditText) findViewById(R.id.Tced);
+        ndc = (EditText) findViewById(R.id.idvict);
+        nac = (EditText) findViewById(R.id.nacionalidadvict);
+        fechn = (EditText) findViewById(R.id.efechnavict);
+        dir = (EditText) findViewById(R.id.direcvict);
+        ciud = (EditText) findViewById(R.id.ciudvict);
+        telef = (EditText) findViewById(R.id.telvict);
 
+        sexo=(RadioGroup) findViewById(R.id.sexovict);
+        sexo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.sexoF) {
+                    x = "F";
+                } else if (checkedId == R.id.sexoM) {
+                    x = "M";
+                }
+            }
+
+        });
+        rg=(RadioGroup) findViewById(R.id.grav);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.muerto) {
+                    gravedad = "Muerto";
+                } else if (checkedId == R.id.herido) {
+                    gravedad = "Herido";
+                }
+            }
+
+        });
+        examen=(RadioGroup) findViewById(R.id.idexamenvict);
+        examen.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.Si) {
+                    exam = "Si";
+                } else if (checkedId == R.id.No) {
+                    exam = "No";
+                }
+            }
+        });
+        auto=(RadioGroup) findViewById(R.id.idAutoriVict);
+        auto.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.Si) {
+                    aut = "Si";
+                } else if (checkedId == R.id.No) {
+                    aut = "No";
+                }
+            }
+        });
+        ebriag=(RadioGroup) findViewById(R.id.embiaguezvict);
+        ebriag.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.mas) {
+                    ebriagez = "+";
+                } else if (checkedId == R.id.menos) {
+                    ebriagez = "-";
+                }
+            }
+        });
+        grdoE=(EditText) findViewById(R.id.gradoembri);
+        sustancias=(RadioGroup) findViewById(R.id.sustanpsicoac);
+        sustancias.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.Si) {
+                    sustancia = "Si";
+                } else if (checkedId == R.id.No) {
+                    sustancia = "No";
+                }
+            }
+        });
+        chal=(RadioGroup) findViewById(R.id.idChaleco);
+        chal.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.Si) {
+                    chaleco= "Si";
+                } else if (checkedId == R.id.No) {
+                    chaleco = "No";
+                }
+            }
+        });
+        casc=(RadioGroup) findViewById(R.id.idCasco);
+        casc.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.Si) {
+                    casco= "Si";
+                } else if (checkedId == R.id.No) {
+                    casco = "No";
+                }
+            }
+        });
+        cintu=(RadioGroup) findViewById(R.id.idCinturon);
+        cintu.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.Si) {
+                    cinturon= "Si";
+                } else if (checkedId == R.id.No) {
+                    cinturon = "No";
+                }
+            }
+        });
         editText1 = (EditText) findViewById(R.id.name);
 
         Bundle bundle= getIntent().getExtras();
@@ -99,25 +220,30 @@ public class AgregarVictimas extends AppCompatActivity {
         if (TextUtils.isEmpty(editText1.getText().toString())){
             editText1.setError("No puede estar vacio");
         }   else {
-            /*DBVictima dv = new DBVictima();
-            dv.setNombre(nombre.getText().toString());
-            dv.setTdoc(tdoc.getText().toString());
-            dv.setNdoc(ndoc.getText().toString());
-            dv.setNacionalidad(nacionalidad.getText().toString());
-            dv.setFecha_n(fecha_n.getText().toString());
+            //sustancias;
+            DBVictima dv = new DBVictima();
+            dv.setDetalle_victima(detalle_victima);
+            dv.setNombre(nom.getText().toString());
+            dv.setTdoc(tdc.getText().toString());
+            dv.setNdoc(ndc.getText().toString());
+            dv.setNacionalidad(nac.getText().toString());
+            dv.setFecha_n(fechn.getText().toString());
             dv.setSexo(x);
-            dv.setDirec(direc.getText().toString());
-            dv.setCiudad(ciudad.getText().toString());
-            dv.setTel(tel.getText().toString());
-            dv.setGravedad(g);
-            dv.setExamen(e);
-            dv.setAut(a);
-            dv.setEbriagez(embr);
+            dv.setDirec(dir.getText().toString());
+            dv.setCiudad(ciud.getText().toString());
+            dv.setTel(telef.getText().toString());
+            dv.setGradoE(gradoE);
+            dv.setSustancias(sustancia);
+            dv.setGravedad(gravedad);
+            dv.setExamen(exam);
+            dv.setAut(aut);
+            dv.setEbriagez(ebriagez);
             dv.setChaleco(chaleco);
             dv.setCasco(casco);
             dv.setCinturon(cinturon);
             dv.setHospital(hospital);
-            dv.save();*/
+            dv.save();
+
             DataEntry de = new DataEntry(editText1.getText().toString());
             Intent i = getIntent();
             i.putExtra("entry", de);

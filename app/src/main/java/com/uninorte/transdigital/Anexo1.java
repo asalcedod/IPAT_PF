@@ -1,6 +1,7 @@
 package com.uninorte.transdigital;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -449,7 +450,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
                 Toast.makeText(this, ca.a, Toast.LENGTH_LONG).show();
             }*/
 
-            startActivity(it);
+            startActivityForResult(it,1);
             //finish();
         }else{
             Toast.makeText(this,"Existen campos sin completar.",Toast.LENGTH_SHORT).show();
@@ -461,7 +462,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
     public void onClick_Informe2(View view) {
         //se va al campo 2, para continuar con el informe-- El campo 2 es Cond_Veh_Prop
         Intent i = new Intent(this, Cond_Vehi_Prop.class);
-        startActivity(i);
+        startActivityForResult(i,4);
     }
 
     public void onClick_Ubicacion(View view) {
@@ -537,12 +538,9 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
                 }
             }
         }
-        if(requestCode==3){
-            if (resultCode==RESULT_OK){
-                /*ubicacion=data.getStringExtra("ubicacion");
-                latitud=data.getStringExtra("latitud");
-                longitud=data.getStringExtra("longitud");
-                mensaje1.setText(ubicacion);*/
+        if(requestCode==4){
+            if (resultCode == Activity.RESULT_OK) {
+                finish();
             }
         }
     }

@@ -66,7 +66,7 @@ public class DatosPersonales extends Fragment {
                 dp.save();
                 List<DBDatosP> c = new Select().from(DBDatosP.class).queryList();
                 for (DBDatosP ca : c) {
-                    Toast.makeText(getActivity(), ca.sexo, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Guardado", Toast.LENGTH_SHORT).show();
                 }
 
             }

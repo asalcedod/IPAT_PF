@@ -1,6 +1,8 @@
 package com.uninorte.transdigital;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +37,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
     private static final String DATOS_VEHICULO_URL = "https://transitodigital-asalcedod.c9users.io/datosvehiculo.php";
     private static final String DETALLES_VEHICULO_URL = "https://transitodigital-asalcedod.c9users.io/detallesvehiculo.php";
     private static final String PROPIETARIO_URL = "https://transitodigital-asalcedod.c9users.io/propietario.php";
+    private static final String VICTIMAS_URL = "https://transitodigital-asalcedod.c9users.io/victimas.php";
 
     //ids
     private static final String TAG_SUCCESS = "success";
@@ -175,6 +178,31 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             lugar_impacto=a.lugar_impacto;
         }
         new Propietario().execute(mismo_cond,nombre2,t_doc,n_doc,clasev,clases,modalidad_t,radioa,fallas,descrip_daño,lugar_impacto,id_cl);
+        String detalle_victima="",nombrev="",tdocv="",ndocv="",nacionalidadv="",fecha_nv="",x="",direcv="",ciudadv="",telv="",gravedadv="",exam="",autv="",ebriagezv="",gradoEv="",sustancia="",chalecov="",cascov="",cinturonv="",hospitalv="";
+        List<DBVictima> v = new Select().from(DBVictima.class).queryList();
+        for (DBVictima ca : v) {
+            detalle_victima=ca.detalle_victima;
+            nombrev=ca.nombre;
+            tdocv=ca.tdoc;
+            ndocv=ca.ndoc;
+            nacionalidadv=ca.nacionalidad;
+            fecha_nv=ca.fecha_n;
+            x=ca.sexo;
+            direcv=ca.direc;
+            ciudadv=ca.ciudad;
+            telv=ca.tel;
+            gravedadv=ca.gravedad;
+            exam=ca.examen;
+            autv=ca.aut;
+            ebriagezv=ca.ebriagez;
+            gradoEv=ca.gradoE;
+            sustancia=ca.sustancias;
+            chalecov=ca.chaleco;
+            cascov=ca.casco;
+            cinturonv=ca.cinturon;
+            hospitalv=ca.hospital;
+            new Victimas().execute(detalle_victima,nombrev,tdocv,ndocv,nacionalidadv,fecha_nv,x,direcv,ciudadv,telv,gravedadv,exam,autv,ebriagezv,gradoEv,sustancia,cinturonv,cascov,chalecov,hospitalv,id_cl);
+        }
         List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
         List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();
         List<DBDatosP> cc = new Delete().from(DBDatosP.class).queryList();
@@ -182,6 +210,10 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         List<DBDatosV> e = new Delete().from(DBDatosV.class).queryList();
         List<DBDetallesV> f = new Delete().from(DBDetallesV.class).queryList();
         List<DBPropietario> g = new Delete().from(DBPropietario.class).queryList();
+        List<DBVictima> vic = new Delete().from(DBVictima.class).queryList();
+        Intent i=new Intent();
+        setResult(Activity.RESULT_OK,i);
+        finish();
     }
 
     class Addform1 extends AsyncTask<String, String, String> {
@@ -326,7 +358,6 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
-                    finish();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -411,7 +442,6 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
-                    finish();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -515,7 +545,6 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
-                    finish();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -604,7 +633,6 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
-                    finish();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -710,7 +738,6 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
-                    finish();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -799,7 +826,112 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
-                    finish();
+                    //startActivity(it);
+                    return json.getString(TAG_MESSAGE);
+                } else {
+                    Log.d("Failure!", json.getString(TAG_MESSAGE));
+                    return json.getString(TAG_MESSAGE);
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+
+        }
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once product deleted
+            pDialog.dismiss();
+            if (file_url != null){
+                Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    class Victimas extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(Enviar.this);
+            pDialog.setMessage("Saving...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            // TODO Auto-generated method stub
+            // Check for success tag
+            int success;
+            String detalles=args[0];
+            String nombre=args[1];
+            String tdoc=args[2];
+            String ndoc=args[3];
+            String nacionalidad=args[4];
+            String fecha_n=args[5];
+            String sexo=args[6];
+            String direc=args[7];
+            String ciudad=args[8];
+            String tel=args[9];
+            String gravedad=args[10];
+            String examen=args[11];
+            String aut=args[12];
+            String ebriagez=args[13];
+            String gradoE=args[14];
+            String sustancias=args[15];
+            String cinturon=args[16];
+            String casco=args[17];
+            String chaleco=args[18];
+            String hospital=args[19];
+            String anexo1=args[20];
+
+
+            try {
+                // Building Parameters
+                List params = new ArrayList();
+                params.add(new BasicNameValuePair("detalles_victima", detalles));
+                params.add(new BasicNameValuePair("nombre", nombre));
+                params.add(new BasicNameValuePair("tipo_doc", tdoc));
+                params.add(new BasicNameValuePair("doc_id", ndoc));
+                params.add(new BasicNameValuePair("nacionalidad", nacionalidad));
+                params.add(new BasicNameValuePair("fecha_n", fecha_n));
+                params.add(new BasicNameValuePair("sexo", sexo));
+                params.add(new BasicNameValuePair("domicilio", direc));
+                params.add(new BasicNameValuePair("ciudad", ciudad));
+                params.add(new BasicNameValuePair("telefono", tel));
+                params.add(new BasicNameValuePair("centro_medico", hospital));
+                params.add(new BasicNameValuePair("examen", examen));
+                params.add(new BasicNameValuePair("autorizo", aut));
+                params.add(new BasicNameValuePair("embriaguez", ebriagez));
+                params.add(new BasicNameValuePair("grado_emb", gradoE));
+                params.add(new BasicNameValuePair("sustancias_psico", sustancias));
+                params.add(new BasicNameValuePair("cinturon", cinturon));
+                params.add(new BasicNameValuePair("casco", casco));
+                params.add(new BasicNameValuePair("chaleco", chaleco));
+                params.add(new BasicNameValuePair("gravedad", gravedad));
+                params.add(new BasicNameValuePair("id_Anexo_1", anexo1));
+
+                Log.d("request!", "starting");
+
+                //Posting user data to script
+                JSONObject json = jsonParser.makeHttpRequest(
+                        VICTIMAS_URL, "POST", params);
+
+                if(json != null) {
+                    // check your log for json response
+                    Log.d("Registering attempt", json.toString());
+
+                    // json success tag
+                    success = json.getInt(TAG_SUCCESS);
+                }else{
+                    return "Falla en el servidor";
+                }
+                if (success == 1) {
+                    Log.d("Formulario enviado!", json.toString());
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {

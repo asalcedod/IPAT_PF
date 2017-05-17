@@ -189,6 +189,7 @@ public class Propietario extends Fragment {
                 p.setDescrip_daño(descrip.getText().toString());
                 p.setLugar_impacto(Editimpacto.getText().toString());
                 p.save();
+                Toast.makeText(getActivity(), "Guardado", Toast.LENGTH_SHORT).show();
             }
         });
 

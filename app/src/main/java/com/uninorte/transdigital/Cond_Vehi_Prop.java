@@ -1,6 +1,7 @@
 package com.uninorte.transdigital;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
@@ -241,7 +242,7 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
         }
         if(sw==true) {
             Intent i = new Intent(Cond_Vehi_Prop.this, Victimas.class);
-            startActivity(i);
+            startActivityForResult(i,2);
         }
     }
 
@@ -341,6 +342,18 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
 
             }
             return null;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==2){
+            if (resultCode == RESULT_OK) {
+                Intent i=new Intent();
+                setResult(RESULT_OK,i);
+                finish();
+            }
         }
     }
 }

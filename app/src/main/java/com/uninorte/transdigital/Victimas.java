@@ -20,8 +20,11 @@ import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionMenu;
 import com.github.clans.fab.FloatingActionButton;
+import com.raizlabs.android.dbflow.sql.language.Delete;
+import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Victimas extends AppCompatActivity {
 
@@ -60,7 +63,7 @@ public class Victimas extends AppCompatActivity {
                 //TODO something when floating action menu first item clicked
                 //GUARDAR
                 Intent i = new Intent(Victimas.this, Enviar.class);
-                startActivity(i);
+                startActivityForResult(i,3);
 
             }
         });
@@ -129,26 +132,33 @@ public class Victimas extends AppCompatActivity {
                 ((CustomAdapter)listView.getAdapter()).notifyDataSetChanged();
             }
         }
+        if(requestCode==3){
+            if (resultCode == Activity.RESULT_OK) {
+                Intent i=new Intent();
+                setResult(Activity.RESULT_OK,i);
+                finish();
+            }
+        }
 
 
     }
     public void onClickButtonRow(View view){
         final DataEntry dataEntry= (DataEntry) view.getTag();
-        Log.d(TAG,"Click en "+dataEntry.id);
-
+        Log.d(TAG,"Click en "+dataEntry.field1);
         //confirmacion de eliminar---------------------------------------
         AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
         dialogo1.setTitle("Eliminar Victima");
         dialogo1.setMessage("Si elimina esta víctima, se borraran todos los datos en el ¿Desea continuar?");
         dialogo1.setCancelable(false);
-        dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder confirmar = dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
+                new Delete().from(DBVictima.class).where(DBVictima_Table.nombre.eq(dataEntry.field1)).executeUpdateDelete();
                 mDataEntryDao.deleteEntry(dataEntry);
                 Entries = mDataEntryDao.getAllEntrys();
                 customAdapter.setData(Entries);
-                ((CustomAdapter)listView.getAdapter()).notifyDataSetChanged();
+                ((CustomAdapter) listView.getAdapter()).notifyDataSetChanged();
 
-                Toast t=Toast.makeText(Victimas.this,"La víctima ha sido borrada con éxito", Toast.LENGTH_SHORT);
+                Toast t = Toast.makeText(Victimas.this, "La víctima ha sido borrada con éxito", Toast.LENGTH_SHORT);
                 t.show();
             }
         });

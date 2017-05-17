@@ -88,8 +88,6 @@ public class DatosPersonales extends Fragment {
                 Log.d("Args",String.valueOf(args));//Bundle[{IdenC=, TdocC=, nombreC=Lauryv }]
 
 
-
-
                 //
 
                 for (DBDatosP ca : c) {

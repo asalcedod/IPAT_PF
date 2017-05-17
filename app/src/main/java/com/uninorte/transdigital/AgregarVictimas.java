@@ -8,6 +8,7 @@ import android.icu.util.Calendar;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -39,6 +40,19 @@ public class AgregarVictimas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_victimas);
+
+        //-------------------------------------------------------------------
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AgregarVictimas.this,Victimas.class);
+                startActivity(i);
+            }
+        });
+        //----------------------------------------------------------------------
         nom = (EditText) findViewById(R.id.name);
         tdc = (EditText) findViewById(R.id.Tced);
         ndc = (EditText) findViewById(R.id.idvict);

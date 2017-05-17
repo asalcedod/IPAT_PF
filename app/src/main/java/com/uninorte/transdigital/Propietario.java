@@ -52,12 +52,7 @@ public class Propietario extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       // Bundle bundle = getIntent().getExtras();
-        //String valorRecibido= getIntent().getStringExtra("dato_bundle");
 
-
-       // setContentView(R.layout.fragment_propietario);
-       // mNum = getArguments() != null ? getArguments().getInt("num") : 1;
     }
 
 

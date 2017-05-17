@@ -199,4 +199,6 @@ public class Comenzar extends AppCompatActivity {
         Intent i = new Intent(this,Anexo1.class);
         startActivityForResult(i,0);
     }
+
+
 }

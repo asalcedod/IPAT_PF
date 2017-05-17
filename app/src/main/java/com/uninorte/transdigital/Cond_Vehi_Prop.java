@@ -212,7 +212,7 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
 
     public void onClick_Informe3(View view) {
         boolean sw=true;
-       List<DBAccidente> c = new Select().from(DBAccidente.class).queryList();
+        List<DBAccidente> c = new Select().from(DBAccidente.class).queryList();
         List<DBDatosP> dp = new Select().from(DBDatosP.class).queryList();
         List<DBDetallesCond> dc = new Select().from(DBDetallesCond.class).queryList();
         List<DBDatosV> dv = new Select().from(DBDatosV.class).queryList();

@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,6 +20,7 @@ import android.widget.Spinner;
 
 import com.raizlabs.android.dbflow.sql.language.Delete;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AgregarVictimas extends AppCompatActivity {
@@ -44,7 +47,29 @@ public class AgregarVictimas extends AppCompatActivity {
         dir = (EditText) findViewById(R.id.direcvict);
         ciud = (EditText) findViewById(R.id.ciudvict);
         telef = (EditText) findViewById(R.id.telvict);
+        tipo_victima = (Spinner) findViewById(R.id.TipoVictima);
+        List<String> detalles_v = new ArrayList<String>();
+        detalles_v.add("Seleccione...");
+        detalles_v.add("Peaton");
+        detalles_v.add("Pasajero");
+        detalles_v.add("Acompañante");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, detalles_v);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tipo_victima.setAdapter(dataAdapter);
+        tipo_victima.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                detalle_victima = parent.getItemAtPosition(position).toString();
+                if (parent.getItemAtPosition(position).toString().equals("Seleccione...")) {
+                    detalle_victima = "";
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                detalle_victima="";
+            }
+        });
         sexo=(RadioGroup) findViewById(R.id.sexovict);
         sexo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

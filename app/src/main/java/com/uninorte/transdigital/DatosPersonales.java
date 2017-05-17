@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -33,6 +34,13 @@ public class DatosPersonales extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_datos_personales, container, false);
         imageButtonSave = (FloatingActionButton) rootview.findViewById(R.id.Save);
         nombre = (EditText) rootview.findViewById(R.id.name);
+        List<String> clase_doc = new ArrayList<String>();
+        clase_doc.add("Seleccione...");
+        clase_doc.add("C.C.");
+        clase_doc.add("C.E.");
+        clase_doc.add("T.I.");
+        clase_doc.add("D.P.");
+        clase_doc.add("Otro");
         tdoc = (EditText) rootview.findViewById(R.id.Tced);
         ndoc = (EditText) rootview.findViewById(R.id.idcond);
         nacionalidad = (EditText) rootview.findViewById(R.id.nacionalidadcond);
@@ -78,7 +86,6 @@ public class DatosPersonales extends Fragment {
 
                 //pasar datos a fragment
                 DatosPersonales fragment = new DatosPersonales();
-
                 Bundle args = new Bundle();
                 args.putString("nombreC", nombreC);
                 args.putString("TdocC", TdocC);
@@ -105,4 +112,3 @@ public class DatosPersonales extends Fragment {
 
 
 }
-c cfcfwd<z

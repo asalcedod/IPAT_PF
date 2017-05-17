@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.github.clans.fab.FloatingActionMenu;
 import com.github.clans.fab.FloatingActionButton;
 import com.raizlabs.android.dbflow.sql.language.Delete;
+import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,8 +80,22 @@ public class Propietario extends Fragment {
                 if (checkedId == R.id.checkBox11) {
                     mismo_cond = "Si";
 
+                    List<DBDatosP> dp = new Select().from(DBDatosP.class).queryList();
+                    for (DBDatosP ca : dp) {
+                        Bnombre=ca.nombre;
+                        Tdoc=ca.tdoc;
+                        Doc=ca.ndoc;
+                    }
+                    enombre=(EditText) rootView.findViewById(R.id.nameProp);
+                    enombre.setText(Bnombre);
+
+                    et_doc=(EditText)rootView.findViewById(R.id.tipoDOc);
+                    et_doc.setText(Tdoc);
+
+                    id_doc=(EditText)rootView.findViewById(R.id.idecond);
+                    id_doc.setText(Doc);///eroro en asignar - se va al sino y muestra null
                     //recibe el dato
-                    if (getArguments() != null) {
+                    /*if (getArguments() != null) {
                         LinearLayout ln = (LinearLayout) rootView.findViewById(R.id.GrupoDatosProp);
                         //ln.setEnable(false); //no me deja desactivarlo
 
@@ -98,8 +113,8 @@ public class Propietario extends Fragment {
                         id_doc.setText(Doc);///eroro en asignar - se va al sino y muestra null
 
                     }else{
-                        Log.d("El dato del cond esx", String.valueOf(getArguments()));
-                    }
+                        Log.d("El dato del cond es: ", String.valueOf(getArguments()));
+                    }*/
                 } else if (checkedId == R.id.checkBox10) {
                     mismo_cond = "No";
                 }
@@ -107,6 +122,7 @@ public class Propietario extends Fragment {
 
         });
         clasev = (Spinner) rootView.findViewById(R.id.idClaseVehi);
+
         List<String> values = new ArrayList<String>();
         values.add("Seleccione...");
         values.add("Automovil");

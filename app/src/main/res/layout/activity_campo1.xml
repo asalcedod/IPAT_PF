@@ -25,10 +25,10 @@
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Anexo 1"
+                android:layout_gravity="center"
+                android:text="Hoja 1 IPAT"
                 android:textColor="@color/Black"
-                android:textSize="20sp"
-                android:layout_gravity="center" />
+                android:textSize="20sp" />
 
 
         </android.support.v7.widget.Toolbar>

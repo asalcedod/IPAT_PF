@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -78,43 +79,45 @@ public class Intro extends AppCompatActivity {
         final EditText ced = (EditText) prompt.findViewById(R.id.cedula);
         final EditText pass = (TextInputEditText) prompt.findViewById(R.id.textInputEditText);
 
+        //nuevo
+
         alertDialogBuilder.setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Ok", null) //Set to null. We override the onclick
+                .setNegativeButton("Cancelar", null);
+
+        AlertDialog alertDialog=alertDialogBuilder.create();
+        //
+
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(final DialogInterface dialog) {
+                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int id)
-                    {
+                    public void onClick(View v) {
                         String cedula = ced.getText().toString();
                         String password = pass.getText().toString();
-
-
                         if (TextUtils.isEmpty(cedula)||	TextUtils.isEmpty(password)){
 
                             Toast.makeText(Intro.this,"Cedula o contraseña no puede estar vacío", Toast.LENGTH_LONG).show();
-                            //ced.setError("No Puede Estar Vacio");
+//                          //ced.setError("No Puede Estar Vacio");
                             //pass.setError("No Puede Estar Vacio");
-                            //showLoginDialog();
-                            //alertDialogBuilder.setView(prompt);
+
                         }
                         else{
-                                new Intro.AttemptLogin().execute(cedula,password);
+                            new Intro.AttemptLogin().execute(cedula,password);
+
 
                         }
                         //---------------------------------
                     }
                 });
-
-        alertDialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id)
-            {
-                dialog.cancel();
-
             }
         });
-
-        alertDialogBuilder.show();
-
+        alertDialog.show();
+        //
     }
+
 
     class AttemptLogin extends AsyncTask<String, String, String> {
 
@@ -191,6 +194,7 @@ public class Intro extends AppCompatActivity {
     }
     //END LOGIN-----------------------------------------------------------------------------------
 
+
     //REGISTER-----------------------------------------------------------------------------------
     private void showRegisterDialog() {
         LayoutInflater li = LayoutInflater.from(this);
@@ -204,30 +208,32 @@ public class Intro extends AppCompatActivity {
 
 
         alertDialogBuilder.setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Ok", null) //Set to null. We override the onclick
+                .setNegativeButton("Cancelar", null);
+        AlertDialog alertDialog=alertDialogBuilder.create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(final DialogInterface dialog) {
+                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int id)
-                    {
+                    public void onClick(View v) {
                         String cedula = ced.getText().toString();
                         String username = user.getText().toString();
                         String password = pass.getText().toString();
 
+                        if (TextUtils.isEmpty(cedula)|| TextUtils.isEmpty(username)||	TextUtils.isEmpty(password)){
+                            Toast.makeText(Intro.this,"Hay campos vacíos, verifique e intentelo de nuevo", Toast.LENGTH_LONG).show();
+
+                        }else{
                         new CreateUser().execute(cedula, username, password);
-                        //---------------------------------
+                        }
+
                     }
                 });
-
-        alertDialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id)
-            {
-                dialog.cancel();
-
             }
         });
-
-        alertDialogBuilder.show();
-
+        alertDialog.show();
 
     }
     class CreateUser extends AsyncTask<String, String, String> {

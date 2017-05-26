@@ -76,8 +76,8 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
         Toast.makeText(Anexos.this, foto, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File file = new File(foto);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-        startActivityForResult(intent, TAKE_PICTURE); // 1 para la camara, 2 para la galeria
+        //intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+        startActivityForResult(intent, 0); // 1 para la camara, 2 para la galeria
     }
 
     @Override
@@ -85,6 +85,9 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
         super.onActivityResult(requestCode, resultCode, data);
         //bmp=(Bitmap) data.getExtras().get(MediaStore.EXTRA_OUTPUT);
         //img.setImageBitmap(bmp);
+        Bundle ext = data.getExtras();
+        bmp = (Bitmap)ext.get("data");
+        img.setImageBitmap(bmp);
         if (dir.exists()) {
             UploaderFoto nuevaTarea = new UploaderFoto();
             nuevaTarea.execute(foto);

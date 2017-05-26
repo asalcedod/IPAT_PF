@@ -3,7 +3,9 @@ package com.uninorte.transdigital;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +13,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Font;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
@@ -18,14 +27,20 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import harmony.java.awt.Color;
 
 public class Enviar extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback{
     private static final String TAG = "LogsAndroid";
     // Progress Dialog
     private ProgressDialog pDialog;
-    String id_cl="";
+    String id_cl="",text="",nombrec="";
+    boolean sw=false;
     // JSON parser class
     JSONParser jsonParser = new JSONParser();
 
@@ -38,7 +53,9 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
     private static final String DETALLES_VEHICULO_URL = "https://transitodigital-asalcedod.c9users.io/detallesvehiculo.php";
     private static final String PROPIETARIO_URL = "https://transitodigital-asalcedod.c9users.io/propietario.php";
     private static final String VICTIMAS_URL = "https://transitodigital-asalcedod.c9users.io/victimas.php";
-
+    private final static String NOMBRE_DIRECTORIO = "MiPdf";
+    private final static String GENERADOR = "MisArchivos";
+    private final static String NOMBRE_DOCUMENTO = "prueba.pdf";
     //ids
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
@@ -51,12 +68,27 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
     }
 
     public void onClick_Informe(View view) {
+        sw=true;
+        Document documento = new Document(PageSize.LETTER);
+        File f =  new File(Environment.getExternalStorageDirectory().toString() + File.separator + NOMBRE_DIRECTORIO);
+        if(!f.exists()){
+            f.mkdir();
+        }
+        File ficheroPdf = new File(f.getPath() + File.separator + GENERADOR);
+        if(!ficheroPdf.exists()){
+            ficheroPdf.mkdir();
+        }
+
+        nombrec=Environment.getExternalStorageDirectory().toString() + File.separator + NOMBRE_DIRECTORIO + File.separator + GENERADOR + File.separator + NOMBRE_DOCUMENTO;
+        File outPutFile = new File(nombrec);
+        if(outPutFile.exists()){
+            outPutFile.delete();
+        }
         String organismo = "",gravedad = "",direccion_a="",latitud = "",longitud="",clase_a="",choque_con="",objeto_fijo="",id_c_l="",fecha_a="",hora_a="",fecha_i="",hora_i="";
         List<DBAccidente> c = new Select().from(DBAccidente.class).queryList();
         for (DBAccidente ca : c) {
             organismo = ca.ot;
             gravedad = ca.gravedad;
-            Toast.makeText(this, gravedad, Toast.LENGTH_SHORT).show();
             direccion_a = ca.ubicacion;
             latitud = ca.latitud;
             longitud = ca.longitud;
@@ -69,6 +101,30 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             hora_a = ca.a_hora;
             fecha_i = ca.r_fecha;
             hora_i = ca.r_hora;
+        }
+        try {
+            PdfWriter writer = PdfWriter.getInstance(documento, new FileOutputStream(nombrec));
+            documento.open();
+            Font font = FontFactory.getFont(FontFactory.defaultEncoding, 30,
+                    Font.BOLD, Color.BLACK);
+            documento.add(new Paragraph("COPIA HOJA IPAT", font));
+            documento.add(new Paragraph("Codigo Oficina Dane: "+organismo));
+            documento.add(new Paragraph("Gravidad del Accidente: "+gravedad));
+            documento.add(new Paragraph("Direccion del accidente: "+direccion_a));
+            documento.add(new Paragraph("Clase de Accidente: "+clase_a));
+            documento.add(new Paragraph("Choque con: "+choque_con));
+            documento.add(new Paragraph("Objeto fijo: "+objeto_fijo));
+            documento.add(new Paragraph("Fecha del accidente: "+fecha_a));
+            documento.add(new Paragraph("Hora del accidente: "+hora_a));
+            documento.add(new Paragraph("Fecha del informe: "+fecha_i));
+            documento.add(new Paragraph("Hora del informe: "+hora_i));
+
+            documento.close();
+
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
         String id_carac_l= "", area= "", sector= "", zona= "", diseño= "", condicionesc= "";
         new Enviar.Addform1().execute(organismo,gravedad,direccion_a,latitud,longitud,clase_a,choque_con,objeto_fijo,id_c_l,fecha_a,hora_a,fecha_i,hora_i);
@@ -203,17 +259,29 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             hospitalv=ca.hospital;
             new Victimas().execute(detalle_victima,nombrev,tdocv,ndocv,nacionalidadv,fecha_nv,x,direcv,ciudadv,telv,gravedadv,exam,autv,ebriagezv,gradoEv,sustancia,cinturonv,cascov,chalecov,hospitalv,id_cl);
         }
-        List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
-        List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();
-        List<DBDatosP> cc = new Delete().from(DBDatosP.class).queryList();
-        List<DBDetallesCond> d = new Delete().from(DBDetallesCond.class).queryList();
-        List<DBDatosV> e = new Delete().from(DBDatosV.class).queryList();
-        List<DBDetallesV> f = new Delete().from(DBDetallesV.class).queryList();
-        List<DBPropietario> g = new Delete().from(DBPropietario.class).queryList();
-        List<DBVictima> vic = new Delete().from(DBVictima.class).queryList();
-        Intent i=new Intent();
-        setResult(Activity.RESULT_OK,i);
-        finish();
+    }
+
+    public void copiaInforme(View view) {
+        if(sw==true) {
+            Uri uri = Uri.fromFile(new File(nombrec));
+            Intent itSend = new Intent(android.content.Intent.ACTION_SEND);
+            itSend.setType("application/pdf");
+            itSend.putExtra(android.content.Intent.EXTRA_EMAIL, "antony9409@gmail.com");
+            itSend.putExtra(android.content.Intent.EXTRA_SUBJECT, "Prueba");
+            itSend.putExtra(android.content.Intent.EXTRA_TEXT, text);
+            itSend.putExtra(Intent.EXTRA_STREAM, uri);
+            startActivityForResult(itSend, 1);
+            List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
+            List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();
+            List<DBDatosP> cc = new Delete().from(DBDatosP.class).queryList();
+            List<DBDetallesCond> d = new Delete().from(DBDetallesCond.class).queryList();
+            List<DBDatosV> e = new Delete().from(DBDatosV.class).queryList();
+            List<DBDetallesV> fe = new Delete().from(DBDetallesV.class).queryList();
+            List<DBPropietario> g = new Delete().from(DBPropietario.class).queryList();
+            List<DBVictima> vic = new Delete().from(DBVictima.class).queryList();
+        }else{
+            Toast.makeText(this, "No has confirmado el envio.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     class Addform1 extends AsyncTask<String, String, String> {

@@ -55,7 +55,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
     private static final String VICTIMAS_URL = "https://transitodigital-asalcedod.c9users.io/victimas.php";
     private final static String NOMBRE_DIRECTORIO = "MiPdf";
     private final static String GENERADOR = "MisArchivos";
-    private final static String NOMBRE_DOCUMENTO = "prueba.pdf";
+    private final static String NOMBRE_DOCUMENTO = "Copia_IPAT.pdf";
     //ids
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";

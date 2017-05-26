@@ -63,8 +63,6 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar);
-
-
     }
 
     public void onClick_Informe(View view) {

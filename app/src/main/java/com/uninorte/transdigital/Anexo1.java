@@ -466,36 +466,38 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
     }
 
     public void onClick_Ubicacion(View view) {
-        mensaje1.setText(ubicacion);
-        if (!latitud.equals("") && !longitud.equals("")) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("¿Desea confirmar la ubicación desde el Mapa?")
-                    .setTitle("Advertencia")
-                    .setCancelable(false)
-                    .setIcon(R.drawable.location_map)
-                    .setNegativeButton("Cancelar",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            })
-                    .setPositiveButton("Continuar",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    Intent i = new Intent(Anexo1.this, Mapa.class);
-                                    i.putExtra("latitud", latitud);
-                                    i.putExtra("longitud", longitud);
-                                    i.putExtra("ubicacion", ubicacion);
-                                    startActivityForResult(i, 1);
-                                }
-                            });
-            AlertDialog alert = builder.create();
-            alert.show();
+            mensaje1.setText(ubicacion);
+            if (!latitud.equals("") && !longitud.equals("")) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("¿Desea confirmar la ubicación desde el Mapa?")
+                        .setTitle("Advertencia")
+                        .setCancelable(false)
+                        .setIcon(R.drawable.location_map)
+                        .setNegativeButton("Cancelar",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                })
+                        .setPositiveButton("Continuar",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Intent i = new Intent(Anexo1.this, Mapa.class);
+                                        i.putExtra("latitud", latitud);
+                                        i.putExtra("longitud", longitud);
+                                        i.putExtra("ubicacion", ubicacion);
+                                        startActivityForResult(i, 1);
+                                    }
+                                });
+                AlertDialog alert = builder.create();
+                alert.show();
 
-            //MANEJO DE las imagenes
-            //Intent i = new Intent(this, ReadComments.class);
-            // startActivity(i);
-        }
+                //MANEJO DE las imagenes
+                //Intent i = new Intent(this, ReadComments.class);
+                // startActivity(i);
+            }else{
+                Toast.makeText(this, "Espere mientras se carga su ubicacion...", Toast.LENGTH_SHORT).show();
+            }
     }
 
     public void onClick_lugar(View view) {

@@ -53,7 +53,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
     private static final String DETALLES_VEHICULO_URL = "https://transitodigital-asalcedod.c9users.io/detallesvehiculo.php";
     private static final String PROPIETARIO_URL = "https://transitodigital-asalcedod.c9users.io/propietario.php";
     private static final String VICTIMAS_URL = "https://transitodigital-asalcedod.c9users.io/victimas.php";
-    private final static String NOMBRE_DIRECTORIO = "MiPdf";
+    private final static String NOMBRE_DIRECTORIO = "IPAT_Digital";
     private final static String GENERADOR = "MisArchivos";
     private final static String NOMBRE_DOCUMENTO = "Copia_IPAT.pdf";
     //ids

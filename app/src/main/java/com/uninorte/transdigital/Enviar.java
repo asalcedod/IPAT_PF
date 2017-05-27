@@ -139,12 +139,12 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             documento.add(new Paragraph("Hora del accidente: "+hora_a));
             documento.add(new Paragraph("Fecha del informe: "+fecha_i));
             documento.add(new Paragraph("Hora del informe: "+hora_i));
-            font = FontFactory.getFont(FontFactory.TIMES_ITALIC, 60, Font.BOLD,
+            font = FontFactory.getFont(FontFactory.TIMES_ITALIC, 55, Font.BOLD,
                     Color.LIGHT_GRAY);
             ColumnText.showTextAligned(writer.getDirectContentUnder(),
                     Element.ALIGN_CENTER, new Paragraph(
                             "Secretaría de Tránsito y Movilidad", font), 297.5f, 421,
-                    writer.getPageNumber() % 2 == 1 ? 55 : -55);
+                    writer.getPageNumber() % 2 == 1 ? 50 : -50);
             documento.close();
 
         } catch (DocumentException e) {
@@ -315,14 +315,6 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         itSend.putExtra(android.content.Intent.EXTRA_TEXT, text);
         itSend.putExtra(Intent.EXTRA_STREAM, uri);
         startActivityForResult(itSend, 1);
-        List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
-        List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();
-        List<DBDatosP> cc = new Delete().from(DBDatosP.class).queryList();
-        List<DBDetallesCond> d = new Delete().from(DBDetallesCond.class).queryList();
-        List<DBDatosV> e = new Delete().from(DBDatosV.class).queryList();
-        List<DBDetallesV> fe = new Delete().from(DBDetallesV.class).queryList();
-        List<DBPropietario> g = new Delete().from(DBPropietario.class).queryList();
-        List<DBVictima> vic = new Delete().from(DBVictima.class).queryList();
     }
 
     public void copiaInforme(View view) {
@@ -398,6 +390,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
+                    List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
                     //finish();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
@@ -475,6 +468,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
+                    List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -559,6 +553,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
+                    List<DBDatosP> cc = new Delete().from(DBDatosP.class).queryList();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -662,6 +657,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
+                    List<DBDetallesCond> d = new Delete().from(DBDetallesCond.class).queryList();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -750,6 +746,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
+                    List<DBDatosV> e = new Delete().from(DBDatosV.class).queryList();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -855,6 +852,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
+                    List<DBDetallesV> fe = new Delete().from(DBDetallesV.class).queryList();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -943,6 +941,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
+                    List<DBPropietario> g = new Delete().from(DBPropietario.class).queryList();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -1049,6 +1048,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
+                    List<DBVictima> vic = new Delete().from(DBVictima.class).queryList();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {

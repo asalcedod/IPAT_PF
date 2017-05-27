@@ -513,8 +513,6 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
         Intent i = new Intent(this, Anexos.class);
         startActivityForResult(i,3);
     }
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

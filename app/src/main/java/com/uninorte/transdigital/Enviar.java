@@ -1,7 +1,9 @@
 package com.uninorte.transdigital;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -45,7 +47,8 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
     private static final String TAG = "LogsAndroid";
     // Progress Dialog
     private ProgressDialog pDialog;
-    String id_cl="",text="",nombrec="";
+    String id_cl="",text="",nombrec="",codb="";
+    ;
     boolean sw=false;
     // JSON parser class
     JSONParser jsonParser = new JSONParser();
@@ -108,7 +111,6 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         }
         String[] cof=fecha_i.split("/");
         String[] coh=hora_i.split(":");
-        String codb="";
         for(int i=0;i<cof.length;i++){
             codb=codb+cof[i]+coh[i];
         }
@@ -281,26 +283,49 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             hospitalv=ca.hospital;
             new Victimas().execute(detalle_victima,nombrev,tdocv,ndocv,nacionalidadv,fecha_nv,x,direcv,ciudadv,telv,gravedadv,exam,autv,ebriagezv,gradoEv,sustancia,cinturonv,cascov,chalecov,hospitalv,id_cl);
         }
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("¿Desea enviar copia del Informe?")
+                .setTitle("Advertencia")
+                .setCancelable(false)
+                .setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        })
+                .setPositiveButton("Aceptar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                copiacorreo();
+                                finish();
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    public void copiacorreo(){
+        Uri uri = Uri.fromFile(new File(nombrec));
+        Intent itSend = new Intent(android.content.Intent.ACTION_SEND);
+        itSend.setType("application/pdf");
+        itSend.putExtra(android.content.Intent.EXTRA_EMAIL, "antony9409@gmail.com");
+        itSend.putExtra(android.content.Intent.EXTRA_SUBJECT, "Copia IPAT "+codb);
+        itSend.putExtra(android.content.Intent.EXTRA_TEXT, text);
+        itSend.putExtra(Intent.EXTRA_STREAM, uri);
+        startActivityForResult(itSend, 1);
+        List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
+        List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();
+        List<DBDatosP> cc = new Delete().from(DBDatosP.class).queryList();
+        List<DBDetallesCond> d = new Delete().from(DBDetallesCond.class).queryList();
+        List<DBDatosV> e = new Delete().from(DBDatosV.class).queryList();
+        List<DBDetallesV> fe = new Delete().from(DBDetallesV.class).queryList();
+        List<DBPropietario> g = new Delete().from(DBPropietario.class).queryList();
+        List<DBVictima> vic = new Delete().from(DBVictima.class).queryList();
     }
 
     public void copiaInforme(View view) {
         if(sw==true) {
-            Uri uri = Uri.fromFile(new File(nombrec));
-            Intent itSend = new Intent(android.content.Intent.ACTION_SEND);
-            itSend.setType("application/pdf");
-            itSend.putExtra(android.content.Intent.EXTRA_EMAIL, "antony9409@gmail.com");
-            itSend.putExtra(android.content.Intent.EXTRA_SUBJECT, "Prueba");
-            itSend.putExtra(android.content.Intent.EXTRA_TEXT, text);
-            itSend.putExtra(Intent.EXTRA_STREAM, uri);
-            startActivityForResult(itSend, 1);
-            List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
-            List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();
-            List<DBDatosP> cc = new Delete().from(DBDatosP.class).queryList();
-            List<DBDetallesCond> d = new Delete().from(DBDetallesCond.class).queryList();
-            List<DBDatosV> e = new Delete().from(DBDatosV.class).queryList();
-            List<DBDetallesV> fe = new Delete().from(DBDetallesV.class).queryList();
-            List<DBPropietario> g = new Delete().from(DBPropietario.class).queryList();
-            List<DBVictima> vic = new Delete().from(DBVictima.class).queryList();
+            copiacorreo();
         }else{
             Toast.makeText(this, "No has confirmado el envío.", Toast.LENGTH_SHORT).show();
         }

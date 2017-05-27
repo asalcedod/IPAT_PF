@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.style.LeadingMarginSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -126,7 +127,8 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             documento.add(imagen);
             Font font = FontFactory.getFont(FontFactory.defaultEncoding,25,
                     Font.BOLD, Color.BLACK);
-            documento.add(new Paragraph("COPIA HOJA IPAT", font));
+            documento.add(new Paragraph("                        COPIA HOJA IPAT", font));
+            documento.add(new Paragraph("                        "));
             documento.add(new Paragraph("Código Oficina Dane: "+organismo));
             documento.add(new Paragraph("Gravidad del Accidente: "+gravedad));
             documento.add(new Paragraph("Dirección del accidente: "+direccion_a));
@@ -137,12 +139,12 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             documento.add(new Paragraph("Hora del accidente: "+hora_a));
             documento.add(new Paragraph("Fecha del informe: "+fecha_i));
             documento.add(new Paragraph("Hora del informe: "+hora_i));
-            font = FontFactory.getFont(FontFactory.TIMES_ITALIC, 50, Font.BOLD,
+            font = FontFactory.getFont(FontFactory.TIMES_ITALIC, 60, Font.BOLD,
                     Color.LIGHT_GRAY);
             ColumnText.showTextAligned(writer.getDirectContentUnder(),
                     Element.ALIGN_CENTER, new Paragraph(
                             "Secretaría de Tránsito y Movilidad", font), 297.5f, 421,
-                    writer.getPageNumber() % 2 == 1 ? 45 : -45);
+                    writer.getPageNumber() % 2 == 1 ? 55 : -55);
             documento.close();
 
         } catch (DocumentException e) {

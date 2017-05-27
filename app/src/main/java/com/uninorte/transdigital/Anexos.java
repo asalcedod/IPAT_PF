@@ -27,6 +27,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import static com.uninorte.transdigital.R.id.imagen;
 
 public class Anexos extends AppCompatActivity implements OnClickListener{
     FloatingActionButton btnCam;
@@ -52,13 +57,13 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
         if(!ficheroPdf.exists()){
             ficheroPdf.mkdir();
         }
-        img = (ImageView) findViewById(R.id.imagen);
+        img = (ImageView) findViewById(imagen);
         //Floating Button
         btnCam = (FloatingActionButton) findViewById(R.id.camara);
         btnCam.setOnClickListener(this);
         aleatorio = new Integer((int) (Math.random() * 100)).intValue();
-        foto = Environment.getExternalStorageDirectory() + File.separator + NOMBRE_DIRECTORIO + File.separator + GENERADOR + File.separator + "imagen"+ aleatorio +".jpg";
-        dir = new File(foto);
+        foto = Environment.getExternalStorageDirectory() + File.separator + NOMBRE_DIRECTORIO + File.separator + GENERADOR;
+        dir = new File(foto,"imagen"+ aleatorio +".jpg");
 
         //-------------------------------------------------------------------
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -98,6 +103,15 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
         Bundle ext = data.getExtras();
         bmp = (Bitmap)ext.get("data");
         img.setImageBitmap(bmp);
+        FileOutputStream fos = null;
+        try{
+            fos = new FileOutputStream(dir);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 10, fos);
+        }catch (FileNotFoundException ex){
+            ex.printStackTrace();
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
         if (dir.exists()) {
             UploaderFoto nuevaTarea = new UploaderFoto();
             nuevaTarea.execute(foto);

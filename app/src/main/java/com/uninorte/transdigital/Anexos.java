@@ -37,17 +37,27 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
     private static int TAKE_PICTURE = 0;
     int aleatorio = 0;
     File dir;
+    private final static String NOMBRE_DIRECTORIO = "IPAT_Digital";
+    private final static String GENERADOR = "MisArchivos";
     final static int cons = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.anexos);
+        File f =  new File(Environment.getExternalStorageDirectory().toString() + File.separator + NOMBRE_DIRECTORIO);
+        if(!f.exists()){
+            f.mkdir();
+        }
+        File ficheroPdf = new File(f.getPath() + File.separator + GENERADOR);
+        if(!ficheroPdf.exists()){
+            ficheroPdf.mkdir();
+        }
         img = (ImageView) findViewById(R.id.imagen);
         //Floating Button
         btnCam = (FloatingActionButton) findViewById(R.id.camara);
         btnCam.setOnClickListener(this);
         aleatorio = new Integer((int) (Math.random() * 100)).intValue();
-        foto = Environment.getExternalStorageDirectory() + "/DCIM/Camera/imagen"+ 1 +".jpg";
+        foto = Environment.getExternalStorageDirectory() + File.separator + NOMBRE_DIRECTORIO + File.separator + GENERADOR + File.separator + "imagen"+ aleatorio +".jpg";
         dir = new File(foto);
 
         //-------------------------------------------------------------------

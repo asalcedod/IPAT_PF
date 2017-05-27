@@ -1,6 +1,5 @@
 package com.uninorte.transdigital;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -13,7 +12,6 @@ import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.style.LeadingMarginSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -37,7 +35,6 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -115,43 +112,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         for(int i=0;i<cof.length;i++){
             codb=codb+cof[i]+coh[i];
         }
-        try {
-            PdfWriter writer = PdfWriter.getInstance(documento, new FileOutputStream(nombrec));
-            documento.open();
-            documento.add(new Paragraph("Ref:"+codb));
-            Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
-                    R.drawable.mintransporte);
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            Image imagen = Image.getInstance(stream.toByteArray());
-            documento.add(imagen);
-            Font font = FontFactory.getFont(FontFactory.defaultEncoding,25,
-                    Font.BOLD, Color.BLACK);
-            documento.add(new Paragraph("                        COPIA HOJA IPAT", font));
-            documento.add(new Paragraph("                        "));
-            documento.add(new Paragraph("Código Oficina Dane: "+organismo));
-            documento.add(new Paragraph("Gravidad del Accidente: "+gravedad));
-            documento.add(new Paragraph("Dirección del accidente: "+direccion_a));
-            documento.add(new Paragraph("Clase de Accidente: "+clase_a));
-            documento.add(new Paragraph("Choque con: "+choque_con));
-            documento.add(new Paragraph("Objeto fijo: "+objeto_fijo));
-            documento.add(new Paragraph("Fecha del accidente: "+fecha_a));
-            documento.add(new Paragraph("Hora del accidente: "+hora_a));
-            documento.add(new Paragraph("Fecha del informe: "+fecha_i));
-            documento.add(new Paragraph("Hora del informe: "+hora_i));
-            font = FontFactory.getFont(FontFactory.TIMES_ITALIC, 55, Font.BOLD,
-                    Color.LIGHT_GRAY);
-            ColumnText.showTextAligned(writer.getDirectContentUnder(),
-                    Element.ALIGN_CENTER, new Paragraph(
-                            "Secretaría de Tránsito y Movilidad", font), 297.5f, 421,
-                    writer.getPageNumber() % 2 == 1 ? 50 : -50);
-            documento.close();
 
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        } catch (java.io.IOException e) {
-            e.printStackTrace();
-        }
         String id_carac_l= "", area= "", sector= "", zona= "", diseño= "", condicionesc= "";
         new Enviar.Addform1().execute(organismo,gravedad,direccion_a,latitud,longitud,clase_a,choque_con,objeto_fijo,id_c_l,fecha_a,hora_a,fecha_i,hora_i);
         List<DBCaracteristicasl> cl = new Select().from(DBCaracteristicasl.class).queryList();
@@ -284,6 +245,64 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             cinturonv=ca.cinturon;
             hospitalv=ca.hospital;
             new Victimas().execute(detalle_victima,nombrev,tdocv,ndocv,nacionalidadv,fecha_nv,x,direcv,ciudadv,telv,gravedadv,exam,autv,ebriagezv,gradoEv,sustancia,cinturonv,cascov,chalecov,hospitalv,id_cl);
+        }
+        try {
+            PdfWriter writer = PdfWriter.getInstance(documento, new FileOutputStream(nombrec));
+            documento.open();
+            documento.add(new Paragraph("Ref:"+codb));
+            Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
+                    R.drawable.encabezado);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Image imagen = Image.getInstance(stream.toByteArray());
+            documento.add(imagen);
+            Font marcaa = FontFactory.getFont(FontFactory.TIMES_ITALIC, 55, Font.BOLD,
+                    Color.LIGHT_GRAY);
+            ColumnText.showTextAligned(writer.getDirectContentUnder(),
+                    Element.ALIGN_CENTER, new Paragraph(
+                            "Secretaría de Tránsito y Movilidad", marcaa), 297.5f, 421,
+                    writer.getPageNumber() % 2 == 1 ? 50 : -50);
+            Font font = FontFactory.getFont(FontFactory.defaultEncoding,25,
+                    Font.BOLD, Color.BLACK);
+            documento.add(new Paragraph("                        COPIA HOJA IPAT", font));
+            documento.add(new Paragraph("                        "));
+            font = FontFactory.getFont(FontFactory.defaultEncoding,20,
+                    Font.BOLD, Color.BLACK);
+            documento.add(new Paragraph("Informacion del Conductor", font));
+            documento.add(new Paragraph("                        "));
+            documento.add(new Paragraph("Nombre: "+nombre));
+            documento.add(new Paragraph("Tipo identificacion: "+tdoc));
+            documento.add(new Paragraph("N° identificacion: "+ndoc));
+            documento.add(new Paragraph("Nacionalidad: "+nacionalidad));
+            documento.add(new Paragraph("Fecha de Nacimiento: "+fecha_n));
+            documento.add(new Paragraph("Sexo: "+sexo));
+            documento.add(new Paragraph("Direccion Residencia"+direc));
+            documento.add(new Paragraph("Ciudad Residencia"+ciudad));
+            documento.add(new Paragraph("Telefono"+tel));
+            documento.add(new Paragraph("                        "));
+            documento.add(new Paragraph("Informacion del accidente", font));
+            documento.add(new Paragraph("                        "));
+            documento.add(new Paragraph("Código Oficina Dane: "+organismo));
+            documento.add(new Paragraph("Gravidad del Accidente: "+gravedad));
+            documento.add(new Paragraph("Dirección del accidente: "+direccion_a));
+            documento.add(new Paragraph("Clase de Accidente: "+clase_a));
+            documento.add(new Paragraph("Choque con: "+choque_con));
+            documento.add(new Paragraph("Objeto fijo: "+objeto_fijo));
+            documento.add(new Paragraph("Fecha del accidente: "+fecha_a));
+            documento.add(new Paragraph("Hora del accidente: "+hora_a));
+            documento.add(new Paragraph("Fecha del informe: "+fecha_i));
+            documento.add(new Paragraph("Hora del informe: "+hora_i));
+            documento.newPage();
+            ColumnText.showTextAligned(writer.getDirectContentUnder(),
+                    Element.ALIGN_CENTER, new Paragraph(
+                            "Secretaría de Tránsito y Movilidad", marcaa), 297.5f, 421,
+                    writer.getPageNumber() % 2 == 1 ? 50 : -50);
+            documento.close();
+
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("¿Desea enviar copia del Informe?")

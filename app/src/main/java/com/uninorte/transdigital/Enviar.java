@@ -3,6 +3,8 @@ package com.uninorte.transdigital;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -15,10 +17,13 @@ import android.widget.Toast;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
+import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfWriter;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
@@ -27,6 +32,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -100,9 +106,22 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             fecha_i = ca.r_fecha;
             hora_i = ca.r_hora;
         }
+        String[] cof=fecha_i.split("/");
+        String[] coh=hora_i.split(":");
+        String codb="";
+        for(int i=0;i<cof.length;i++){
+            codb=codb+cof[i]+coh[i];
+        }
         try {
             PdfWriter writer = PdfWriter.getInstance(documento, new FileOutputStream(nombrec));
             documento.open();
+            documento.add(new Paragraph("Ref:"+codb));
+            Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
+                    R.drawable.mintransporte);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Image imagen = Image.getInstance(stream.toByteArray());
+            documento.add(imagen);
             Font font = FontFactory.getFont(FontFactory.defaultEncoding, 30,
                     Font.BOLD, Color.BLACK);
             documento.add(new Paragraph("COPIA HOJA IPAT", font));
@@ -116,12 +135,17 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             documento.add(new Paragraph("Hora del accidente: "+hora_a));
             documento.add(new Paragraph("Fecha del informe: "+fecha_i));
             documento.add(new Paragraph("Hora del informe: "+hora_i));
-
+            font = FontFactory.getFont(FontFactory.TIMES_ITALIC, 50, Font.BOLD,
+                    Color.LIGHT_GRAY);
+            ColumnText.showTextAligned(writer.getDirectContentUnder(),
+                    Element.ALIGN_CENTER, new Paragraph(
+                            "Secretaria de Transito y Movilidad", font), 297.5f, 421,
+                    writer.getPageNumber() % 2 == 1 ? 45 : -45);
             documento.close();
 
         } catch (DocumentException e) {
             e.printStackTrace();
-        } catch (FileNotFoundException e) {
+        } catch (java.io.IOException e) {
             e.printStackTrace();
         }
         String id_carac_l= "", area= "", sector= "", zona= "", diseño= "", condicionesc= "";

@@ -71,6 +71,8 @@ public class Victimas extends AppCompatActivity {
             public void onClick(View v) {
                 //TODO something when floating action menu second item clicked
                 //ANEXOS--
+                Intent i = new Intent(Victimas.this, Anexos.class);
+                startActivityForResult(i,3);
 
             }
         });

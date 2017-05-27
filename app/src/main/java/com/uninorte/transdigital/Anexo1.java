@@ -62,7 +62,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
     String salida2 = dh.format(hora);
 
     //Localizacion------------------------------------------------------------------------------
-    String ubicacion = "Ubicacion",direccion="";
+    String ubicacion = "Ubicación",direccion="";
     String latitud = "";
     String longitud = "";
     String gravedad = "";
@@ -146,14 +146,14 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
                     otro.setVisibility(View.GONE);
                 }
                 if(parent.getItemAtPosition(position).toString().equals("Choque")){
-                    final String[] items = {"Vehiculo","Tren","Semoviente","Objeto fijo"};
+                    final String[] items = {"Vehículo","Tren","Semoviente","Objeto fijo"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(Anexo1.this);
                     builder.setTitle("Seleccione Choque con: ");
                     builder.setItems(items, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int item) {
                             choque=items[item];
                             if(items[item].equals("Objeto fijo")){
-                                final String[] items = {"Muro","Poste","Arbol","Baranda","Semaforo","Inmueble","Hidratante","Valla señal","Tarima, caseta, vehiculo estacionada","Otro"};
+                                final String[] items = {"Muro","Poste","Árbol","Baranda","Semaforo","Inmueble","Hidratante","Valla señal","Tarima, caseta, vehÍculo estacionada","Otro"};
                                 AlertDialog.Builder builder = new AlertDialog.Builder(Anexo1.this);
                                 builder.setTitle("Objeto fijo: ");
                                 builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -496,7 +496,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
                 //Intent i = new Intent(this, ReadComments.class);
                 // startActivity(i);
             }else{
-                Toast.makeText(this, "Espere mientras se carga su ubicacion...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Espere mientras se carga su ubicación...", Toast.LENGTH_SHORT).show();
             }
     }
 

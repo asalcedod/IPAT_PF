@@ -120,14 +120,14 @@ public class Propietario extends Fragment {
 
         List<String> values = new ArrayList<String>();
         values.add("Seleccione...");
-        values.add("Automovil");
+        values.add("Automóvil");
         values.add("Bus");
         values.add("Buseta");
-        values.add("Camion");
+        values.add("Camión");
         values.add("Camioneta");
         values.add("Campero");
         values.add("Micro bus");
-        values.add("Tracto Camion");
+        values.add("Tracto Camión");
         values.add("Volqueta");
         values.add("Motocicleta");
         values.add("M. Agricola");
@@ -143,9 +143,9 @@ public class Propietario extends Fragment {
         List<String> values2 = new ArrayList<String>();
         values2.add("Seleccione...");
         values2.add("Oficial");
-        values2.add("Publico");
+        values2.add("Público");
         values2.add("Particular");
-        values2.add("Diplomatico");
+        values2.add("Diplomático");
         List<String> values3 = new ArrayList<String>();
         values3.add("Seleccione...");
         values3.add("Mixto");

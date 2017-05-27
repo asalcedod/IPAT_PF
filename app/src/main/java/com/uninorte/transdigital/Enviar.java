@@ -125,9 +125,9 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             Font font = FontFactory.getFont(FontFactory.defaultEncoding,25,
                     Font.BOLD, Color.BLACK);
             documento.add(new Paragraph("COPIA HOJA IPAT", font));
-            documento.add(new Paragraph("Codigo Oficina Dane: "+organismo));
+            documento.add(new Paragraph("Código Oficina Dane: "+organismo));
             documento.add(new Paragraph("Gravidad del Accidente: "+gravedad));
-            documento.add(new Paragraph("Direccion del accidente: "+direccion_a));
+            documento.add(new Paragraph("Dirección del accidente: "+direccion_a));
             documento.add(new Paragraph("Clase de Accidente: "+clase_a));
             documento.add(new Paragraph("Choque con: "+choque_con));
             documento.add(new Paragraph("Objeto fijo: "+objeto_fijo));
@@ -139,7 +139,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                     Color.LIGHT_GRAY);
             ColumnText.showTextAligned(writer.getDirectContentUnder(),
                     Element.ALIGN_CENTER, new Paragraph(
-                            "Secretaria de Transito y Movilidad", font), 297.5f, 421,
+                            "Secretaría de Tránsito y Movilidad", font), 297.5f, 421,
                     writer.getPageNumber() % 2 == 1 ? 45 : -45);
             documento.close();
 
@@ -302,7 +302,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             List<DBPropietario> g = new Delete().from(DBPropietario.class).queryList();
             List<DBVictima> vic = new Delete().from(DBVictima.class).queryList();
         }else{
-            Toast.makeText(this, "No has confirmado el envio.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No has confirmado el envío.", Toast.LENGTH_SHORT).show();
         }
     }
 

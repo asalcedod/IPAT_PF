@@ -187,7 +187,7 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
             setResult(Activity.RESULT_OK, i);
             finish();
         }else{
-            Toast.makeText(this, "EXISTEN CAMPOS SIN SELECCIONAR", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Hay campos vacíos, verifique e intentelo de nuevo", Toast.LENGTH_SHORT).show();
         }
     }
 }

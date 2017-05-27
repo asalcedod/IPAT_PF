@@ -64,7 +64,7 @@ public class AgregarVictimas extends AppCompatActivity {
         tipo_victima = (Spinner) findViewById(R.id.TipoVictima);
         List<String> detalles_v = new ArrayList<String>();
         detalles_v.add("Seleccione...");
-        detalles_v.add("Peaton");
+        detalles_v.add("Peatón");
         detalles_v.add("Pasajero");
         detalles_v.add("Acompañante");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, detalles_v);
@@ -257,7 +257,7 @@ public class AgregarVictimas extends AppCompatActivity {
             finish();
         }
         if (TextUtils.isEmpty(editText1.getText().toString())){
-            editText1.setError("No puede estar vacio");
+            editText1.setError("No puede estar vacío");
         }   else {
             //sustancias;
             DBVictima dv = new DBVictima();

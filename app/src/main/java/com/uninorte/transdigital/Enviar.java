@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -62,6 +63,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
     private static final String VICTIMAS_URL = "https://transitodigital-asalcedod.c9users.io/victimas.php";
     private final static String NOMBRE_DIRECTORIO = "IPAT_Digital";
     private final static String GENERADOR = "MisArchivos";
+    private final static String D_FOTO = "Evidencias";
     private final static String NOMBRE_DOCUMENTO = "Copia_IPAT.pdf";
     //ids
     private static final String TAG_SUCCESS = "success";
@@ -247,9 +249,11 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             new Victimas().execute(detalle_victima,nombrev,tdocv,ndocv,nacionalidadv,fecha_nv,x,direcv,ciudadv,telv,gravedadv,exam,autv,ebriagezv,gradoEv,sustancia,cinturonv,cascov,chalecov,hospitalv,id_cl);
         }
         try {
+            String foto = Environment.getExternalStorageDirectory() + File.separator + NOMBRE_DIRECTORIO + File.separator + D_FOTO;
             PdfWriter writer = PdfWriter.getInstance(documento, new FileOutputStream(nombrec));
             documento.open();
             documento.add(new Paragraph("Ref:"+codb));
+
             Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
                     R.drawable.encabezado);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -276,9 +280,9 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             documento.add(new Paragraph("Nacionalidad: "+nacionalidad));
             documento.add(new Paragraph("Fecha de Nacimiento: "+fecha_n));
             documento.add(new Paragraph("Sexo: "+sexo));
-            documento.add(new Paragraph("Direccion Residencia"+direc));
-            documento.add(new Paragraph("Ciudad Residencia"+ciudad));
-            documento.add(new Paragraph("Telefono"+tel));
+            documento.add(new Paragraph("Direccion Residencia: "+direc));
+            documento.add(new Paragraph("Ciudad Residencia: "+ciudad));
+            documento.add(new Paragraph("Telefono: "+tel));
             documento.add(new Paragraph("                        "));
             documento.add(new Paragraph("Informacion del accidente", font));
             documento.add(new Paragraph("                        "));
@@ -292,11 +296,32 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             documento.add(new Paragraph("Hora del accidente: "+hora_a));
             documento.add(new Paragraph("Fecha del informe: "+fecha_i));
             documento.add(new Paragraph("Hora del informe: "+hora_i));
-            documento.newPage();
-            ColumnText.showTextAligned(writer.getDirectContentUnder(),
-                    Element.ALIGN_CENTER, new Paragraph(
-                            "Secretaría de Tránsito y Movilidad", marcaa), 297.5f, 421,
-                    writer.getPageNumber() % 2 == 1 ? 50 : -50);
+            //EVIDENCIAS
+            Bitmap bmp = BitmapFactory.decodeFile(foto+File.separator+"foto"+1+".jpg");
+            int i=1;
+            while(bmp!=null && i<10) {
+                int width = bmp.getWidth();
+                int height = bmp.getHeight();
+                float scaleWidth = ((float) 300) / width;
+                float scaleHeight = ((float) 600) / height;
+                // create a matrix for the manipulation
+                Matrix matrix = new Matrix();
+                // resize the bit map
+                matrix.postScale(scaleWidth, scaleHeight);
+                // recreate the new Bitmap
+                bmp = Bitmap.createBitmap(bmp, 0, 0, width, height, matrix, false);
+                ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.JPEG, 50, stream2);
+                Image imagen2 = Image.getInstance(stream2.toByteArray());
+                documento.newPage();
+                ColumnText.showTextAligned(writer.getDirectContentUnder(),
+                        Element.ALIGN_CENTER, new Paragraph(
+                                "Secretaría de Tránsito y Movilidad", marcaa), 297.5f, 421,
+                        writer.getPageNumber() % 2 == 1 ? 50 : -50);
+                documento.add(imagen2);
+                i++;
+                bmp = BitmapFactory.decodeFile(foto+File.separator+"foto"+i+".jpg");
+            }
             documento.close();
 
         } catch (DocumentException e) {

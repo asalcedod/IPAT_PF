@@ -3,11 +3,15 @@ package com.uninorte.transdigital;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -26,6 +30,7 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -36,19 +41,21 @@ import static com.uninorte.transdigital.R.id.imagen;
 public class Anexos extends AppCompatActivity implements OnClickListener{
     FloatingActionButton btnCam;
     ImageView img;
+    File mi_foto;
     Bitmap bmp;
     Intent i;
-    private String foto;
+    private String foto,tempo="";
     private static int TAKE_PICTURE = 0;
     int aleatorio = 0;
     File dir;
     private final static String NOMBRE_DIRECTORIO = "IPAT_Digital";
-    private final static String GENERADOR = "MisArchivos";
+    private final static String GENERADOR = "Evidencias";
     final static int cons = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.anexos);
+        foto = Environment.getExternalStorageDirectory() + File.separator + NOMBRE_DIRECTORIO + File.separator + GENERADOR;
         File f =  new File(Environment.getExternalStorageDirectory().toString() + File.separator + NOMBRE_DIRECTORIO);
         if(!f.exists()){
             f.mkdir();
@@ -61,9 +68,8 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
         //Floating Button
         btnCam = (FloatingActionButton) findViewById(R.id.camara);
         btnCam.setOnClickListener(this);
-        aleatorio = new Integer((int) (Math.random() * 100)).intValue();
-        foto = Environment.getExternalStorageDirectory() + File.separator + NOMBRE_DIRECTORIO + File.separator + GENERADOR;
-        dir = new File(foto,"imagen"+ aleatorio +".jpg");
+        aleatorio = aleatorio+1;
+        dir = new File(foto);
 
         //-------------------------------------------------------------------
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -88,20 +94,29 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        Toast.makeText(Anexos.this, foto, Toast.LENGTH_SHORT).show();
+        tempo=foto+File.separator+"foto"+aleatorio+".jpg";
+        mi_foto = new File(tempo);
+        try {
+            mi_foto.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File file = new File(foto);
-        //intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mi_foto));
         startActivityForResult(intent, 0); // 1 para la camara, 2 para la galeria
+        aleatorio++;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //bmp=(Bitmap) data.getExtras().get(MediaStore.EXTRA_OUTPUT);
         //img.setImageBitmap(bmp);
-        Bundle ext = data.getExtras();
-        bmp = (Bitmap)ext.get("data");
+        bmp = BitmapFactory.decodeFile(tempo);
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         img.setImageBitmap(bmp);
         FileOutputStream fos = null;
         try{
@@ -114,7 +129,7 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
         }
         if (dir.exists()) {
             UploaderFoto nuevaTarea = new UploaderFoto();
-            nuevaTarea.execute(foto);
+            nuevaTarea.execute(tempo);
         }
         else{
             Toast.makeText(getApplicationContext(), "No se ha realizado la foto", Toast.LENGTH_SHORT).show();

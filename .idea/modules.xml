@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Trabajo1.iml" filepath="$PROJECT_DIR$/Trabajo1.iml" />
       <module fileurl="file://$PROJECT_DIR$/TransDigital_PF(Version Final).iml" filepath="$PROJECT_DIR$/TransDigital_PF(Version Final).iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

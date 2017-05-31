@@ -33,13 +33,19 @@ import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class Cond_Vehi_Prop extends AppCompatActivity {
 
     public ImageButton bfechnacond,bfechalicen,bfechavencSoat,bfechavencSSC,bfechavencSSE;
     public EditText efechnacond,efechalicen,efechavencSoat,efechavencSSC,efechavencSSE;
-
+    long ahora = System.currentTimeMillis();
+    Date fecha = new Date(ahora);
+    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    int año = Integer.parseInt(df.format(fecha).split("/")[2])+2000;
     public ImageButton iBFallas;
     public FloatingActionButton floatingActionButtonSend;
 
@@ -166,7 +172,6 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
         mes=c.get(Calendar.MONTH);
         ano=c.get(Calendar.YEAR);
         final DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 set(i,year, month, dayOfMonth);
@@ -175,12 +180,12 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
         //Tenias esto al reves (,dia,mes,ano
                 ,ano,mes,dia);
         datePickerDialog.show();
-
     }
 
     public void set(int i,int year, int month, int dayOfMonth){
         EditText et_setDate;
         String fecha=dayOfMonth+"/"+(month+1)+"/"+year;
+        DateFormat fech=new SimpleDateFormat("dd/MM/yyyy");
         Log.d(TAG, fecha);
         switch (i) {
             case 1:

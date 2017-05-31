@@ -17,6 +17,14 @@ import java.util.List;
 public class Caracteristicas_Lugar extends AppCompatActivity {
     Spinner area,sector,zona,diseño,condicionc;
     String ar,sec,zo,dis,condc;
+    int[] in=new int[5];
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putIntArray("position",in);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +37,12 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onPause();
             }
         });
+
         //--------------------------------------------------------
+
         area=(Spinner)findViewById(R.id.area);
         List<String> values1 = new ArrayList<String>();
         values1.add("Seleccione...");
@@ -50,6 +60,8 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
                 ar=parent.getItemAtPosition(position).toString();
                 if(parent.getItemAtPosition(position).toString().equals("Seleccione...")){
                     ar="";
+                }else{
+                    in[0]=position;
                 }
             }
 
@@ -73,6 +85,8 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
                 sec=parent.getItemAtPosition(position).toString();
                 if(parent.getItemAtPosition(position).toString().equals("Seleccione...")){
                     sec="";
+                }else{
+                    in[1]=position;
                 }
             }
 
@@ -98,6 +112,8 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
                 zo=parent.getItemAtPosition(position).toString();
                 if(parent.getItemAtPosition(position).toString().equals("Seleccione...")){
                     zo="";
+                }else{
+                    in[2]=position;
                 }
             }
 
@@ -130,6 +146,8 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
                 dis=parent.getItemAtPosition(position).toString();
                 if(parent.getItemAtPosition(position).toString().equals("Seleccione...")){
                     dis="";
+                }else{
+                    in[3]=position;
                 }
             }
 
@@ -155,6 +173,8 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
                 condc=parent.getItemAtPosition(position).toString();
                 if(parent.getItemAtPosition(position).toString().equals("Seleccione...")){
                     condc="";
+                }else{
+                    in[4]=position;
                 }
             }
 
@@ -163,8 +183,14 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
                 condc="";
             }
         });
-
-
+        if(savedInstanceState!=null){
+            int[] t=savedInstanceState.getIntArray("position");
+            area.setSelection(t[0]);
+            sector.setSelection(t[1]);
+            zona.setSelection(t[2]);
+            diseño.setSelection(t[3]);
+            condicionc.setSelection(t[4]);
+        }
     }
 
     public void Save_Caract_Lugar(View view) {
@@ -184,7 +210,6 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
             i.putExtra("diseño", dis);
             i.putExtra("condicionc", condc);
             i.putExtra("idcl",getIntent().getStringExtra("idinfo"));
-            setResult(Activity.RESULT_OK, i);
             finish();
         }else{
             Toast.makeText(this, "Hay campos vacíos, verifique e intentelo de nuevo", Toast.LENGTH_SHORT).show();

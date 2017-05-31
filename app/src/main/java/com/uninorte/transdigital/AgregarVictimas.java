@@ -25,13 +25,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AgregarVictimas extends AppCompatActivity {
-    EditText editText1,devic,nom,tdc,ndc,nac,fechn,se,dir,ciud,telef,grdoE,hospi;;
+    EditText editText1,devic,nom,ndc,nac,fechn,se,dir,ciud,telef,grdoE,hospi;;
     String detalle_victima="",nombre="",tdoc="",ndoc="",nacionalidad="",fecha_n="",x="",direc="",ciudad="",tel="",gravedad="",exam="",aut="",ebriagez="",gradoE="",sustancia="",chaleco="",casco="",cinturon="",hospital="";
     public String TAG = Constants.TAG;
     private boolean customview;
     public ImageButton bfechnavic;
     public EditText efechnavict;
-    Spinner tipo_victima;
+    Spinner tipo_victima,tdc;
     RadioGroup rg,sexo,examen,auto,ebriag,sustancias,chal,casc,cintu;
     public int dia,mes,ano;
 
@@ -54,7 +54,30 @@ public class AgregarVictimas extends AppCompatActivity {
         });
         //----------------------------------------------------------------------
         nom = (EditText) findViewById(R.id.name);
-        tdc = (EditText) findViewById(R.id.Tced);
+        tdc = (Spinner) findViewById(R.id.Tced);
+        List<String> valuesc = new ArrayList<String>();
+        valuesc.add("Seleccione...");
+        valuesc.add("C.C.");
+        valuesc.add("C.E.");
+        valuesc.add("PD");
+        valuesc.add("T.I.");
+        ArrayAdapter<String> dataAdapterc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, valuesc);
+        dataAdapterc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tdc.setAdapter(dataAdapterc);
+        tdc.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                tdoc = parent.getItemAtPosition(position).toString();
+                if (parent.getItemAtPosition(position).toString().equals("Seleccione...")) {
+                    tdoc = "";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                tdoc="";
+            }
+        });
         ndc = (EditText) findViewById(R.id.idvict);
         nac = (EditText) findViewById(R.id.nacionalidadvict);
         fechn = (EditText) findViewById(R.id.efechnavict);
@@ -263,7 +286,7 @@ public class AgregarVictimas extends AppCompatActivity {
             DBVictima dv = new DBVictima();
             dv.setDetalle_victima(detalle_victima);
             dv.setNombre(nom.getText().toString());
-            dv.setTdoc(tdc.getText().toString());
+            dv.setTdoc(tdoc);
             dv.setNdoc(ndc.getText().toString());
             dv.setNacionalidad(nac.getText().toString());
             dv.setFecha_n(fechn.getText().toString());

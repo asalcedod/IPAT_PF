@@ -34,9 +34,9 @@ public class Propietario extends Fragment {
     FloatingActionMenu materialDesignFAM;
     FloatingActionButton floatingActionButtonsend;
 
-    EditText Editimpacto,Editfallas,enombre,et_doc,id_doc,descrip;
+    EditText Editimpacto,Editfallas,enombre,id_doc,descrip;
     String mismo_cond="",nombre="",t_doc,n_doc,sclasev,sclases,modalidad_t,sradioa,falla,descrip_daño,lugar_impacto;
-    public Spinner clasev,clases,mdt,radioa;
+    public Spinner clasev,clases,mdt,radioa,et_doc;
     public int dia,mes,ano;
     public String cat="",cs="",mt="",rada="";
     String cv="";
@@ -65,13 +65,37 @@ public class Propietario extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_propietario, container, false);
 
 
+        et_doc=(Spinner)rootView.findViewById(R.id.Tdoc);
+        final List<String> valuesc = new ArrayList<String>();
+        valuesc.add("Seleccione...");
+        valuesc.add("C.C.");
+        valuesc.add("C.E.");
+        valuesc.add("PD");
+        valuesc.add("T.I.");
+        ArrayAdapter<String> dataAdapterc = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, valuesc);
+        dataAdapterc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        et_doc.setAdapter(dataAdapterc);
+        et_doc.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                t_doc = parent.getItemAtPosition(position).toString();
+                if (parent.getItemAtPosition(position).toString().equals("Seleccione...")) {
+                    t_doc = "";
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                t_doc="";
+            }
+        });
         rg=(RadioGroup)rootView.findViewById(R.id.m_c);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // TODO Auto-generated method stub
+
                 if (checkedId == R.id.checkBox11) {
                     mismo_cond = "Si";
 
@@ -81,14 +105,17 @@ public class Propietario extends Fragment {
                         Tdoc=ca.tdoc;
                         Doc=ca.ndoc;
                     }
+                    for(int i=0;i<5;i++){
+                        if(valuesc.get(i).equals(Tdoc)){
+                            et_doc.setSelection(i);
+                            i=5;
+                        }
+                    }
                     enombre=(EditText) rootView.findViewById(R.id.nameProp);
                     enombre.setText(Bnombre);
-
-                    et_doc=(EditText)rootView.findViewById(R.id.tipoDOc);
-                    et_doc.setText(Tdoc);
-
                     id_doc=(EditText)rootView.findViewById(R.id.idecond);
-                    id_doc.setText(Doc);///eroro en asignar - se va al sino y muestra null
+                    id_doc.setText(Doc);
+                    ///eroro en asignar - se va al sino y muestra null
                     //recibe el dato
                     /*if (getArguments() != null) {
                         LinearLayout ln = (LinearLayout) rootView.findViewById(R.id.GrupoDatosProp);
@@ -233,14 +260,13 @@ public class Propietario extends Fragment {
             @Override
             public void onClick(View v) {
                 enombre=(EditText)rootView.findViewById(R.id.nameProp);
-                et_doc=(EditText)rootView.findViewById(R.id.tipoDOc);
                 id_doc=(EditText)rootView.findViewById(R.id.idecond);
                 descrip=(EditText)rootView.findViewById(R.id.idDesDaños);
                 List<DBPropietario> a = new Delete().from(DBPropietario.class).queryList();
                 DBPropietario p = new DBPropietario();
                 p.setMismo_cond(mismo_cond);
                 p.setNombre(enombre.getText().toString());
-                p.setT_doc(et_doc.getText().toString());
+                p.setT_doc(t_doc);
                 p.setN_doc(id_doc.getText().toString());
                 p.setClasev(cv);
                 p.setClases(cs);

@@ -1,5 +1,6 @@
 package com.uninorte.transdigital;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -116,7 +117,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         }
 
         String id_carac_l= "", area= "", sector= "", zona= "", diseño= "", condicionesc= "";
-        new Enviar.Addform1().execute(organismo,gravedad,direccion_a,latitud,longitud,clase_a,choque_con,objeto_fijo,id_c_l,fecha_a,hora_a,fecha_i,hora_i);
+        new Enviar.Addform1().execute(organismo,gravedad,direccion_a,latitud,longitud,clase_a,choque_con,objeto_fijo,id_c_l,fecha_a,hora_a,fecha_i,hora_i,codb);
         List<DBCaracteristicasl> cl = new Select().from(DBCaracteristicasl.class).queryList();
         for (DBCaracteristicasl ca : cl) {
             id_carac_l = id_cl;
@@ -304,11 +305,8 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 int height = bmp.getHeight();
                 float scaleWidth = ((float) 300) / width;
                 float scaleHeight = ((float) 600) / height;
-                // create a matrix for the manipulation
                 Matrix matrix = new Matrix();
-                // resize the bit map
                 matrix.postScale(scaleWidth, scaleHeight);
-                // recreate the new Bitmap
                 bmp = Bitmap.createBitmap(bmp, 0, 0, width, height, matrix, false);
                 ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
                 bmp.compress(Bitmap.CompressFormat.JPEG, 50, stream2);
@@ -343,6 +341,9 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 copiacorreo();
+                                Intent i=new Intent();
+                                setResult(Activity.RESULT_OK,i);
+                                finish();
                                 finish();
                             }
                         });
@@ -355,7 +356,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         Intent itSend = new Intent(android.content.Intent.ACTION_SEND);
         itSend.setType("application/pdf");
         itSend.putExtra(android.content.Intent.EXTRA_EMAIL, "antony9409@gmail.com");
-        itSend.putExtra(android.content.Intent.EXTRA_SUBJECT, "Copia IPAT "+codb);
+        itSend.putExtra(android.content.Intent.EXTRA_SUBJECT, "Copia IPAT_"+codb);
         itSend.putExtra(android.content.Intent.EXTRA_TEXT, text);
         itSend.putExtra(Intent.EXTRA_STREAM, uri);
         startActivityForResult(itSend, 1);
@@ -399,10 +400,12 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             String hora_a = args[10];
             String fecha_i = args[11];
             String hora_i = args[12];
+            String id_formulario = args[13];
 
             try {
                 // Building Parameters
                 List params = new ArrayList();
+                params.add(new BasicNameValuePair("id_formulario",id_formulario));
                 params.add(new BasicNameValuePair("organismo", organismo));
                 params.add(new BasicNameValuePair("gravedad", gravedad));
                 params.add(new BasicNameValuePair("direccion_a", direccion_a));

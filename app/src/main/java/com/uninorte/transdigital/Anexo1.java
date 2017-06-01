@@ -3,7 +3,6 @@ package com.uninorte.transdigital;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -513,6 +512,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
         Intent i = new Intent(this, Anexos.class);
         startActivityForResult(i,3);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

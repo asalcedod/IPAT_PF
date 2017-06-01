@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -139,11 +138,10 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
     class UploaderFoto extends AsyncTask<String, String, String> {
 
         ProgressDialog pDialog;
-        String miFoto = "";
 
         @Override
         protected String doInBackground(String... params) {
-            miFoto = params[0];
+            String miFoto = params[0];
             try {
                 HttpClient httpclient = new DefaultHttpClient();
                 httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);

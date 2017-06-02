@@ -1,15 +1,17 @@
 package com.uninorte.transdigital;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.raizlabs.android.dbflow.sql.language.Delete;
+import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +44,6 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
         });
 
         //--------------------------------------------------------
-
         area=(Spinner)findViewById(R.id.area);
         List<String> values1 = new ArrayList<String>();
         values1.add("Seleccione...");
@@ -70,6 +71,16 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
                 ar="";
             }
         });
+        List<DBCaracteristicasl> c = new Select().from(DBCaracteristicasl.class).queryList();
+        if(c.size()>0){
+            for (DBCaracteristicasl ca : c) {
+                for(int i=0;i<values1.size();i++) {
+                    if(ca.area.equals(values1.get(i))){
+                        area.setSelection(i);
+                    }
+                }
+            }
+        }
         sector=(Spinner)findViewById(R.id.sector);
         List<String> values2 = new ArrayList<String>();
         values2.add("Seleccione...");
@@ -95,15 +106,24 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
                 sec="";
             }
         });
+        if(c.size()>0){
+            for (DBCaracteristicasl ca : c) {
+                for(int i=0;i<values2.size();i++) {
+                    if(ca.sector.equals(values2.get(i))){
+                        sector.setSelection(i);
+                    }
+                }
+            }
+        }
         zona=(Spinner)findViewById(R.id.zona);
-        List<String> values = new ArrayList<String>();
-        values.add("Seleccione...");
-        values.add("Escolar");
-        values.add("Turística");
-        values.add("Deportiva");
-        values.add("Privada");
-        values.add("Hospitalaria");
-        ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, values);
+        List<String> values3 = new ArrayList<String>();
+        values3.add("Seleccione...");
+        values3.add("Escolar");
+        values3.add("Turística");
+        values3.add("Deportiva");
+        values3.add("Privada");
+        values3.add("Hospitalaria");
+        ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, values3);
         dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         zona.setAdapter(dataAdapter3);
         zona.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
@@ -122,6 +142,15 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
                 zo="";
             }
         });
+        if(c.size()>0){
+            for (DBCaracteristicasl ca : c) {
+                for(int i=0;i<values3.size();i++) {
+                    if(ca.zona.equals(values3.get(i))){
+                        zona.setSelection(i);
+                    }
+                }
+            }
+        }
         diseño=(Spinner)findViewById(R.id.diseño);
         List<String> values4 = new ArrayList<String>();
         values4.add("Seleccione...");
@@ -156,6 +185,15 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
                 dis="";
             }
         });
+        if(c.size()>0){
+            for (DBCaracteristicasl ca : c) {
+                for(int i=0;i<values4.size();i++) {
+                    if(ca.diseño.equals(values4.get(i))){
+                        diseño.setSelection(i);
+                    }
+                }
+            }
+        }
         condicionc=(Spinner)findViewById(R.id.condicionc);
         List<String> values5 = new ArrayList<String>();
         values5.add("Seleccione...");
@@ -183,17 +221,19 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
                 condc="";
             }
         });
-        if(savedInstanceState!=null){
-            int[] t=savedInstanceState.getIntArray("position");
-            area.setSelection(t[0]);
-            sector.setSelection(t[1]);
-            zona.setSelection(t[2]);
-            diseño.setSelection(t[3]);
-            condicionc.setSelection(t[4]);
+        if(c.size()>0){
+            for (DBCaracteristicasl ca : c) {
+                for(int i=0;i<values5.size();i++) {
+                    if(ca.condicionc.equals(values5.get(i))){
+                        condicionc.setSelection(i);
+                    }
+                }
+            }
         }
     }
 
     public void Save_Caract_Lugar(View view) {
+        List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();
         Intent i = new Intent();
         if(!ar.equals("") && !sec.equals("") && !zo.equals("") && !dis.equals("") && !condc.equals("") ) {
             DBCaracteristicasl caracter = new DBCaracteristicasl();

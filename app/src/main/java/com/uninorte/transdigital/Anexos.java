@@ -145,7 +145,7 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
             try {
                 HttpClient httpclient = new DefaultHttpClient();
                 httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-                HttpPost httppost = new HttpPost("https://transitodigital-asalcedod.c9users.io/upload.php");
+                HttpPost httppost = new HttpPost("https://transitodigital-asalcedod.c9users.io/form.php");
                 File file = new File(miFoto);
                 MultipartEntity mpEntity = new MultipartEntity();
                 ContentBody foto = new FileBody(file);

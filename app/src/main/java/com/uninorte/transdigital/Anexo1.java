@@ -152,7 +152,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
                         public void onClick(DialogInterface dialog, int item) {
                             choque=item+"";
                             if(items[item].equals("Objeto fijo")){
-                                final String[] items = {"Muro","Poste","Árbol","Baranda","Semaforo","Inmueble","Hidratante","Valla señal","Tarima, caseta, vehÍculo estacionada","Otro"};
+                                final String[] items = {"Muro","Poste","Árbol","Baranda","Semaforo","Inmueble","Hidratante","Valla señal","Tarima, caseta, vehículo estacionada","Otro"};
                                 AlertDialog.Builder builder = new AlertDialog.Builder(Anexo1.this);
                                 builder.setTitle("Objeto fijo: ");
                                 builder.setItems(items, new DialogInterface.OnClickListener() {

@@ -1,26 +1,23 @@
 package com.uninorte.transdigital;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -44,8 +41,6 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
     public EditText efechnacond,efechalicen,efechavencSoat,efechavencSSC,efechavencSSE;
     long ahora = System.currentTimeMillis();
     Date fecha = new Date(ahora);
-    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-    int año = Integer.parseInt(df.format(fecha).split("/")[2])+2000;
     public ImageButton iBFallas;
     public FloatingActionButton floatingActionButtonSend;
 
@@ -185,12 +180,31 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
     public void set(int i,int year, int month, int dayOfMonth){
         EditText et_setDate;
         String fecha=dayOfMonth+"/"+(month+1)+"/"+year;
-        DateFormat fech=new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat fech=new SimpleDateFormat("d/M/yyyy");
         Log.d(TAG, fecha);
         switch (i) {
             case 1:
-                et_setDate = (EditText) findViewById(R.id.efechnacond);
-                et_setDate.setText(fecha);
+                if(Integer.parseInt(fecha.split("/")[2])-year<16) {
+                    Toast.makeText(this, "Fecha invalida, menor de 16 años", Toast.LENGTH_SHORT).show();
+                }else{
+                    if(Integer.parseInt(fecha.split("/")[2])-year==16) {
+                        if(Integer.parseInt(fecha.split("/")[1])<(month+1)) {
+                            Toast.makeText(this, "Fecha invalida, menor de 16 años", Toast.LENGTH_SHORT).show();
+                        }else{
+                            if(Integer.parseInt(fecha.split("/")[1])==(month+1)) {
+                                if(Integer.parseInt(fecha.split("/")[0])<dayOfMonth) {
+                                    Toast.makeText(this, "Fecha invalida, menor de 16 años", Toast.LENGTH_SHORT).show();
+                                }
+                            }else{
+                                et_setDate = (EditText) findViewById(R.id.efechnacond);
+                                et_setDate.setText(fecha);
+                            }
+                        }
+                    }else{
+                        et_setDate = (EditText) findViewById(R.id.efechnacond);
+                        et_setDate.setText(fecha);
+                    }
+                }
                 break;
             case 2:
                 et_setDate = (EditText) findViewById(R.id.efechalicen);

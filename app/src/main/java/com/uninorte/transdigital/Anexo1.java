@@ -53,7 +53,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
     EditText name, date, hour,otro;
     long ahora = System.currentTimeMillis();
     Date fecha = new Date(ahora);
-    DateFormat df = new SimpleDateFormat("dd/MM/yy");
+    DateFormat df = new SimpleDateFormat("d/M/yyyy");
     String salida1 = df.format(fecha);
     String cla = "";
     Date hora = new Date(ahora);

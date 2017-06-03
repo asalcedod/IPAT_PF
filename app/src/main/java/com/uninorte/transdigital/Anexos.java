@@ -113,25 +113,25 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
         //bmp=(Bitmap) data.getExtras().get(MediaStore.EXTRA_OUTPUT);
         //img.setImageBitmap(bmp);
         bmp = BitmapFactory.decodeFile(tempo);
-
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-        img.setImageBitmap(bmp);
-        FileOutputStream fos = null;
-        try{
-            fos = new FileOutputStream(dir);
-            bmp.compress(Bitmap.CompressFormat.JPEG, 10, fos);
-        }catch (FileNotFoundException ex){
-            ex.printStackTrace();
-        }catch (IOException ex){
-            ex.printStackTrace();
-        }
-        if (dir.exists()) {
-            UploaderFoto nuevaTarea = new UploaderFoto();
-            nuevaTarea.execute(tempo);
-        }
-        else{
-            Toast.makeText(getApplicationContext(), "No se ha realizado la foto", Toast.LENGTH_SHORT).show();
+        if(bmp != null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            img.setImageBitmap(bmp);
+            FileOutputStream fos = null;
+            try {
+                fos = new FileOutputStream(dir);
+                bmp.compress(Bitmap.CompressFormat.JPEG, 10, fos);
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            if (dir.exists()) {
+                UploaderFoto nuevaTarea = new UploaderFoto();
+                nuevaTarea.execute(tempo);
+            } else {
+                Toast.makeText(getApplicationContext(), "No se ha realizado la foto", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -161,16 +161,10 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
 
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(Anexos.this);
-            pDialog.setMessage("Subiendo la imagen, espere.");
-            pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            pDialog.setCancelable(true);
-            pDialog.show();
         }
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            pDialog.dismiss();
         }
     }
 }

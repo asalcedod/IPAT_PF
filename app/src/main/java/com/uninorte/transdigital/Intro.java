@@ -105,9 +105,7 @@ public class Intro extends AppCompatActivity {
 
                         }
                         else{
-                            new Intro.AttemptLogin().execute(cedula,password);
-
-
+                            new Intro.AttemptLogin().execute(cedula, password);
                         }
                         //---------------------------------
                     }
@@ -226,7 +224,16 @@ public class Intro extends AppCompatActivity {
                             Toast.makeText(Intro.this,"Hay campos vacíos, verifique e intentelo de nuevo", Toast.LENGTH_LONG).show();
 
                         }else{
-                        new CreateUser().execute(cedula, username, password);
+                            if(cedula.length()<10 || password.length()>6 && password.length()<8){
+                                if(cedula.length()<10){
+                                    Toast.makeText(Intro.this, "Cedula invalida, por favor ingrese una cedula.", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(Intro.this, "Contraseña invalida, por favor ingrese una contrasela entre 6 a 8 caracteres.", Toast.LENGTH_SHORT).show();
+                                }
+                            }else {
+                                new CreateUser().execute(cedula, username, password);
+                            }
+
                         }
 
                     }

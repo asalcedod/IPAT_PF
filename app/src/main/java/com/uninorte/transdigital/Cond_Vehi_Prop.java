@@ -178,22 +178,30 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
     }
 
     public void set(int i,int year, int month, int dayOfMonth){
+        List<DBAccidente> c = new Select().from(DBAccidente.class).queryList();
+        String fecha_i="";
+        for (DBAccidente ca : c) {
+            fecha_i = ca.r_fecha;
+        }
         EditText et_setDate;
         String fecha=dayOfMonth+"/"+(month+1)+"/"+year;
         DateFormat fech=new SimpleDateFormat("d/M/yyyy");
         Log.d(TAG, fecha);
         switch (i) {
             case 1:
-                if(Integer.parseInt(fecha.split("/")[2])-year<16) {
+                if(Integer.parseInt(fecha_i.split("/")[2])-year<16) {
                     Toast.makeText(this, "Fecha invalida, menor de 16 años", Toast.LENGTH_SHORT).show();
                 }else{
-                    if(Integer.parseInt(fecha.split("/")[2])-year==16) {
-                        if(Integer.parseInt(fecha.split("/")[1])<(month+1)) {
+                    if(Integer.parseInt(fecha_i.split("/")[2])-year==16) {
+                        if(Integer.parseInt(fecha_i.split("/")[1])<(month+1)) {
                             Toast.makeText(this, "Fecha invalida, menor de 16 años", Toast.LENGTH_SHORT).show();
                         }else{
-                            if(Integer.parseInt(fecha.split("/")[1])==(month+1)) {
-                                if(Integer.parseInt(fecha.split("/")[0])<dayOfMonth) {
+                            if(Integer.parseInt(fecha_i.split("/")[1])==(month+1)) {
+                                if(Integer.parseInt(fecha_i.split("/")[0])<dayOfMonth) {
                                     Toast.makeText(this, "Fecha invalida, menor de 16 años", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    et_setDate = (EditText) findViewById(R.id.efechnacond);
+                                    et_setDate.setText(fecha);
                                 }
                             }else{
                                 et_setDate = (EditText) findViewById(R.id.efechnacond);

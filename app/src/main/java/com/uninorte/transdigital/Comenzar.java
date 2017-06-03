@@ -3,28 +3,17 @@ package com.uninorte.transdigital;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Environment;
-import android.preference.PreferenceManager;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
-import com.cocoahero.android.geojson.Feature;
 import com.cocoahero.android.geojson.Point;
-import com.lowagie.text.Font;
-import com.lowagie.text.FontFactory;
-import com.lowagie.text.HeaderFooter;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.Phrase;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Delete;
@@ -32,19 +21,9 @@ import com.raizlabs.android.dbflow.sql.language.Delete;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.pdf.PdfWriter;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import harmony.java.awt.Color;
 
 public class Comenzar extends AppCompatActivity {
 
@@ -106,32 +85,32 @@ public class Comenzar extends AppCompatActivity {
         ad.setId_dane(8000000);
         ad.setCiudad("Barranquilla");
         ad.setDepartamento("Atlántico");
-        ad.setOficina_transito("INSTITUTO DPTAL. DE TTE Y TTO DEL ATLANTICO");
+        ad.setOficina_transito("Instituto Dptal. de TTE y TTO del Atlantico");
         ad.save();
         ad.setId_dane(8001000);
         ad.setCiudad("Barranquilla");
         ad.setDepartamento("Atlántico");
-        ad.setOficina_transito("INST. DISTRITAL DE TTO. Y TTE. DE BARRANQUILLA");
+        ad.setOficina_transito("Inst. Distrital de TTO. y TTE. de Barranquilla");
         ad.save();
         ad.setId_dane(8296000);
         ad.setCiudad("Galapa");
         ad.setDepartamento("Atlántico");
-        ad.setOficina_transito("INSTITUTO DPTAL. DE TTE. Y TTO. DE GALAPA");
+        ad.setOficina_transito("Instituto Dptal. de TTE. y TTO. de Galapa");
         ad.save();
         ad.setId_dane(8433000);
         ad.setCiudad("Malambo");
         ad.setDepartamento("Atlántico");
-        ad.setOficina_transito("INSTITUTO DPTAL. DE TTE. Y TTO. DEL ATLANTICO");
+        ad.setOficina_transito("Instituto Dptal. de TTE. y TTO. del Atlantico");
         ad.save();
         ad.setId_dane(8573000);
         ad.setCiudad("Puerto Colombia");
         ad.setDepartamento("Atlántico");
-        ad.setOficina_transito("INSTIT. DEPTAL. DE TTE. Y TTO. DEL ATLANTICO");
+        ad.setOficina_transito("Inst. Dptal. de TTE. y TTO. del Atlantico");
         ad.save();
         ad.setId_dane(8758000);
         ad.setCiudad("Soledad");
         ad.setDepartamento("Atlántico");
-        ad.setOficina_transito("INSTITUTO MUNICIPAL DE TRANSITO Y TRANSPORTE DE SOLEDAD");
+        ad.setOficina_transito("Instituto Municipal de Transito Y Transporte de Soledad");
         ad.save();
         List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
         List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();

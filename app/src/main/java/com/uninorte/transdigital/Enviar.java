@@ -1,17 +1,19 @@
 package com.uninorte.transdigital;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -62,6 +64,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
     private static final String VICTIMAS_URL = "https://transitodigital-asalcedod.c9users.io/victimas.php";
     private final static String NOMBRE_DIRECTORIO = "IPAT_Digital";
     private final static String GENERADOR = "MisArchivos";
+    private final static String D_FOTO = "Evidencias";
     private final static String NOMBRE_DOCUMENTO = "Copia_IPAT.pdf";
     //ids
     private static final String TAG_SUCCESS = "success";
@@ -114,7 +117,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         }
 
         String id_carac_l= "", area= "", sector= "", zona= "", diseño= "", condicionesc= "";
-        new Enviar.Addform1().execute(organismo,gravedad,direccion_a,latitud,longitud,clase_a,choque_con,objeto_fijo,id_c_l,fecha_a,hora_a,fecha_i,hora_i);
+        new Enviar.Addform1().execute(organismo,gravedad,direccion_a,latitud,longitud,clase_a,choque_con,objeto_fijo,id_c_l,fecha_a,hora_a,fecha_i,hora_i,codb);
         List<DBCaracteristicasl> cl = new Select().from(DBCaracteristicasl.class).queryList();
         for (DBCaracteristicasl ca : cl) {
             id_carac_l = id_cl;
@@ -247,9 +250,11 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             new Victimas().execute(detalle_victima,nombrev,tdocv,ndocv,nacionalidadv,fecha_nv,x,direcv,ciudadv,telv,gravedadv,exam,autv,ebriagezv,gradoEv,sustancia,cinturonv,cascov,chalecov,hospitalv,id_cl);
         }
         try {
+            String foto = Environment.getExternalStorageDirectory() + File.separator + NOMBRE_DIRECTORIO + File.separator + D_FOTO;
             PdfWriter writer = PdfWriter.getInstance(documento, new FileOutputStream(nombrec));
             documento.open();
             documento.add(new Paragraph("Ref:"+codb));
+
             Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
                     R.drawable.encabezado);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -268,22 +273,22 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             documento.add(new Paragraph("                        "));
             font = FontFactory.getFont(FontFactory.defaultEncoding,20,
                     Font.BOLD, Color.BLACK);
-            documento.add(new Paragraph("Informacion del Conductor", font));
+            documento.add(new Paragraph("Información del Conductor", font));
             documento.add(new Paragraph("                        "));
             documento.add(new Paragraph("Nombre: "+nombre));
-            documento.add(new Paragraph("Tipo identificacion: "+tdoc));
+            documento.add(new Paragraph("Tipo identificación: "+tdoc));
             documento.add(new Paragraph("N° identificacion: "+ndoc));
             documento.add(new Paragraph("Nacionalidad: "+nacionalidad));
             documento.add(new Paragraph("Fecha de Nacimiento: "+fecha_n));
             documento.add(new Paragraph("Sexo: "+sexo));
-            documento.add(new Paragraph("Direccion Residencia"+direc));
-            documento.add(new Paragraph("Ciudad Residencia"+ciudad));
-            documento.add(new Paragraph("Telefono"+tel));
+            documento.add(new Paragraph("Direccion Residencia: "+direc));
+            documento.add(new Paragraph("Ciudad Residencia: "+ciudad));
+            documento.add(new Paragraph("Telefono: "+tel));
             documento.add(new Paragraph("                        "));
-            documento.add(new Paragraph("Informacion del accidente", font));
+            documento.add(new Paragraph("Información del accidente", font));
             documento.add(new Paragraph("                        "));
             documento.add(new Paragraph("Código Oficina Dane: "+organismo));
-            documento.add(new Paragraph("Gravidad del Accidente: "+gravedad));
+            documento.add(new Paragraph("Gravedad del Accidente: "+gravedad));
             documento.add(new Paragraph("Dirección del accidente: "+direccion_a));
             documento.add(new Paragraph("Clase de Accidente: "+clase_a));
             documento.add(new Paragraph("Choque con: "+choque_con));
@@ -292,11 +297,66 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             documento.add(new Paragraph("Hora del accidente: "+hora_a));
             documento.add(new Paragraph("Fecha del informe: "+fecha_i));
             documento.add(new Paragraph("Hora del informe: "+hora_i));
+            //Siguiente pag
             documento.newPage();
+            bitmap = BitmapFactory.decodeResource(this.getResources(),
+                    R.drawable.encabezado);
+            stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            imagen = Image.getInstance(stream.toByteArray());
+            documento.add(imagen);
+            marcaa = FontFactory.getFont(FontFactory.TIMES_ITALIC, 55, Font.BOLD,
+                    Color.LIGHT_GRAY);
             ColumnText.showTextAligned(writer.getDirectContentUnder(),
                     Element.ALIGN_CENTER, new Paragraph(
                             "Secretaría de Tránsito y Movilidad", marcaa), 297.5f, 421,
                     writer.getPageNumber() % 2 == 1 ? 50 : -50);
+            font = FontFactory.getFont(FontFactory.defaultEncoding,20,
+                    Font.BOLD, Color.BLACK);
+            documento.add(new Paragraph("Detalles del Vehículo", font));
+            documento.add(new Paragraph("                        "));
+            documento.add(new Paragraph("Empresa(Vehículos de transporte de servicio publico): "+empresa));
+            documento.add(new Paragraph("NIT: "+nit));
+            documento.add(new Paragraph("Matriculado en: "+matriculado));
+            documento.add(new Paragraph("Inmovilizado en: "+inmovilizado));
+            documento.add(new Paragraph("A Disposición de: "+dispocicion));
+            documento.add(new Paragraph("N° Tarjeta de Registro: "+t_registro));
+            documento.add(new Paragraph("Rev. Tecnico mecanica y de gases: "+rev_tecnica));
+            documento.add(new Paragraph("N° de la Revision: "+nrevic));
+            documento.add(new Paragraph("Número de acompañantes: "+n_acompañantes));
+            documento.add(new Paragraph("Porta SOAT"+SOAT));
+            documento.add(new Paragraph("Aseguradora: "+aseguradora));
+            documento.add(new Paragraph("N° Poliza: "+poliza));
+            documento.add(new Paragraph("Vencimiento del SOAT: "+fecha_v_soat));
+            documento.add(new Paragraph("Porta Seguro de Seguridad Civil Contractual: "+porta_seguro));
+            documento.add(new Paragraph("Aseguradora: "+asignatura));
+            documento.add(new Paragraph("Fecha de vencimiento: "+fecha_vsre));
+            documento.add(new Paragraph("Porta Seguro de Seguridad Civil Extractual: "+porta_seguro2));
+            documento.add(new Paragraph("Fecha de vencimiento: "+fecha_vsce));
+            //EVIDENCIAS
+            documento.newPage();
+            Bitmap bmp = BitmapFactory.decodeFile(foto+File.separator+"foto"+1+".jpg");
+            int i=1;
+            while(bmp!=null && i<10) {
+                int width = bmp.getWidth();
+                int height = bmp.getHeight();
+                float scaleWidth = ((float) 300) / width;
+                float scaleHeight = ((float) 600) / height;
+                Matrix matrix = new Matrix();
+                matrix.postScale(scaleWidth, scaleHeight);
+                bmp = Bitmap.createBitmap(bmp, 0, 0, width, height, matrix, false);
+                ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.JPEG, 50, stream2);
+                Image imagen2 = Image.getInstance(stream2.toByteArray());
+                documento.newPage();
+                ColumnText.showTextAligned(writer.getDirectContentUnder(),
+                        Element.ALIGN_CENTER, new Paragraph(
+                                "Secretaría de Tránsito y Movilidad", marcaa), 297.5f, 421,
+                        writer.getPageNumber() % 2 == 1 ? 50 : -50);
+                documento.add(imagen2);
+                i++;
+                bmp = BitmapFactory.decodeFile(foto+File.separator+"foto"+i+".jpg");
+            }
             documento.close();
 
         } catch (DocumentException e) {
@@ -318,6 +378,9 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 copiacorreo();
+                                Intent i=new Intent();
+                                setResult(Activity.RESULT_OK,i);
+                                finish();
                                 finish();
                             }
                         });
@@ -330,7 +393,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         Intent itSend = new Intent(android.content.Intent.ACTION_SEND);
         itSend.setType("application/pdf");
         itSend.putExtra(android.content.Intent.EXTRA_EMAIL, "antony9409@gmail.com");
-        itSend.putExtra(android.content.Intent.EXTRA_SUBJECT, "Copia IPAT "+codb);
+        itSend.putExtra(android.content.Intent.EXTRA_SUBJECT, "Copia IPAT_"+codb);
         itSend.putExtra(android.content.Intent.EXTRA_TEXT, text);
         itSend.putExtra(Intent.EXTRA_STREAM, uri);
         startActivityForResult(itSend, 1);
@@ -374,10 +437,12 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             String hora_a = args[10];
             String fecha_i = args[11];
             String hora_i = args[12];
+            String id_formulario = args[13];
 
             try {
                 // Building Parameters
                 List params = new ArrayList();
+                params.add(new BasicNameValuePair("id_formulario",id_formulario));
                 params.add(new BasicNameValuePair("organismo", organismo));
                 params.add(new BasicNameValuePair("gravedad", gravedad));
                 params.add(new BasicNameValuePair("direccion_a", direccion_a));

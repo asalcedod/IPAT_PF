@@ -106,13 +106,13 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
                 // TODO Auto-generated method stub
                 if (checkedId == R.id.radioButton4) {
                     Log.d(TAG, "La gravedad del accidente es con muertos");
-                    gravedad = "Muertos";
+                    gravedad = "1";
                 } else if (checkedId == R.id.radioButton5) {
                     Log.d(TAG, "La gravedad del accidente es con heridos");
-                    gravedad = "Heridos";
+                    gravedad = "2";
                 } else if (checkedId == R.id.radioButton6) {
                     Log.d(TAG, "La gravedad del accidente es con solo daños");
-                    gravedad = "Solo Daños";
+                    gravedad = "3";
                 }
             }
 
@@ -133,7 +133,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
         accidente.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                cla=parent.getItemAtPosition(position).toString();
+                cla=""+position;
                 if(parent.getItemAtPosition(position).toString().equals("Seleccione...")){
                     cla="";
                 }
@@ -150,14 +150,14 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
                     builder.setTitle("Seleccione Choque con: ");
                     builder.setItems(items, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int item) {
-                            choque=items[item];
+                            choque=item+"";
                             if(items[item].equals("Objeto fijo")){
                                 final String[] items = {"Muro","Poste","Árbol","Baranda","Semaforo","Inmueble","Hidratante","Valla señal","Tarima, caseta, vehÍculo estacionada","Otro"};
                                 AlertDialog.Builder builder = new AlertDialog.Builder(Anexo1.this);
                                 builder.setTitle("Objeto fijo: ");
                                 builder.setItems(items, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int item) {
-                                        objeto=items[item];
+                                        objeto=item+"";
                                         if(items[item].equals("Otro")){
                                             otro=(EditText)findViewById(R.id.otro);
                                             otro.setVisibility(View.VISIBLE);

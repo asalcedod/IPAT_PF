@@ -58,7 +58,7 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
         area.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ar=parent.getItemAtPosition(position).toString();
+                ar=position+"";
                 if(parent.getItemAtPosition(position).toString().equals("Seleccione...")){
                     ar="";
                 }else{
@@ -93,7 +93,7 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
         sector.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                sec=parent.getItemAtPosition(position).toString();
+                sec=position+"";
                 if(parent.getItemAtPosition(position).toString().equals("Seleccione...")){
                     sec="";
                 }else{
@@ -129,7 +129,7 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
         zona.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                zo=parent.getItemAtPosition(position).toString();
+                zo=position+"";
                 if(parent.getItemAtPosition(position).toString().equals("Seleccione...")){
                     zo="";
                 }else{
@@ -172,7 +172,7 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
         diseño.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                dis=parent.getItemAtPosition(position).toString();
+                dis=position+"";
                 if(parent.getItemAtPosition(position).toString().equals("Seleccione...")){
                     dis="";
                 }else{
@@ -208,7 +208,7 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
         condicionc.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                condc=parent.getItemAtPosition(position).toString();
+                condc=position+"";
                 if(parent.getItemAtPosition(position).toString().equals("Seleccione...")){
                     condc="";
                 }else{

@@ -213,8 +213,34 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
                         et_setDate.setText(fecha);
                     }
                 }
+                et_setDate = (EditText) findViewById(R.id.efechnacond);
+                et_setDate.setText(fecha);
                 break;
             case 2:
+                /*if(Integer.parseInt(fecha_i.split("/")[2])-year<16) {
+                    Toast.makeText(this, "Fecha invalida, menor de 16 años", Toast.LENGTH_SHORT).show();
+                }else{
+                    if(Integer.parseInt(fecha_i.split("/")[2])-year==16) {
+                        if(Integer.parseInt(fecha_i.split("/")[1])<(month+1)) {
+                            Toast.makeText(this, "Fecha invalida, menor de 16 años", Toast.LENGTH_SHORT).show();
+                        }else{
+                            if(Integer.parseInt(fecha_i.split("/")[1])==(month+1)) {
+                                if(Integer.parseInt(fecha_i.split("/")[0])<dayOfMonth) {
+                                    Toast.makeText(this, "Fecha invalida, menor de 16 años", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    et_setDate = (EditText) findViewById(R.id.efechalicen);
+                                    et_setDate.setText(fecha);
+                                }
+                            }else{
+                                et_setDate = (EditText) findViewById(R.id.efechalicen);
+                                et_setDate.setText(fecha);
+                            }
+                        }
+                    }else{
+                        et_setDate = (EditText) findViewById(R.id.efechalicen);
+                        et_setDate.setText(fecha);
+                    }
+                }*/
                 et_setDate = (EditText) findViewById(R.id.efechalicen);
                 et_setDate.setText(fecha);
                 break;

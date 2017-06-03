@@ -1,7 +1,6 @@
 package com.uninorte.transdigital;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -50,7 +49,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 3;
     int REQUEST_CODE = 1;
     //Fecha y Hora...............................................................................
-    EditText name, date, hour,otro;
+    EditText name, date, hour,otro, ncond;
     long ahora = System.currentTimeMillis();
     Date fecha = new Date(ahora);
     DateFormat df = new SimpleDateFormat("d/M/yyyy");
@@ -193,6 +192,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
         hour = (EditText) findViewById(R.id.hour);
         date.setText(salida1);
         hour.setText(salida2);
+        ncond = (EditText) findViewById(R.id.idnumcond);
         String nombre = name.getText().toString();
         String fecha = salida1;
         String hora = salida2;
@@ -448,8 +448,24 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
             for (DBClaseAccidente ca : c) {
                 Toast.makeText(this, ca.a, Toast.LENGTH_LONG).show();
             }*/
-
-            startActivityForResult(it,1);
+            int nveh=0;
+            if(ncond.getText().toString().equals("")){
+                nveh=0;
+            }else{
+                nveh=Integer.parseInt(ncond.getText().toString());
+            }
+            if(nveh>2) {
+                for (int j = nveh - 2; j > 0; j--) {
+                    Intent i = new Intent(this, Cond_Vehi_Prop.class);
+                    i.putExtra("hoja", "Anexo " + j);
+                    startActivityForResult(i, 4);
+                }
+            }
+            for(int j=2;j>0;j--) {
+                Intent i = new Intent(this, Cond_Vehi_Prop.class);
+                i.putExtra("hoja","Conductor "+j);
+                startActivityForResult(i, 4);
+            }
             //finish();
         }else{
             Toast.makeText(this,"Existen campos sin completar.",Toast.LENGTH_SHORT).show();
@@ -460,8 +476,13 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
 
     public void onClick_Informe2(View view) {
         //se va al campo 2, para continuar con el informe-- El campo 2 es Cond_Veh_Prop
-        Intent i = new Intent(this, Cond_Vehi_Prop.class);
-        startActivityForResult(i,4);
+        Intent in = new Intent(this, Victimas.class);
+        startActivityForResult(in,5);
+        for(int j=2;j>0;j--) {
+            Intent i = new Intent(this, Cond_Vehi_Prop.class);
+            i.putExtra("hoja","Conductor "+j);
+            startActivityForResult(i, 4);
+        }
     }
 
     public void onClick_Ubicacion(View view) {
@@ -539,9 +560,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
             }
         }
         if(requestCode==4){
-            if (resultCode == Activity.RESULT_OK) {
-                finish();
-            }
+            finish();
         }
     }
 

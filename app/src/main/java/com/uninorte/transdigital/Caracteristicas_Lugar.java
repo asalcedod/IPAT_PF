@@ -75,7 +75,7 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
         if(c.size()>0){
             for (DBCaracteristicasl ca : c) {
                 for(int i=0;i<values1.size();i++) {
-                    if(ca.area.equals(values1.get(i))){
+                    if(ca.area.equals(i+"")){
                         area.setSelection(i);
                     }
                 }
@@ -109,7 +109,7 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
         if(c.size()>0){
             for (DBCaracteristicasl ca : c) {
                 for(int i=0;i<values2.size();i++) {
-                    if(ca.sector.equals(values2.get(i))){
+                    if(ca.sector.equals(i+"")){
                         sector.setSelection(i);
                     }
                 }
@@ -145,7 +145,7 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
         if(c.size()>0){
             for (DBCaracteristicasl ca : c) {
                 for(int i=0;i<values3.size();i++) {
-                    if(ca.zona.equals(values3.get(i))){
+                    if(ca.zona.equals(i+"")){
                         zona.setSelection(i);
                     }
                 }
@@ -188,7 +188,7 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
         if(c.size()>0){
             for (DBCaracteristicasl ca : c) {
                 for(int i=0;i<values4.size();i++) {
-                    if(ca.diseño.equals(values4.get(i))){
+                    if(ca.diseño.equals(i+"")){
                         diseño.setSelection(i);
                     }
                 }
@@ -224,7 +224,7 @@ public class Caracteristicas_Lugar extends AppCompatActivity {
         if(c.size()>0){
             for (DBCaracteristicasl ca : c) {
                 for(int i=0;i<values5.size();i++) {
-                    if(ca.condicionc.equals(values5.get(i))){
+                    if(ca.condicionc.equals(i+"")){
                         condicionc.setSelection(i);
                     }
                 }

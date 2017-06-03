@@ -474,7 +474,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
-                    List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
+                    //List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
                     //finish();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
@@ -552,7 +552,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());
-                    List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();
+                    //List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {

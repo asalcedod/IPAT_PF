@@ -47,7 +47,7 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
     public Spinner categoria,clasev,clases,mdt,radioa;
     public int dia,mes,ano;
     public String cat="",cv="",cs="",mt="",rada="";
-
+    public TextView tit;
     private static final String TAG = "LogsAndroid";
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -58,7 +58,9 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cond__vehi__prop);
-
+        String title=getIntent().getStringExtra("hoja");
+        tit=(TextView)findViewById(R.id.toolbar_title);
+        tit.setText(title);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -298,6 +300,7 @@ public class Cond_Vehi_Prop extends AppCompatActivity {
         if(sw==true) {
             Intent i = new Intent(Cond_Vehi_Prop.this, Victimas.class);
             startActivityForResult(i,2);
+            //finish();
         }
     }
 

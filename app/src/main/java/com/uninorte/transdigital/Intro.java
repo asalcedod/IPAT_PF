@@ -192,7 +192,6 @@ public class Intro extends AppCompatActivity {
     }
     //END LOGIN-----------------------------------------------------------------------------------
 
-
     //REGISTER-----------------------------------------------------------------------------------
     private void showRegisterDialog() {
         LayoutInflater li = LayoutInflater.from(this);

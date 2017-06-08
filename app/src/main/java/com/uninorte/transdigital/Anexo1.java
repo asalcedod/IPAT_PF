@@ -58,6 +58,9 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
     Date hora = new Date(ahora);
     DateFormat dh = new SimpleDateFormat("HH:mm:ss");
     String salida2 = dh.format(hora);
+    SimpleDateFormat sdf = new SimpleDateFormat("EEE");
+    Date d = new Date(ahora);
+    String dayOfTheWeek = sdf.format(d);
 
     //Localizacion------------------------------------------------------------------------------
     String ubicacion = "Ubicación",direccion="";
@@ -116,7 +119,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
             }
 
         });
-
+        Toast.makeText(this, ""+dayOfTheWeek, Toast.LENGTH_SHORT).show();
         accidente=(Spinner)findViewById(R.id.acc);
         List<String> values = new ArrayList<String>();
         values.add("Seleccione...");
@@ -438,6 +441,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
             accidente.setR_fecha(salida1);
             accidente.setR_hora(salida2);
             accidente.setA_fecha(mdate);
+            accidente.setDia_s(dayOfTheWeek);
             accidente.setA_hora(mhour);
             accidente.setAccidente(cla);
             accidente.setChoque(choque);

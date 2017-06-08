@@ -14,9 +14,17 @@ public class DBAccidente extends BaseModel{
     @PrimaryKey(autoincrement = true)
     int id;
     @Column
-    String ot,gravedad,latitud,longitud,ubicacion,a_fecha,a_hora,r_fecha,r_hora,accidente,caracteristicasl;
+    String ot,gravedad,latitud,longitud,ubicacion,a_fecha,a_hora,r_fecha,dia_s,r_hora,accidente,caracteristicasl;
     @Column @Nullable
     String choque,objetof;
+
+    public String getDia_s() {
+        return dia_s;
+    }
+
+    public void setDia_s(String dia_s) {
+        this.dia_s = dia_s;
+    }
 
     public String getChoque() {
         return choque;

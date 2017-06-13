@@ -58,9 +58,10 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
     Date hora = new Date(ahora);
     DateFormat dh = new SimpleDateFormat("HH:mm:ss");
     String salida2 = dh.format(hora);
-    SimpleDateFormat sdf = new SimpleDateFormat("EEE");
+    SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
     Date d = new Date(ahora);
     String dayOfTheWeek = sdf.format(d);
+    String localidad="";
 
     //Localizacion------------------------------------------------------------------------------
     String ubicacion = "Ubicación",direccion="";
@@ -314,7 +315,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
             try {
                 Geocoder geocoder = new Geocoder(this, Locale.getDefault());
                 List<Address> list = geocoder.getFromLocation(
-                        loc.getLatitude(), loc.getLongitude(), 1);
+                        loc.getLatitude(),  loc.getLongitude(), 1);
                 if (!list.isEmpty()) {
                     Address DirCalle = list.get(0);
                     ubicacion = "Mi dirección es: \n"
@@ -322,6 +323,9 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
                     direccion=""+DirCalle.getAddressLine(0);
                     departamento=list.get(0).getAdminArea();
                     ciudad=list.get(0).getLocality();
+                    Log.d(TAG,""+list.get(0).getPremises());
+                    Log.d(TAG,""+list.get(0).getThoroughfare());
+                    Log.d(TAG,""+list.get(0).getSubThoroughfare());
                 }
 
             } catch (IOException e) {
@@ -440,8 +444,8 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
             accidente.setGravedad(gravedad);
             accidente.setR_fecha(salida1);
             accidente.setR_hora(salida2);
+            accidente.setLocalidad("Norte");
             accidente.setA_fecha(mdate);
-            accidente.setDia_s(dayOfTheWeek);
             accidente.setA_hora(mhour);
             accidente.setAccidente(cla);
             accidente.setChoque(choque);

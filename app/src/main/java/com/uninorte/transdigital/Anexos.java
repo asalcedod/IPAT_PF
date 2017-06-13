@@ -138,14 +138,14 @@ public class Anexos extends AppCompatActivity implements OnClickListener{
     class UploaderFoto extends AsyncTask<String, String, String> {
 
         ProgressDialog pDialog;
-
+        String miFoto;
         @Override
         protected String doInBackground(String... params) {
-            String miFoto = params[0];
+            miFoto = params[0];
             try {
                 HttpClient httpclient = new DefaultHttpClient();
                 httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-                HttpPost httppost = new HttpPost("https://transitodigital-asalcedod.c9users.io/form.php");
+                HttpPost httppost = new HttpPost("https://transitodigital-asalcedod.c9users.io/insertImagen.php");
                 File file = new File(miFoto);
                 MultipartEntity mpEntity = new MultipartEntity();
                 ContentBody foto = new FileBody(file);

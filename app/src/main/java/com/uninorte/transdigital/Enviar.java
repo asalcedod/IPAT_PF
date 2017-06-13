@@ -92,12 +92,13 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         if(outPutFile.exists()){
             outPutFile.delete();
         }
-        String organismo = "",gravedad = "",direccion_a="",latitud = "",longitud="",clase_a="",choque_con="",objeto_fijo="",id_c_l="",fecha_a="",hora_a="",fecha_i="",hora_i="";
+        String localidad = "",organismo = "",gravedad = "",direccion_a="",latitud = "",longitud="",clase_a="",choque_con="",objeto_fijo="",id_c_l="",fecha_a="",hora_a="",fecha_i="",hora_i="";
         List<DBAccidente> c = new Select().from(DBAccidente.class).queryList();
         for (DBAccidente ca : c) {
             organismo = ca.ot;
             gravedad = ca.gravedad;
             direccion_a = ca.ubicacion;
+            localidad = ca.localidad;
             latitud = ca.latitud;
             longitud = ca.longitud;
             clase_a = ca.accidente;
@@ -117,7 +118,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         }
 
         String id_carac_l= "", area= "", sector= "", zona= "", diseño= "", condicionesc= "";
-        new Enviar.Addform1().execute(organismo,gravedad,direccion_a,latitud,longitud,clase_a,choque_con,objeto_fijo,id_c_l,fecha_a,hora_a,fecha_i,hora_i,codb);
+        new Enviar.Addform1().execute(organismo,gravedad,direccion_a,latitud,longitud,clase_a,choque_con,objeto_fijo,id_c_l,fecha_a,hora_a,fecha_i,hora_i,codb,localidad);
         List<DBCaracteristicasl> cl = new Select().from(DBCaracteristicasl.class).queryList();
         for (DBCaracteristicasl ca : cl) {
             id_carac_l = id_cl;
@@ -438,6 +439,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             String fecha_i = args[11];
             String hora_i = args[12];
             String id_formulario = args[13];
+            String localidad = args[14];
 
             try {
                 // Building Parameters
@@ -456,6 +458,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 params.add(new BasicNameValuePair("hora_a", hora_a));
                 params.add(new BasicNameValuePair("fecha_i", fecha_i));
                 params.add(new BasicNameValuePair("hora_i", hora_i));
+                params.add(new BasicNameValuePair("localidad", localidad));
 
                 Log.d("request!", "starting");
 
@@ -470,18 +473,23 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                     // json success tag
                     success = json.getInt(TAG_SUCCESS);
                 }else{
-                    return "Falla en el servidor";
+
+                    return "Falla en la conexion";
                 }
-                if (success == 1) {
+                if (success == 2) {
                     Log.d("Formulario enviado!", json.toString());
                     //List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
                     //finish();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
+                    DBEstado estadoi = new DBEstado();
+                    estadoi.setId(id_formulario);
+                    estadoi.setEstado("No");
+                    estadoi.save();
+                    finish();
                     Log.d("Failure!", json.getString(TAG_MESSAGE));
                     return json.getString(TAG_MESSAGE);
-
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -540,8 +548,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 //Posting user data to script
                 JSONObject json = jsonParser.makeHttpRequest(
                         CAR_LUG_URL, "POST", params);
-
-                if(json != null) {
+                if(json != null ) {
                     // check your log for json response
                     Log.d("Registering attempt", json.toString());
 
@@ -1021,7 +1028,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                     // json success tag
                     success = json.getInt(TAG_SUCCESS);
                 }else{
-                    return "Falla en el servidor";
+                    return "Falla en la conexion";
                 }
                 if (success == 1) {
                     Log.d("Formulario enviado!", json.toString());

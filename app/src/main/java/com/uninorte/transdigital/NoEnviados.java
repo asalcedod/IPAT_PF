@@ -63,6 +63,7 @@ public class NoEnviados extends AppCompatActivity {
     }
 
     public void reenviar(View view) {
+        List<DBEstado> es = new Delete().from(DBEstado.class).queryList();
         String localidad = "",id_agente="1045719930",organismo = "",gravedad = "",direccion_a="",latitud = "",longitud="",clase_a="",choque_con="",objeto_fijo="",id_c_l="",fecha_a="",hora_a="",fecha_i="",hora_i="";
         List<DBAccidente> c = new Select().from(DBAccidente.class).queryList();
         if(c.size()>0) {
@@ -89,7 +90,6 @@ public class NoEnviados extends AppCompatActivity {
                 codb=codb+cof[i]+coh[i];
             }
             new NoEnviados.Addform1().execute(organismo,gravedad,direccion_a,latitud,longitud,clase_a,choque_con,objeto_fijo,id_c_l,fecha_a,hora_a,fecha_i,hora_i,codb,localidad,id_agente);
-
         }
 
         String id_carac_l= "", area= "", sector= "", zona= "", diseño= "", condicionesc= "";
@@ -328,13 +328,22 @@ public class NoEnviados extends AppCompatActivity {
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
-                    DBEstado estadoi = new DBEstado();
-                    estadoi.setId(id_cl);
-                    estadoi.setEstado("No");
-                    estadoi.save();
-                    finish();
-                    Log.d("Failure!", json.getString(TAG_MESSAGE));
-                    return json.getString(TAG_MESSAGE);
+                    if (success == 1) {
+                        Log.d("Formulario enviado!", json.toString());
+                        List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
+                        List<DBEstado> esta = new Delete().from(DBEstado.class).queryList();
+                        //finish();
+                        //startActivity(it);
+                        return "Formulario enviado!";
+                    }else {
+                        DBEstado estadoi = new DBEstado();
+                        estadoi.setId(id_cl);
+                        estadoi.setEstado("No");
+                        estadoi.save();
+                        finish();
+                        Log.d("Failure!", json.getString(TAG_MESSAGE));
+                        return json.getString(TAG_MESSAGE);
+                    }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

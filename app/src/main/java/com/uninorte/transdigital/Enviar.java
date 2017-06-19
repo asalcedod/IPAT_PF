@@ -380,7 +380,6 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                                 Intent i=new Intent();
                                 setResult(Activity.RESULT_OK,i);
                                 finish();
-                                finish();
                             }
                         });
         AlertDialog alert = builder.create();
@@ -480,20 +479,29 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                     finish();
                     return "Falla en la conexion";
                 }
+
                 if (success == 2) {
                     Log.d("Formulario enviado!", json.toString());
-                    List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
+                    //List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
                     //finish();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
-                    DBEstado estadoi = new DBEstado();
-                    estadoi.setId(id_cl);
-                    estadoi.setEstado("No");
-                    estadoi.save();
-                    finish();
-                    Log.d("Failure!", json.getString(TAG_MESSAGE));
-                    return json.getString(TAG_MESSAGE);
+                    if (success == 1) {
+                        Log.d("Formulario enviado!", json.toString());
+                        //List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
+                        //finish();
+                        //startActivity(it);
+                        return "Formulario enviado!";
+                    }else {
+                        DBEstado estadoi = new DBEstado();
+                        estadoi.setId(id_cl);
+                        estadoi.setEstado("No");
+                        estadoi.save();
+                        finish();
+                        Log.d("Failure!", json.getString(TAG_MESSAGE));
+                        return json.getString(TAG_MESSAGE);
+                    }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

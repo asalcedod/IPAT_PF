@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,18 +11,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-
-import com.github.clans.fab.FloatingActionMenu;
 import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.raizlabs.android.dbflow.sql.language.Delete;
-import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Victimas extends AppCompatActivity {
 
@@ -135,11 +129,9 @@ public class Victimas extends AppCompatActivity {
             }
         }
         if(requestCode==3){
-            if (resultCode == Activity.RESULT_OK) {
-                Intent i=new Intent();
-                setResult(Activity.RESULT_OK,i);
-                finish();
-            }
+            Intent i=new Intent();
+            setResult(Activity.RESULT_OK,i);
+            finish();
         }
 
 

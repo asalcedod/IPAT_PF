@@ -60,7 +60,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDz8vNb2RX6buOklOKR7Y5b_7eFmofF5Z4" />
+            android:value="AIzaSyDN9lluG6bQyNE5jETgQaLA6HeFgvACG_U" />
 
         <activity
             android:name=".Victimas"

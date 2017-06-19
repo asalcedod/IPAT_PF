@@ -1,33 +1,15 @@
 package com.uninorte.transdigital;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Element;
-import com.lowagie.text.Font;
-import com.lowagie.text.FontFactory;
-import com.lowagie.text.Image;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.pdf.ColumnText;
-import com.lowagie.text.pdf.PdfWriter;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
@@ -35,15 +17,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import harmony.java.awt.Color;
+public class NoEnviados extends AppCompatActivity {
 
-public class Enviar extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback{
     private static final String TAG = "LogsAndroid";
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -61,348 +39,210 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
     private static final String DETALLES_VEHICULO_URL = "https://transitodigital-asalcedod.c9users.io/detallesvehiculo.php";
     private static final String PROPIETARIO_URL = "https://transitodigital-asalcedod.c9users.io/propietario.php";
     private static final String VICTIMAS_URL = "https://transitodigital-asalcedod.c9users.io/victimas.php";
-    private final static String NOMBRE_DIRECTORIO = "IPAT_Digital";
-    private final static String GENERADOR = "MisArchivos";
-    private final static String D_FOTO = "Evidencias";
-    private final static String NOMBRE_DOCUMENTO = "Copia_IPAT.pdf";
-    //ids
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
+
+    private ArrayList<String> telefonos;
+    private ArrayAdapter<String> adaptador1;
+    private ListView lv1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_enviar);
+        setContentView(R.layout.activity_no_enviados);
+        telefonos=new ArrayList<String>();
+        List<DBEstado> c = new Select().from(DBEstado.class).queryList();
+        if(c.size()>0) {
+            Toast.makeText(this, "Tiene informes pendientes por enviar", Toast.LENGTH_SHORT).show();
+            for (DBEstado es : c) {
+                telefonos.add(es.id);
+            }
+        }
+        adaptador1=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,telefonos);
+        lv1=(ListView)findViewById(R.id.listView);
+        lv1.setAdapter(adaptador1);
     }
 
-    public void onClick_Informe(View view) {
-        sw=true;
-        Document documento = new Document(PageSize.LETTER);
-        File f =  new File(Environment.getExternalStorageDirectory().toString() + File.separator + NOMBRE_DIRECTORIO);
-        if(!f.exists()){
-            f.mkdir();
-        }
-        File ficheroPdf = new File(f.getPath() + File.separator + GENERADOR);
-        if(!ficheroPdf.exists()){
-            ficheroPdf.mkdir();
-        }
-
-        nombrec=Environment.getExternalStorageDirectory().toString() + File.separator + NOMBRE_DIRECTORIO + File.separator + GENERADOR + File.separator + NOMBRE_DOCUMENTO;
-        File outPutFile = new File(nombrec);
-        if(outPutFile.exists()){
-            outPutFile.delete();
-        }
+    public void reenviar(View view) {
         String localidad = "",id_agente="1045719930",organismo = "",gravedad = "",direccion_a="",latitud = "",longitud="",clase_a="",choque_con="",objeto_fijo="",id_c_l="",fecha_a="",hora_a="",fecha_i="",hora_i="";
         List<DBAccidente> c = new Select().from(DBAccidente.class).queryList();
-        for (DBAccidente ca : c) {
-            organismo = ca.ot;
-            gravedad = ca.gravedad;
-            direccion_a = ca.ubicacion;
-            localidad = ca.localidad;
-            latitud = ca.latitud;
-            longitud = ca.longitud;
-            clase_a = ca.accidente;
-            choque_con = ca.choque;
-            objeto_fijo = ca.objetof;
-            id_c_l = ca.caracteristicasl;
-            id_cl=id_c_l;
-            fecha_a = ca.a_fecha;
-            hora_a = ca.a_hora;
-            fecha_i = ca.r_fecha;
-            hora_i = ca.r_hora;
+        if(c.size()>0) {
+            for (DBAccidente ca : c) {
+                organismo = ca.ot;
+                gravedad = ca.gravedad;
+                direccion_a = ca.ubicacion;
+                localidad = ca.localidad;
+                latitud = ca.latitud;
+                longitud = ca.longitud;
+                clase_a = ca.accidente;
+                choque_con = ca.choque;
+                objeto_fijo = ca.objetof;
+                id_c_l = ca.caracteristicasl;
+                id_cl = id_c_l;
+                fecha_a = ca.a_fecha;
+                hora_a = ca.a_hora;
+                fecha_i = ca.r_fecha;
+                hora_i = ca.r_hora;
+            }
+            String[] cof=fecha_i.split("/");
+            String[] coh=hora_i.split(":");
+            for(int i=0;i<cof.length;i++){
+                codb=codb+cof[i]+coh[i];
+            }
+            new NoEnviados.Addform1().execute(organismo,gravedad,direccion_a,latitud,longitud,clase_a,choque_con,objeto_fijo,id_c_l,fecha_a,hora_a,fecha_i,hora_i,codb,localidad,id_agente);
+
         }
-        String[] cof=fecha_i.split("/");
-        String[] coh=hora_i.split(":");
-        for(int i=0;i<cof.length;i++){
-            codb=codb+cof[i]+coh[i];
-        }
+
         String id_carac_l= "", area= "", sector= "", zona= "", diseño= "", condicionesc= "";
-        new Enviar.Addform1().execute(organismo,gravedad,direccion_a,latitud,longitud,clase_a,choque_con,objeto_fijo,id_c_l,fecha_a,hora_a,fecha_i,hora_i,codb,localidad,id_agente);
+
         List<DBCaracteristicasl> cl = new Select().from(DBCaracteristicasl.class).queryList();
-        for (DBCaracteristicasl ca : cl) {
-            id_carac_l = id_cl;
-            area = ca.area;
-            sector = ca.sector;
-            zona = ca.zona;
-            diseño = ca.diseño;
-            condicionesc = ca.condicionc;
+        if(cl.size()>0) {
+            for (DBCaracteristicasl ca : cl) {
+                id_carac_l = id_cl;
+                area = ca.area;
+                sector = ca.sector;
+                zona = ca.zona;
+                diseño = ca.diseño;
+                condicionesc = ca.condicionc;
+            }
+            new NoEnviados.Caract_lugar().execute(id_carac_l, area, sector, zona, diseño, condicionesc);
         }
-        new Caract_lugar().execute(id_carac_l, area, sector, zona, diseño, condicionesc);
+
         String nombre="",tdoc="",ndoc="",nacionalidad="",fecha_n="",sexo="",direc="",ciudad="",tel="";
         List<DBDatosP> dp = new Select().from(DBDatosP.class).queryList();
-        for (DBDatosP ca : dp) {
-            nombre=ca.nombre;
-            tdoc=ca.tdoc;
-            ndoc=ca.ndoc;
-            nacionalidad=ca.nacionalidad;
-            fecha_n=ca.fecha_n;
-            sexo=ca.sexo;
-            direc=ca.direc;
-            ciudad=ca.ciudad;
-            tel=ca.tel;
+        if(dp.size()>0) {
+            for (DBDatosP ca : dp) {
+                nombre = ca.nombre;
+                tdoc = ca.tdoc;
+                ndoc = ca.ndoc;
+                nacionalidad = ca.nacionalidad;
+                fecha_n = ca.fecha_n;
+                sexo = ca.sexo;
+                direc = ca.direc;
+                ciudad = ca.ciudad;
+                tel = ca.tel;
+            }
+            new NoEnviados.DatosPersonales().execute(nombre,tdoc,ndoc,nacionalidad,fecha_n,sexo,direc,ciudad,tel,id_cl);
         }
-        new DatosPersonales().execute(nombre,tdoc,ndoc,nacionalidad,fecha_n,sexo,direc,ciudad,tel,id_cl);
+
         String gravedad2="",examen="",aut="",ebriagez="",gradoE="",sustancias="",portalicencia="",idlicencia="",restriccion="",categoria="",estado="",fecha="",cod_of="",chaleco="",casco="",cinturon="",hospital="",descip="";
         List<DBDetallesCond> dec = new Select().from(DBDetallesCond.class).queryList();
-        for (DBDetallesCond ca : dec) {
-            //gravedad2,examen,aut,ebriagez,gradoE,sustancias,portalicencia,idlicencia,categoria,estado,fecha,cod_of,chaleco,casco,cinturon,hospital,descip
-            gravedad2=ca.gravedad;
-            examen=ca.examen;
-            aut=ca.aut;
-            ebriagez=ca.ebriagez;
-            gradoE=ca.gradoE;
-            sustancias=ca.sustancias;
-            portalicencia=ca.portalicencia;
-            idlicencia=ca.idlicencia;
-            categoria=ca.categoria;
-            restriccion=ca.restriccion;
-            estado=ca.estado;
-            fecha=ca.fecha;
-            cod_of=ca.cod_of;
-            chaleco=ca.chaleco;
-            casco=ca.casco;
-            cinturon=ca.cinturon;
-            hospital=ca.hospital;
-            descip=ca.descip;
+        if(dec.size()>0) {
+            for (DBDetallesCond ca : dec) {
+                //gravedad2,examen,aut,ebriagez,gradoE,sustancias,portalicencia,idlicencia,categoria,estado,fecha,cod_of,chaleco,casco,cinturon,hospital,descip
+                gravedad2 = ca.gravedad;
+                examen = ca.examen;
+                aut = ca.aut;
+                ebriagez = ca.ebriagez;
+                gradoE = ca.gradoE;
+                sustancias = ca.sustancias;
+                portalicencia = ca.portalicencia;
+                idlicencia = ca.idlicencia;
+                categoria = ca.categoria;
+                restriccion = ca.restriccion;
+                estado = ca.estado;
+                fecha = ca.fecha;
+                cod_of = ca.cod_of;
+                chaleco = ca.chaleco;
+                casco = ca.casco;
+                cinturon = ca.cinturon;
+                hospital = ca.hospital;
+                descip = ca.descip;
+            }
+            new NoEnviados.DetallesConductor().execute(gravedad2,examen,aut,ebriagez,gradoE,sustancias,portalicencia,idlicencia,categoria,restriccion,estado,fecha,cod_of,chaleco,casco,cinturon,hospital,descip,id_cl);
         }
-        new DetallesConductor().execute(gravedad2,examen,aut,ebriagez,gradoE,sustancias,portalicencia,idlicencia,categoria,restriccion,estado,fecha,cod_of,chaleco,casco,cinturon,hospital,descip,id_cl);
+
         String placa="",remorque="",nacionalidad2="",marca="",linea="",color="",modelo="",carroceria="",toneladas="",n_personas="",id_licencia="";
         List<DBDatosV> dv = new Select().from(DBDatosV.class).queryList();
-        for (DBDatosV ca : dv) {
-            //placa,remorque,nacionalidad,marca,linea,color,modelo,carroceria,toneladas,n_personas,id_licencia;
-            placa=ca.placa;
-            remorque=ca.remorque;
-            nacionalidad2=ca.nacionalidad;
-            marca=ca.marca;
-            linea=ca.linea;
-            color=ca.color;
-            modelo=ca.modelo;
-            carroceria=ca.carroceria;
-            toneladas=ca.toneladas;
-            n_personas=ca.n_personas;
-            id_licencia=ca.id_licencia;
+        if(dv.size()>0) {
+            for (DBDatosV ca : dv) {
+                //placa,remorque,nacionalidad,marca,linea,color,modelo,carroceria,toneladas,n_personas,id_licencia;
+                placa = ca.placa;
+                remorque = ca.remorque;
+                nacionalidad2 = ca.nacionalidad;
+                marca = ca.marca;
+                linea = ca.linea;
+                color = ca.color;
+                modelo = ca.modelo;
+                carroceria = ca.carroceria;
+                toneladas = ca.toneladas;
+                n_personas = ca.n_personas;
+                id_licencia = ca.id_licencia;
+            }
+            new NoEnviados.DatosVehiculos().execute(placa,remorque,nacionalidad2,marca,linea,color,modelo,carroceria,toneladas,n_personas,id_licencia,id_cl);
         }
-        new DatosVehiculos().execute(placa,remorque,nacionalidad2,marca,linea,color,modelo,carroceria,toneladas,n_personas,id_licencia,id_cl);
+
         String empresa="",nit="",matriculado="",inmovilizado="",dispocicion="",t_registro="",rev_tecnica="",nrevic="",n_acompañantes="",SOAT="",aseguradora="",poliza="",fecha_v_soat="",porta_seguro="",id_seguro="",asignatura="",fecha_vsre="",porta_seguro2="",fecha_vsce="";
         //empresa,nit,matriculado,inmovilizado,dispocicion,t_registro,rev_tecnica,n_acompañantes,SOAT,aseguradora,poliza,fecha_v_soat,porta_seguro,id_seguro,asignatura,fecha_vsre,porta_seguro2,fecha_vsce;
         List<DBDetallesV> dev = new Select().from(DBDetallesV.class).queryList();
-        for (DBDetallesV a : dev) {
-            empresa=a.empresa;
-            nit=a.nit;
-            matriculado=a.matriculado;
-            inmovilizado=a.inmovilizado;
-            dispocicion=a.dispocicion;
-            t_registro=a.t_registro;
-            rev_tecnica=a.rev_tecnica;
-            nrevic=a.nrevt;
-            n_acompañantes=a.n_acompañantes;
-            SOAT=a.SOAT;
-            aseguradora=a.aseguradora;
-            poliza=a.poliza;
-            fecha_v_soat=a.fecha_v_soat;
-            porta_seguro=a.porta_seguro;
-            asignatura=a.asignatura;
-            fecha_vsre=a.fecha_vsre;
-            porta_seguro2=a.porta_seguro2;
-            fecha_vsce=a.fecha_vsce;
+        if(dev.size()>0) {
+            for (DBDetallesV a : dev) {
+                empresa = a.empresa;
+                nit = a.nit;
+                matriculado = a.matriculado;
+                inmovilizado = a.inmovilizado;
+                dispocicion = a.dispocicion;
+                t_registro = a.t_registro;
+                rev_tecnica = a.rev_tecnica;
+                nrevic = a.nrevt;
+                n_acompañantes = a.n_acompañantes;
+                SOAT = a.SOAT;
+                aseguradora = a.aseguradora;
+                poliza = a.poliza;
+                fecha_v_soat = a.fecha_v_soat;
+                porta_seguro = a.porta_seguro;
+                asignatura = a.asignatura;
+                fecha_vsre = a.fecha_vsre;
+                porta_seguro2 = a.porta_seguro2;
+                fecha_vsce = a.fecha_vsce;
+            }
+            new NoEnviados.DetallesVehiculos().execute(empresa,nit,matriculado,inmovilizado,dispocicion,t_registro,rev_tecnica,nrevic,n_acompañantes,SOAT,aseguradora,poliza,fecha_v_soat,porta_seguro,id_seguro,asignatura,fecha_vsre,porta_seguro2,fecha_vsce,id_cl);
         }
-        new DetallesVehiculos().execute(empresa,nit,matriculado,inmovilizado,dispocicion,t_registro,rev_tecnica,nrevic,n_acompañantes,SOAT,aseguradora,poliza,fecha_v_soat,porta_seguro,id_seguro,asignatura,fecha_vsre,porta_seguro2,fecha_vsce,id_cl);
+
         String mismo_cond="",nombre2="",t_doc="",n_doc="",clasev="",clases="",modalidad_t="",radioa="",fallas="",descrip_daño="",lugar_impacto="";
         List<DBPropietario> pr = new Select().from(DBPropietario.class).queryList();
-        for (DBPropietario a : pr) {
-            //mismo_cond,nombre2,t_doc,n_doc,clasev,clases,modalidad_t,radioa,fallas,descrip_daño,lugar_impacto
-            mismo_cond=a.mismo_cond;
-            nombre2=a.nombre;
-            t_doc=a.t_doc;
-            n_doc=a.n_doc;
-            clasev=a.clasev;
-            clases=a.clases;
-            modalidad_t=a.modalidad_t;
-            radioa=a.radioa;
-            fallas=a.fallas;
-            descrip_daño=a.descrip_daño;
-            lugar_impacto=a.lugar_impacto;
+        if(pr.size()>0) {
+            for (DBPropietario a : pr) {
+                //mismo_cond,nombre2,t_doc,n_doc,clasev,clases,modalidad_t,radioa,fallas,descrip_daño,lugar_impacto
+                mismo_cond = a.mismo_cond;
+                nombre2 = a.nombre;
+                t_doc = a.t_doc;
+                n_doc = a.n_doc;
+                clasev = a.clasev;
+                clases = a.clases;
+                modalidad_t = a.modalidad_t;
+                radioa = a.radioa;
+                fallas = a.fallas;
+                descrip_daño = a.descrip_daño;
+                lugar_impacto = a.lugar_impacto;
+            }
+            new NoEnviados.Propietario().execute(mismo_cond,nombre2,t_doc,n_doc,clasev,clases,modalidad_t,radioa,fallas,descrip_daño,lugar_impacto,id_cl);
         }
-        new Propietario().execute(mismo_cond,nombre2,t_doc,n_doc,clasev,clases,modalidad_t,radioa,fallas,descrip_daño,lugar_impacto,id_cl);
         String detalle_victima="",nombrev="",tdocv="",ndocv="",nacionalidadv="",fecha_nv="",x="",direcv="",ciudadv="",telv="",gravedadv="",exam="",autv="",ebriagezv="",gradoEv="",sustancia="",chalecov="",cascov="",cinturonv="",hospitalv="";
         List<DBVictima> v = new Select().from(DBVictima.class).queryList();
-        for (DBVictima ca : v) {
-            detalle_victima=ca.detalle_victima;
-            nombrev=ca.nombre;
-            tdocv=ca.tdoc;
-            ndocv=ca.ndoc;
-            nacionalidadv=ca.nacionalidad;
-            fecha_nv=ca.fecha_n;
-            x=ca.sexo;
-            direcv=ca.direc;
-            ciudadv=ca.ciudad;
-            telv=ca.tel;
-            gravedadv=ca.gravedad;
-            exam=ca.examen;
-            autv=ca.aut;
-            ebriagezv=ca.ebriagez;
-            gradoEv=ca.gradoE;
-            sustancia=ca.sustancias;
-            chalecov=ca.chaleco;
-            cascov=ca.casco;
-            cinturonv=ca.cinturon;
-            hospitalv=ca.hospital;
-            new Victimas().execute(detalle_victima,nombrev,tdocv,ndocv,nacionalidadv,fecha_nv,x,direcv,ciudadv,telv,gravedadv,exam,autv,ebriagezv,gradoEv,sustancia,cinturonv,cascov,chalecov,hospitalv,id_cl);
-        }
-        try {
-            String foto = Environment.getExternalStorageDirectory() + File.separator + NOMBRE_DIRECTORIO + File.separator + D_FOTO;
-            PdfWriter writer = PdfWriter.getInstance(documento, new FileOutputStream(nombrec));
-            documento.open();
-            documento.add(new Paragraph("Ref:"+codb));
-
-            Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
-                    R.drawable.encabezado);
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            Image imagen = Image.getInstance(stream.toByteArray());
-            documento.add(imagen);
-            Font marcaa = FontFactory.getFont(FontFactory.TIMES_ITALIC, 55, Font.BOLD,
-                    Color.LIGHT_GRAY);
-            ColumnText.showTextAligned(writer.getDirectContentUnder(),
-                    Element.ALIGN_CENTER, new Paragraph(
-                            "Secretaría de Tránsito y Movilidad", marcaa), 297.5f, 421,
-                    writer.getPageNumber() % 2 == 1 ? 50 : -50);
-            Font font = FontFactory.getFont(FontFactory.defaultEncoding,25,
-                    Font.BOLD, Color.BLACK);
-            documento.add(new Paragraph("                        COPIA HOJA IPAT", font));
-            documento.add(new Paragraph("                        "));
-            font = FontFactory.getFont(FontFactory.defaultEncoding,20,
-                    Font.BOLD, Color.BLACK);
-            documento.add(new Paragraph("Información del Conductor", font));
-            documento.add(new Paragraph("                        "));
-            documento.add(new Paragraph("Nombre: "+nombre));
-            documento.add(new Paragraph("Tipo identificación: "+tdoc));
-            documento.add(new Paragraph("N° identificacion: "+ndoc));
-            documento.add(new Paragraph("Nacionalidad: "+nacionalidad));
-            documento.add(new Paragraph("Fecha de Nacimiento: "+fecha_n));
-            documento.add(new Paragraph("Sexo: "+sexo));
-            documento.add(new Paragraph("Direccion Residencia: "+direc));
-            documento.add(new Paragraph("Ciudad Residencia: "+ciudad));
-            documento.add(new Paragraph("Telefono: "+tel));
-            documento.add(new Paragraph("                        "));
-            documento.add(new Paragraph("Información del accidente", font));
-            documento.add(new Paragraph("                        "));
-            documento.add(new Paragraph("Código Oficina Dane: "+organismo));
-            documento.add(new Paragraph("Gravedad del Accidente: "+gravedad));
-            documento.add(new Paragraph("Dirección del accidente: "+direccion_a));
-            documento.add(new Paragraph("Clase de Accidente: "+clase_a));
-            documento.add(new Paragraph("Choque con: "+choque_con));
-            documento.add(new Paragraph("Objeto fijo: "+objeto_fijo));
-            documento.add(new Paragraph("Fecha del accidente: "+fecha_a));
-            documento.add(new Paragraph("Hora del accidente: "+hora_a));
-            documento.add(new Paragraph("Fecha del informe: "+fecha_i));
-            documento.add(new Paragraph("Hora del informe: "+hora_i));
-            //Siguiente pag
-            documento.newPage();
-            bitmap = BitmapFactory.decodeResource(this.getResources(),
-                    R.drawable.encabezado);
-            stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            imagen = Image.getInstance(stream.toByteArray());
-            documento.add(imagen);
-            marcaa = FontFactory.getFont(FontFactory.TIMES_ITALIC, 55, Font.BOLD,
-                    Color.LIGHT_GRAY);
-            ColumnText.showTextAligned(writer.getDirectContentUnder(),
-                    Element.ALIGN_CENTER, new Paragraph(
-                            "Secretaría de Tránsito y Movilidad", marcaa), 297.5f, 421,
-                    writer.getPageNumber() % 2 == 1 ? 50 : -50);
-            font = FontFactory.getFont(FontFactory.defaultEncoding,20,
-                    Font.BOLD, Color.BLACK);
-            documento.add(new Paragraph("Detalles del Vehículo", font));
-            documento.add(new Paragraph("                        "));
-            documento.add(new Paragraph("Empresa(Vehículos de transporte de servicio publico): "+empresa));
-            documento.add(new Paragraph("NIT: "+nit));
-            documento.add(new Paragraph("Matriculado en: "+matriculado));
-            documento.add(new Paragraph("Inmovilizado en: "+inmovilizado));
-            documento.add(new Paragraph("A Disposición de: "+dispocicion));
-            documento.add(new Paragraph("N° Tarjeta de Registro: "+t_registro));
-            documento.add(new Paragraph("Rev. Tecnico mecanica y de gases: "+rev_tecnica));
-            documento.add(new Paragraph("N° de la Revision: "+nrevic));
-            documento.add(new Paragraph("Número de acompañantes: "+n_acompañantes));
-            documento.add(new Paragraph("Porta SOAT"+SOAT));
-            documento.add(new Paragraph("Aseguradora: "+aseguradora));
-            documento.add(new Paragraph("N° Poliza: "+poliza));
-            documento.add(new Paragraph("Vencimiento del SOAT: "+fecha_v_soat));
-            documento.add(new Paragraph("Porta Seguro de Seguridad Civil Contractual: "+porta_seguro));
-            documento.add(new Paragraph("Aseguradora: "+asignatura));
-            documento.add(new Paragraph("Fecha de vencimiento: "+fecha_vsre));
-            documento.add(new Paragraph("Porta Seguro de Seguridad Civil Extractual: "+porta_seguro2));
-            documento.add(new Paragraph("Fecha de vencimiento: "+fecha_vsce));
-            //EVIDENCIAS
-            documento.newPage();
-            Bitmap bmp = BitmapFactory.decodeFile(foto+File.separator+"foto"+1+".jpg");
-            int i=1;
-            while(bmp!=null && i<10) {
-                int width = bmp.getWidth();
-                int height = bmp.getHeight();
-                float scaleWidth = ((float) 300) / width;
-                float scaleHeight = ((float) 600) / height;
-                Matrix matrix = new Matrix();
-                matrix.postScale(scaleWidth, scaleHeight);
-                bmp = Bitmap.createBitmap(bmp, 0, 0, width, height, matrix, false);
-                ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
-                bmp.compress(Bitmap.CompressFormat.JPEG, 50, stream2);
-                Image imagen2 = Image.getInstance(stream2.toByteArray());
-                documento.newPage();
-                ColumnText.showTextAligned(writer.getDirectContentUnder(),
-                        Element.ALIGN_CENTER, new Paragraph(
-                                "Secretaría de Tránsito y Movilidad", marcaa), 297.5f, 421,
-                        writer.getPageNumber() % 2 == 1 ? 50 : -50);
-                documento.add(imagen2);
-                i++;
-                bmp = BitmapFactory.decodeFile(foto+File.separator+"foto"+i+".jpg");
+        if(v.size()>0) {
+            for (DBVictima ca : v) {
+                detalle_victima = ca.detalle_victima;
+                nombrev = ca.nombre;
+                tdocv = ca.tdoc;
+                ndocv = ca.ndoc;
+                nacionalidadv = ca.nacionalidad;
+                fecha_nv = ca.fecha_n;
+                x = ca.sexo;
+                direcv = ca.direc;
+                ciudadv = ca.ciudad;
+                telv = ca.tel;
+                gravedadv = ca.gravedad;
+                exam = ca.examen;
+                autv = ca.aut;
+                ebriagezv = ca.ebriagez;
+                gradoEv = ca.gradoE;
+                sustancia = ca.sustancias;
+                chalecov = ca.chaleco;
+                cascov = ca.casco;
+                cinturonv = ca.cinturon;
+                hospitalv = ca.hospital;
+                new NoEnviados.Victimas().execute(detalle_victima, nombrev, tdocv, ndocv, nacionalidadv, fecha_nv, x, direcv, ciudadv, telv, gravedadv, exam, autv, ebriagezv, gradoEv, sustancia, cinturonv, cascov, chalecov, hospitalv, id_cl);
             }
-            documento.close();
-
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        } catch (java.io.IOException e) {
-            e.printStackTrace();
-        }
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("¿Desea enviar copia del Informe?")
-                .setTitle("Advertencia")
-                .setCancelable(false)
-                .setNegativeButton("Cancelar",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        })
-                .setPositiveButton("Aceptar",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                copiacorreo();
-                                Intent i=new Intent();
-                                setResult(Activity.RESULT_OK,i);
-                                finish();
-                                finish();
-                            }
-                        });
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
-
-    public void copiacorreo(){
-        Uri uri = Uri.fromFile(new File(nombrec));
-        Intent itSend = new Intent(android.content.Intent.ACTION_SEND);
-        itSend.setType("application/pdf");
-        itSend.putExtra(android.content.Intent.EXTRA_EMAIL, "antony9409@gmail.com");
-        itSend.putExtra(android.content.Intent.EXTRA_SUBJECT, "Copia IPAT_"+codb);
-        itSend.putExtra(android.content.Intent.EXTRA_TEXT, text);
-        itSend.putExtra(Intent.EXTRA_STREAM, uri);
-        startActivityForResult(itSend, 1);
-    }
-
-    public void copiaInforme(View view) {
-        if(sw==true) {
-            copiacorreo();
-        }else{
-            Toast.makeText(this, "No has confirmado el envío.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -483,6 +323,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 if (success == 2) {
                     Log.d("Formulario enviado!", json.toString());
                     List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
+                    List<DBEstado> esta = new Delete().from(DBEstado.class).queryList();
                     //finish();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
@@ -507,7 +348,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             // dismiss the dialog once product deleted
             //pDialog.dismiss();
             if (file_url != null){
-                Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoEnviados.this, file_url, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -569,6 +410,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 if (success == 2) {
                     Log.d("Formulario enviado!", json.toString());
                     List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();
+                    List<DBEstado> esta = new Delete().from(DBEstado.class).queryList();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -593,7 +435,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             // dismiss the dialog once product deleted
             //pDialog.dismiss();
             if (file_url != null){
-                Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoEnviados.this, file_url, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -664,6 +506,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 if (success == 2) {
                     Log.d("Formulario enviado!", json.toString());
                     List<DBDatosP> cc = new Delete().from(DBDatosP.class).queryList();
+                    List<DBEstado> esta = new Delete().from(DBEstado.class).queryList();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -688,7 +531,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             // dismiss the dialog once product deleted
             //pDialog.dismiss();
             if (file_url != null){
-                Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoEnviados.this, file_url, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -778,6 +621,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 if (success == 2) {
                     Log.d("Formulario enviado!", json.toString());
                     List<DBDetallesCond> d = new Delete().from(DBDetallesCond.class).queryList();
+                    List<DBEstado> esta = new Delete().from(DBEstado.class).queryList();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -802,7 +646,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             // dismiss the dialog once product deleted
             //pDialog.dismiss();
             if (file_url != null){
-                Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoEnviados.this, file_url, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -877,6 +721,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 if (success == 2) {
                     Log.d("Formulario enviado!", json.toString());
                     List<DBDatosV> e = new Delete().from(DBDatosV.class).queryList();
+                    List<DBEstado> esta = new Delete().from(DBEstado.class).queryList();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -901,7 +746,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             // dismiss the dialog once product deleted
             //pDialog.dismiss();
             if (file_url != null){
-                Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoEnviados.this, file_url, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -993,6 +838,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 if (success == 2) {
                     Log.d("Formulario enviado!", json.toString());
                     List<DBDetallesV> fe = new Delete().from(DBDetallesV.class).queryList();
+                    List<DBEstado> esta = new Delete().from(DBEstado.class).queryList();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -1017,7 +863,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             // dismiss the dialog once product deleted
             //pDialog.dismiss();
             if (file_url != null){
-                Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoEnviados.this, file_url, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -1092,6 +938,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 if (success == 2) {
                     Log.d("Formulario enviado!", json.toString());
                     List<DBPropietario> g = new Delete().from(DBPropietario.class).queryList();
+                    List<DBEstado> esta = new Delete().from(DBEstado.class).queryList();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -1116,7 +963,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             // dismiss the dialog once product deleted
             //pDialog.dismiss();
             if (file_url != null){
-                Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoEnviados.this, file_url, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -1126,7 +973,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(Enviar.this);
+            pDialog = new ProgressDialog(NoEnviados.this);
             pDialog.setMessage("Saving...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
@@ -1209,6 +1056,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
                 if (success == 2) {
                     Log.d("Formulario enviado!", json.toString());
                     List<DBVictima> vic = new Delete().from(DBVictima.class).queryList();
+                    List<DBEstado> esta = new Delete().from(DBEstado.class).queryList();
                     //startActivity(it);
                     return json.getString(TAG_MESSAGE);
                 } else {
@@ -1233,7 +1081,7 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             // dismiss the dialog once product deleted
             pDialog.dismiss();
             if (file_url != null){
-                Toast.makeText(Enviar.this, file_url, Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoEnviados.this, file_url, Toast.LENGTH_SHORT).show();
             }
         }
     }

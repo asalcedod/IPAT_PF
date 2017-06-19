@@ -112,13 +112,13 @@ public class Comenzar extends AppCompatActivity {
         ad.setDepartamento("Atlántico");
         ad.setOficina_transito("Instituto Municipal de Transito Y Transporte de Soledad");
         ad.save();
-        List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
+        /*List<DBAccidente> a = new Delete().from(DBAccidente.class).queryList();
         List<DBCaracteristicasl> b = new Delete().from(DBCaracteristicasl.class).queryList();
         List<DBDatosP> c = new Delete().from(DBDatosP.class).queryList();
         List<DBDetallesCond> d = new Delete().from(DBDetallesCond.class).queryList();
         List<DBDatosV> e = new Delete().from(DBDatosV.class).queryList();
         List<DBDetallesV> f = new Delete().from(DBDetallesV.class).queryList();
-        List<DBPropietario> g = new Delete().from(DBPropietario.class).queryList();
+        List<DBPropietario> g = new Delete().from(DBPropietario.class).queryList();*/
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -287,7 +287,12 @@ public class Comenzar extends AppCompatActivity {
         //text="{"+text.substring(1)+"}";*/
     }
 
-        class AttemptLogin extends AsyncTask<String, String, String> {
+    public void consultar(View view) {
+        Intent i = new Intent(this,NoEnviados.class);
+        startActivityForResult(i,7);
+    }
+
+    class AttemptLogin extends AsyncTask<String, String, String> {
 
             @Override
             protected void onPreExecute() {

@@ -32,7 +32,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Comenzar"
             android:label=""
@@ -70,12 +69,12 @@
         <activity
             android:name=".AgregarVictimas"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Enviar"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity android:name=".NoEnviados"></activity>
     </application>
 
 </manifest>

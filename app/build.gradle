@@ -90,5 +90,8 @@ dependencies {
     compile 'com.android.support:support-v4:25.+'
     compile 'com.cocoahero.android:geojson:1.0.1@jar'
 }
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+}
 
 

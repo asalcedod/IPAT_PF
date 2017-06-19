@@ -93,6 +93,9 @@ public class JSONParser {
     public JSONObject makeHttpRequest(String url, String method,
                                       List params) {
 
+        is = null;
+        jObj = null;
+        json = "";
         // Haciendo la Petición HTTP
         try {
 

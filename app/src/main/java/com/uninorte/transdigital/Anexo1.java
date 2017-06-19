@@ -91,8 +91,7 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Anexo1.this,Comenzar.class);
-                startActivity(i);
+                finish();
             }
         });
         //----------------------------------------------------------------------

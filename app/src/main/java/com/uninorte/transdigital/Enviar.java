@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -72,6 +73,15 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public void onClick_Informe(View view) {
@@ -390,7 +400,6 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
         Uri uri = Uri.fromFile(new File(nombrec));
         Intent itSend = new Intent(android.content.Intent.ACTION_SEND);
         itSend.setType("application/pdf");
-        itSend.putExtra(android.content.Intent.EXTRA_EMAIL, "antony9409@gmail.com");
         itSend.putExtra(android.content.Intent.EXTRA_SUBJECT, "Copia IPAT_"+codb);
         itSend.putExtra(android.content.Intent.EXTRA_TEXT, text);
         itSend.putExtra(Intent.EXTRA_STREAM, uri);

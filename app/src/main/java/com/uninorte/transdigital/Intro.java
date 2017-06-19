@@ -58,7 +58,7 @@ public class Intro extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
 
 
-          }
+    }
 
     public void Onclik_Iniciar(View view) {
         showLoginDialog();

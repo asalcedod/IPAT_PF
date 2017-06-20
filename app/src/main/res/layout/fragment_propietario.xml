@@ -17,11 +17,11 @@
             android:id="@+id/propiet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp"
             android:layout_alignParentTop="true"
+            android:layout_margin="20dp"
+            android:layout_marginBottom="30dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginBottom="30dp">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -78,7 +78,7 @@
                         android:layout_marginRight="15sp"
                         android:layout_weight="1"
                         android:tint="@color/colorGreen"
-                        app:srcCompat="@drawable/ic_person_outline_white_48dp"  />
+                        app:srcCompat="@drawable/ic_person_outline_white_48dp" />
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/idprop"
@@ -140,9 +140,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="10sp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10sp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/ClaseVehi"
@@ -159,16 +159,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/colorGreen"  />
+                    android:backgroundTint="@color/colorGreen" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="10sp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10sp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/ClaseServ"
@@ -192,19 +192,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="10sp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10sp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/ModalidadTransp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:text="Modalidad de Transp." />
+                    android:text="Modalidad de Transp."
+                    android:textSize="16sp" />
 
                 <Spinner
                     android:id="@+id/idModalidadTransp"
@@ -218,9 +218,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="10sp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10sp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/RadioAcc"
@@ -295,6 +295,7 @@
                         android:hint="Descripcion daños Materiales del Vehículo"
                         android:inputType="textMultiLine"
                         android:textSize="16sp" />
+
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
@@ -330,6 +331,40 @@
                     android:onClick="botonFallas"
                     android:tint="@color/colorGreen"
                     app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <ImageView
+                    android:id="@+id/imageView14"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15sp"
+                    android:tint="@color/colorGreen"
+                    app:srcCompat="@drawable/ic_flash_on_white_48dp" />
+
+                <EditText
+                    android:id="@+id/idHipoCond"
+                    android:layout_width="146dp"
+                    android:layout_height="match_parent"
+                    android:hint="Hipotesis Conductor"
+                    android:inputType="number"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/idHipVeh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:hint="Hipotesis Vehiculo"
+                    android:inputType="number"
+                    android:textSize="16sp" />
 
 
             </LinearLayout>
@@ -374,29 +409,29 @@
                     fab:menu_shadowYOffset="4dp"
                     fab:menu_showShadow="true">
 
-                <com.github.clans.fab.FloatingActionButton
-                    android:id="@+id/SaveProp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@android:drawable/ic_menu_save"
-                    fab:fab_colorNormal="@color/colorPrimary"
-                    fab:fab_colorPressed="@color/colorPrimaryDark"
-                    fab:fab_label="Guardar"
-                    fab:fab_size="mini" />
+                    <com.github.clans.fab.FloatingActionButton
+                        android:id="@+id/SaveProp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@android:drawable/ic_menu_save"
+                        fab:fab_colorNormal="@color/colorPrimary"
+                        fab:fab_colorPressed="@color/colorPrimaryDark"
+                        fab:fab_label="Guardar"
+                        fab:fab_size="mini" />
 
                     <com.github.clans.fab.FloatingActionButton
                         android:id="@+id/next"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="onClick_Informe3"
                         android:src="@android:drawable/ic_menu_send"
                         fab:fab_colorNormal="@color/colorPrimary"
                         fab:fab_colorPressed="@color/colorPrimaryDark"
                         fab:fab_label="Enviar"
-                        android:onClick="onClick_Informe3"
                         fab:fab_size="mini" />
                 </com.github.clans.fab.FloatingActionMenu>
 
-               <!-- <ImageButton
+                <!-- <ImageButton
                     android:id="@+id/SaveProp"
                     android:layout_width="64dp"
                     android:layout_height="wrap_content"

@@ -173,8 +173,9 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             cinturon=ca.cinturon;
             hospital=ca.hospital;
             descip=ca.descip;
+            new DetallesConductor().execute(gravedad2,examen,aut,ebriagez,gradoE,sustancias,portalicencia,idlicencia,categoria,restriccion,estado,fecha,cod_of,chaleco,casco,cinturon,hospital,descip,id_cl);
         }
-        new DetallesConductor().execute(gravedad2,examen,aut,ebriagez,gradoE,sustancias,portalicencia,idlicencia,categoria,restriccion,estado,fecha,cod_of,chaleco,casco,cinturon,hospital,descip,id_cl);
+
         String placa="",remorque="",nacionalidad2="",marca="",linea="",color="",modelo="",carroceria="",toneladas="",n_personas="",id_licencia="";
         List<DBDatosV> dv = new Select().from(DBDatosV.class).queryList();
         for (DBDatosV ca : dv) {
@@ -190,8 +191,9 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             toneladas=ca.toneladas;
             n_personas=ca.n_personas;
             id_licencia=ca.id_licencia;
+            new DatosVehiculos().execute(placa,remorque,nacionalidad2,marca,linea,color,modelo,carroceria,toneladas,n_personas,id_licencia,id_cl);
         }
-        new DatosVehiculos().execute(placa,remorque,nacionalidad2,marca,linea,color,modelo,carroceria,toneladas,n_personas,id_licencia,id_cl);
+
         String empresa="",nit="",matriculado="",inmovilizado="",dispocicion="",t_registro="",rev_tecnica="",nrevic="",n_acompañantes="",SOAT="",aseguradora="",poliza="",fecha_v_soat="",porta_seguro="",id_seguro="",asignatura="",fecha_vsre="",porta_seguro2="",fecha_vsce="";
         //empresa,nit,matriculado,inmovilizado,dispocicion,t_registro,rev_tecnica,n_acompañantes,SOAT,aseguradora,poliza,fecha_v_soat,porta_seguro,id_seguro,asignatura,fecha_vsre,porta_seguro2,fecha_vsce;
         List<DBDetallesV> dev = new Select().from(DBDetallesV.class).queryList();
@@ -214,8 +216,9 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             fecha_vsre=a.fecha_vsre;
             porta_seguro2=a.porta_seguro2;
             fecha_vsce=a.fecha_vsce;
+            new DetallesVehiculos().execute(empresa,nit,matriculado,inmovilizado,dispocicion,t_registro,rev_tecnica,nrevic,n_acompañantes,SOAT,aseguradora,poliza,fecha_v_soat,porta_seguro,id_seguro,asignatura,fecha_vsre,porta_seguro2,fecha_vsce,id_cl);
         }
-        new DetallesVehiculos().execute(empresa,nit,matriculado,inmovilizado,dispocicion,t_registro,rev_tecnica,nrevic,n_acompañantes,SOAT,aseguradora,poliza,fecha_v_soat,porta_seguro,id_seguro,asignatura,fecha_vsre,porta_seguro2,fecha_vsce,id_cl);
+
         String mismo_cond="",nombre2="",t_doc="",n_doc="",clasev="",clases="",modalidad_t="",radioa="",fallas="",descrip_daño="",lugar_impacto="";
         List<DBPropietario> pr = new Select().from(DBPropietario.class).queryList();
         for (DBPropietario a : pr) {
@@ -231,8 +234,9 @@ public class Enviar extends AppCompatActivity implements ActivityCompat.OnReques
             fallas=a.fallas;
             descrip_daño=a.descrip_daño;
             lugar_impacto=a.lugar_impacto;
+            new Propietario().execute(mismo_cond,nombre2,t_doc,n_doc,clasev,clases,modalidad_t,radioa,fallas,descrip_daño,lugar_impacto,id_cl);
         }
-        new Propietario().execute(mismo_cond,nombre2,t_doc,n_doc,clasev,clases,modalidad_t,radioa,fallas,descrip_daño,lugar_impacto,id_cl);
+
         String detalle_victima="",nombrev="",tdocv="",ndocv="",nacionalidadv="",fecha_nv="",x="",direcv="",ciudadv="",telv="",gravedadv="",exam="",autv="",ebriagezv="",gradoEv="",sustancia="",chalecov="",cascov="",cinturonv="",hospitalv="";
         List<DBVictima> v = new Select().from(DBVictima.class).queryList();
         for (DBVictima ca : v) {

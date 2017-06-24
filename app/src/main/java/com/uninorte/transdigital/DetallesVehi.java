@@ -10,7 +10,6 @@ import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.util.List;
@@ -118,7 +117,7 @@ public class DetallesVehi extends Fragment {
                 asign=asignatura.getText().toString();
                 f_vsre=fecha_vsre.getText().toString();
                 f_vsce=fecha_vsce.getText().toString();
-                List<DBDetallesV> a = new Delete().from(DBDetallesV.class).queryList();
+                //List<DBDetallesV> a = new Delete().from(DBDetallesV.class).queryList();
                 DBDetallesV dv = new DBDetallesV();
                 dv.setEmpresa(emp);
                 dv.setNit(nt);

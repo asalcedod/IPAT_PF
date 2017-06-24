@@ -7,11 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.util.List;
@@ -67,7 +65,7 @@ public class DatosVehi extends Fragment {
                 tonel=toneladas.getText().toString();
                 n_per=n_personas.getText().toString();
                 id_l=id_licencia.getText().toString();
-                List<DBDatosV> a = new Delete().from(DBDatosV.class).queryList();
+                //List<DBDatosV> a = new Delete().from(DBDatosV.class).queryList();
                 DBDatosV dv = new DBDatosV();
                 dv.setPlaca(pla);
                 dv.setRemorque(remo);

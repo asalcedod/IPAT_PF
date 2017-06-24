@@ -11,7 +11,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 
 @Table(database = AppDatabase.class)
 public class DBClaseAccidente extends BaseModel {
-    @PrimaryKey
+    @PrimaryKey(autoincrement = true)
     int id;
     @Column
     String choque,volcameinto,caida,ocupante,incendio,otro;

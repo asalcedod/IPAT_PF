@@ -7,15 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.raizlabs.android.dbflow.list.IFlowCursorIterator;
-import com.raizlabs.android.dbflow.sql.language.Delete;
-
-import java.util.List;
 
 
 public class DetallesConductores extends Fragment {
@@ -175,7 +169,7 @@ public class DetallesConductores extends Fragment {
                 descip=extra.getText().toString();
                 res=rest.getText().toString();
                 //cat,g,e,a,embr,gE,sust,portlia,idlicencia,fcha,el,cod_of,chaleco,casco,cinturon,hospital,descip;
-                List<DBDetallesCond> b = new Delete().from(DBDetallesCond.class).queryList();
+                //List<DBDetallesCond> b = new Delete().from(DBDetallesCond.class).queryList();
                 DBDetallesCond dc=new DBDetallesCond();
                 dc.setGravedad(g);
                 dc.setExamen(e);

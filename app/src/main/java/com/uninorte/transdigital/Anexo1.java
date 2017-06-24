@@ -465,13 +465,29 @@ public class Anexo1 extends AppCompatActivity implements View.OnClickListener , 
                 for (int j = nveh - 2; j > 0; j--) {
                     Intent i = new Intent(this, Cond_Vehi_Prop.class);
                     i.putExtra("hoja", "Anexo " + j);
+                    if(j==nveh - 2){
+                        i.putExtra("fin","Si");
+                    }else{
+                        i.putExtra("fin","No");
+                    }
                     startActivityForResult(i, 4);
                 }
-            }
-            for(int j=2;j>0;j--) {
-                Intent i = new Intent(this, Cond_Vehi_Prop.class);
-                i.putExtra("hoja","Conductor "+j);
-                startActivityForResult(i, 4);
+                for (int j = 2; j > 0; j--) {
+                    Intent i = new Intent(this, Cond_Vehi_Prop.class);
+                    i.putExtra("hoja", "Conductor " + j);
+                    startActivityForResult(i, 4);
+                }
+            }else {
+                for (int j = 2; j > 0; j--) {
+                    Intent i = new Intent(this, Cond_Vehi_Prop.class);
+                    i.putExtra("hoja", "Conductor " + j);
+                    if(j==2){
+                        i.putExtra("fin","Si");
+                    }else{
+                        i.putExtra("fin","No");
+                    }
+                    startActivityForResult(i, 4);
+                }
             }
             //finish();
         }else{

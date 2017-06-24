@@ -1,11 +1,9 @@
 package com.uninorte.transdigital;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +11,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.github.clans.fab.FloatingActionMenu;
 import com.github.clans.fab.FloatingActionButton;
-import com.raizlabs.android.dbflow.sql.language.Delete;
+import com.github.clans.fab.FloatingActionMenu;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.util.ArrayList;
@@ -262,7 +258,7 @@ public class Propietario extends Fragment {
                 enombre=(EditText)rootView.findViewById(R.id.nameProp);
                 id_doc=(EditText)rootView.findViewById(R.id.idecond);
                 descrip=(EditText)rootView.findViewById(R.id.idDesDaños);
-                List<DBPropietario> a = new Delete().from(DBPropietario.class).queryList();
+                //List<DBPropietario> a = new Delete().from(DBPropietario.class).queryList();
                 DBPropietario p = new DBPropietario();
                 p.setMismo_cond(mismo_cond);
                 p.setNombre(enombre.getText().toString());

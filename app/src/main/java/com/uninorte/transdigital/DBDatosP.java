@@ -9,7 +9,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 @Table(database = AppDatabase.class)
 public class DBDatosP extends BaseModel {
-    @PrimaryKey
+    @PrimaryKey(autoincrement = true)
     int id;
     @Column
     String nombre,tdoc,ndoc,nacionalidad,fecha_n,sexo,direc,ciudad,tel;

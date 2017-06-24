@@ -10,7 +10,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 @Table(database = AppDatabase.class)
 public class DBPropietario extends BaseModel {
-    @PrimaryKey
+    @PrimaryKey(autoincrement = true)
     int id;
     @Column
     String mismo_cond,nombre,t_doc,n_doc,clasev,clases,modalidad_t,radioa,fallas,descrip_daño,lugar_impacto;

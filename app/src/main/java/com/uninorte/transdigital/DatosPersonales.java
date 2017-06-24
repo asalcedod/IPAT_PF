@@ -1,10 +1,8 @@
 package com.uninorte.transdigital;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +15,6 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.util.ArrayList;
@@ -85,7 +82,7 @@ public class DatosPersonales extends Fragment {
         imageButtonSave.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                List<DBDatosP> a = new Delete().from(DBDatosP.class).queryList();
+                //List<DBDatosP> a = new Delete().from(DBDatosP.class).queryList();
                 DBDatosP dp = new DBDatosP();
                 String nombreC = nombre.getText().toString();
                 String TdocC = tipodoc;
